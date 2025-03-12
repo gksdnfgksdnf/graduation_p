@@ -2,15 +2,18 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public DialogueManager Instance { get; private set; }
+
+    [SerializeField] private DialogueSO testDialogue;
+
+    private void Awake()
     {
-        
+        Instance = this;
+        Debug.Log(JsonUtility.ToJson(testDialogue));
     }
 
-    // Update is called once per frame
-    void Update()
+    public void EnterDialogue(DialogueSO dialogue)
     {
-        
+
     }
 }
