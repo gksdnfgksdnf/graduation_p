@@ -13,7 +13,7 @@ public class DecisionButton : MonoBehaviour
     private DialogueDecision decision;
     private DecisionDisplayer displayer;
 
-    private void Awake()
+    public void Init()
     {
         rectTrm = transform as RectTransform;
         button = GetComponent<Button>();

@@ -9,6 +9,12 @@ public class DecisionDisplayer : MonoBehaviour
     private Customer customer;
     private DialogueDisplayer displayer;
 
+    public void Init()
+    {
+        for (int i = 0; i < buttons.Count; i++)
+            buttons[i].Init();
+    }
+
     public bool IsShowDecisions()
     {
         return isShow;

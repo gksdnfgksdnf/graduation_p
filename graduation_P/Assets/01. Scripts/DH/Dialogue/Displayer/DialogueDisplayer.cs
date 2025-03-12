@@ -10,8 +10,12 @@ public class DialogueDisplayer : MonoBehaviour
     {
         if (TextDisplayer == null)
             TextDisplayer = GetComponentInChildren<TextDisplayer>();
+        TextDisplayer.Init();
+
         if (DecisionDisplayer == null)
             DecisionDisplayer = GetComponentInChildren<DecisionDisplayer>();
+        DecisionDisplayer.Init();
+
         if (canvasGroup == null)
             canvasGroup = GetComponent<CanvasGroup>();
 

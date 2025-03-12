@@ -14,7 +14,7 @@ public class TextDisplayer : MonoBehaviour
     private Coroutine coroutine;
     private RectTransform rectTrm;
 
-    private void Awake()
+    public void Init()
     {
         rectTrm = transform as RectTransform;
     }
