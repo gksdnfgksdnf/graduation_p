@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class CustomerStats : ScriptableObject
 {
-    public int drunk = 0; // Ãë±â
-    public int reliance = 0; // ½Å·Ú
-    public int like = 0; // È£°¨µµ
+    public int drunk = 0; // ì·¨ê¸°
+    public int reliance = 0; // ì‹ ë¢°
+    public int like = 0; // í˜¸ê°ë„
+
 }
