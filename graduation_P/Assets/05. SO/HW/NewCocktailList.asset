@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c93d87627d8f07649903a2abfc4b3ab7, type: 3}
+  m_Name: NewCocktailList
+  m_EditorClassIdentifier: 
+  data:
+  - {fileID: 11400000, guid: c11fa58e6ef8c5840b91dad820870798, type: 2}
+  - {fileID: 11400000, guid: c511ce1eae4240e41a058f1c0a3036c3, type: 2}
+  - {fileID: 11400000, guid: f459f3149f3e749438b23ddae5700ee1, type: 2}
+  - {fileID: 11400000, guid: 47a3937d4b950624286c1ac750b62c31, type: 2}
