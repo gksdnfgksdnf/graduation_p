@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public enum Tool_Type
 {
     Shaker,
@@ -11,8 +13,8 @@ public enum Tool_Type
     CocktailPin
 }
 
-[System.Serializable]
-public class MakingTool
+[CreateAssetMenu(fileName = "NewTool", menuName = "SO/Item/Tool")]
+public class ToolSO : ItemSO
 {
     public Tool_Type type;
 }

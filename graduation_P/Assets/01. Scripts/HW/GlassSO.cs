@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public enum Glass_Type
 {
     Shot,
@@ -16,15 +18,10 @@ public enum Glass_Type
     Sherry,
     Coupe,
     ChampagneFlute
-
-
 }
-
-[System.Serializable]
-public class Glass
+[CreateAssetMenu(fileName = "NewGlass", menuName = "SO/Item/Glass")]
+public class GlassSO : ItemSO
 {
     public Glass_Type type;
 }
-
-
 
