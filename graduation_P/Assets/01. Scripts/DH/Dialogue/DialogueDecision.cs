@@ -17,20 +17,20 @@ public class DialogueDecision : ScriptableObject
     public List<DecisionEffect> effects;
     public DialogueText nextText;
 
-    public void ApplyEffect(CustomerStat stats)
+    public void ApplyEffect(Customer customer)
     {
         for (int i = 0; i < effects.Count; i++)
         {
             switch (effects[i].type)
             {
                 case CustomerStatType.Drunk:
-                    stats.drunk += effects[i].value;
+                    customer.stats.drunk += effects[i].value;
                     break;
                 case CustomerStatType.Reliance:
-                    stats.reliance += effects[i].value;
+                    customer.stats.reliance += effects[i].value;
                     break;
                 case CustomerStatType.Like:
-                    stats.like += effects[i].value;
+                    customer.stats.like += effects[i].value;
                     break;
             }
         }

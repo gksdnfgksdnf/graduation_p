@@ -7,6 +7,7 @@ public enum CustomerStatType
     Like
 }
 
+[CreateAssetMenu(menuName = "SO/Customer/Stat")]
 public class CustomerStat : ScriptableObject
 {
     public int drunk; // 취기
