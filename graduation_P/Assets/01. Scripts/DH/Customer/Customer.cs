@@ -2,5 +2,5 @@ using UnityEngine;
 
 public abstract class Customer : MonoBehaviour
 {
-    public CustomerStats stats;
+    public CustomerStat stats;
 }
