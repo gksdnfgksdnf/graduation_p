@@ -20,4 +20,4 @@ MonoBehaviour:
     value: 30
   - type: 2
     value: 10
-  nextText: {fileID: 11400000, guid: 0a588e53aeb23f84d97a4432c9854edd, type: 2}
+  nextText: {fileID: 11400000, guid: 4d10ff2226ab3554189ce3e744141320, type: 2}

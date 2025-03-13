@@ -7,7 +7,6 @@ public class DecisionDisplayer : MonoBehaviour
 
     private bool isShow = false;
     private Customer customer;
-    private DialogueDisplayer displayer;
 
     public void Init()
     {
@@ -20,7 +19,7 @@ public class DecisionDisplayer : MonoBehaviour
         return isShow;
     }
 
-    public void Show(Customer customer, DialogueDisplayer displayer, List<DialogueDecision> decisions)
+    public void Show(Customer customer, List<DialogueDecision> decisions)
     {
         for (int i = 0; i < decisions.Count; i++)
         {
@@ -28,7 +27,6 @@ public class DecisionDisplayer : MonoBehaviour
         }
         isShow = true;
         this.customer = customer;
-        this.displayer = displayer;
     }
 
     public void Unshow()
@@ -39,19 +37,19 @@ public class DecisionDisplayer : MonoBehaviour
         }
         isShow = false;
         customer = null;
-        displayer = null;
     }
 
     public void Select(DialogueDecision decision)
     {
-        decision.ApplyEffect(customer);
+        customer.AI.AddDecision(decision);
 
         if (decision.nextText == null)
         {
             DialogueManager.Instance.ExitDialogue();
             return;
         }
-        DialogueManager.Instance.EnterDialogue(customer, displayer, decision.nextText);
+
+        DialogueManager.Instance.EnterDialogue(customer, decision.nextText);
         Unshow();
     }
 }

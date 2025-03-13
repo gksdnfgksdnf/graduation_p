@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d152ebcbd39cd545a469dcd4c19d940, type: 3}
   m_Name: TestText
   m_EditorClassIdentifier: 
+  type: 1
   texts:
   - ...
   - "\uB098\uB294 \uD14D\uC2A4\uD2B8\uC57C"
@@ -20,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 9dac113816158024c8e451e92b3f6fba, type: 2}
   - {fileID: 11400000, guid: bc501658c11f89f4189bd7d980beb255, type: 2}
   - {fileID: 11400000, guid: 37b9c1671db645540afb59728dc8aa20, type: 2}
+  next: {fileID: 0}

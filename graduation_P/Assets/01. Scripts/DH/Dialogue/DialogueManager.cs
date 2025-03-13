@@ -1,20 +1,32 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
+    public enum DialogueType
+    {
+        Player,
+        Customer
+    }
+
     public static DialogueManager Instance { get; private set; }
 
+    public bool test = false;
     [SerializeField] private Customer testCustomer;
     [SerializeField] private DialogueText testDialogue;
-    [SerializeField] private DialogueDisplayer testDisplayer;
+
+    public List<DialogueDisplayer> playerDisplayers;
+    public List<DialogueDisplayer> customerDisplayers;
 
     private Customer customer;
     private DialogueText dialogue;
     private DialogueDisplayer displayer;
 
     private int dialoguePointer = 0;
+    private DialogueText lastDialogue;
 
-    // public event Action OnDialogueEnd;
+    public Action onDialogueEnded;
 
     private void Awake()
     {
@@ -23,25 +35,42 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
-        EnterDialogue(testCustomer, testDisplayer, testDialogue);
+        if (test)
+            EnterDialogue(testCustomer, testDialogue);
     }
 
-    public void EnterDialogue(Customer customer, DialogueDisplayer displayer, DialogueText dialogue)
+    public void EnterDialogue(Customer customer, DialogueText dialogue)
     {
+        dialoguePointer = 0;
+        lastDialogue = this.dialogue;
+
         this.customer = customer;
         this.dialogue = dialogue;
-        dialoguePointer = 0;
 
-        if (this.displayer != null)
+        if (displayer != null)
         {
-            this.displayer.Enable(false);
-            this.displayer.TextDisplayer.nextButton.onClick.RemoveListener(Next);
+            displayer.Enable(false);
+            displayer.TextDisplayer.nextButton.onClick.RemoveListener(Next);
         }
 
-        this.displayer = displayer; // displayers[UnityEngine.Random.Range(0, displayers.Count)];
-        this.displayer.Enable(true);
-        this.displayer.TextDisplayer.nextButton.onClick.AddListener(Next);
-        this.displayer.TextDisplayer.Show(dialogue.texts[dialoguePointer++]);
+        if (displayer == null || dialogue.type != lastDialogue.type)
+            displayer = GetDisplayer(dialogue);
+
+        displayer.Enable(true);
+        displayer.TextDisplayer.nextButton.onClick.AddListener(Next);
+        displayer.TextDisplayer.Show(dialogue.texts[dialoguePointer++]);
+    }
+
+    private DialogueDisplayer GetDisplayer(DialogueText dialogue)
+    {
+        switch (dialogue.type)
+        {
+            case DialogueType.Player:
+                return playerDisplayers[UnityEngine.Random.Range(0, playerDisplayers.Count)];
+            case DialogueType.Customer:
+                return customerDisplayers[UnityEngine.Random.Range(0, customerDisplayers.Count)];
+        }
+        return null;
     }
 
     public void ExitDialogue()
@@ -56,6 +85,8 @@ public class DialogueManager : MonoBehaviour
             displayer.Enable(false);
             displayer = null;
         }
+
+        onDialogueEnded?.Invoke();
     }
 
     public void Next() // 화면 클릭 작용, 나오는 중 누르면 줄 스킵, 끝나면 선택지나 대화 종료 중에 결정
@@ -71,9 +102,15 @@ public class DialogueManager : MonoBehaviour
         }
         if (dialoguePointer == dialogue.texts.Count)
         {
-            if (dialogue.decisions.Count > 0)
+            if (dialogue.decisions == null || dialogue.decisions.Count > 0)
             {
                 ShowDecisions();
+                return;
+            }
+
+            if (dialogue.next != null)
+            {
+                EnterDialogue(customer, dialogue.next);
                 return;
             }
 
@@ -91,7 +128,7 @@ public class DialogueManager : MonoBehaviour
 
     private void ShowDecisions()
     {
-        displayer.DecisionDisplayer.Show(customer, displayer, dialogue.decisions);
+        displayer.DecisionDisplayer.Show(customer, dialogue.decisions);
     }
 
     private void Update()
