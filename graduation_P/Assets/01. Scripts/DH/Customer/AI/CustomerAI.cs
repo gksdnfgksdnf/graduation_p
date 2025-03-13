@@ -4,7 +4,7 @@ using UnityEngine;
 public enum BehaviourType
 {
     Enter,
-    Talking,
+    Talk,
     Order,
     Reaction,
     Exit
@@ -21,7 +21,6 @@ public enum CustomerFeel
 
 public enum CustomerStatType
 {
-    like,
     reliance,
     progress,
     // temporal value
@@ -43,9 +42,6 @@ public abstract class CustomerAI : MonoBehaviour
 
     public List<AIBehaviour> prevBehaviours;
 
-    protected bool enter = false;
-    protected int drunk = 0;
-
     public virtual void Load()
     {
         information.Load();
@@ -53,28 +49,22 @@ public abstract class CustomerAI : MonoBehaviour
 
     public virtual void Entered()
     {
-        drunk = 0;
-        enter = true;
-
         information.visitCount++;
     }
 
     public virtual void Exited()
     {
-        enter = false;
     }
 
     public virtual AIBehaviour GetBehaviour() // return aibehaviour by infomation and taste
     {
         AIBehaviour behaviour = new();
-        DecideDialogueType(behaviour);
-        DecideNextDialogue(behaviour);
+        DecideNextBehaviour(behaviour);
         prevBehaviours.Add(behaviour);
         return behaviour;
     }
 
-    protected abstract void DecideNextDialogue(AIBehaviour behaviour);
-    protected abstract void DecideDialogueType(AIBehaviour behaviour);
+    protected abstract void DecideNextBehaviour(AIBehaviour behaviour);
     protected abstract void DecideVisit(int day);
 
     public void AddDecision(DialogueDecision decision) // fix information by decisions

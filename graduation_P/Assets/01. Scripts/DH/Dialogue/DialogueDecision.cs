@@ -10,7 +10,7 @@ public class DialogueDecision : ScriptableObject
     public class DecisionEffect
     {
         public CustomerStatType type;
-        public int value;
+        public float value;
     }
 
     public string text;
