@@ -1,56 +1,57 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class CocktailMaker : MonoBehaviour
 {
-    public CocktailDataListSO cocktailDatas;  // 모든 칵테일 SO
-    public List<IngredientSO> selectedIngs = new List<IngredientSO>();
-    public List<ToolSO> selectedTools = new List<ToolSO>();
-
-    public void MakeCocktail()
+    public ItemListSO itemList; // 모든 아이템 목록
+    public CocktailDataListSO cocktailDataList; // 칵테일 데이터 목록
+    private void Start()
     {
-        // 칵테일 검증
-        CocktailDataSO result = ValidateCocktail();
-        if (result != null)
+        MakeCocktail("Negroni");
+    }
+    public void MakeCocktail(string cocktailName)
+    {
+        // 해당 칵테일 데이터 가져오기
+        CocktailDataSO cocktailData = cocktailDataList.datas.Find(c => c.cocktailName == cocktailName);
+
+        if (cocktailData == null)
         {
-            Debug.Log(result.cocktailName + " 완성!");
-            // UI 표시 및 효과 연출
+            Debug.LogError("칵테일을 찾을 수 없습니다.");
+            return;
         }
-        else
+
+        // 재료 준비
+        List<ItemSO> ingredients = cocktailData.ingredients;
+        List<ItemSO> tools = cocktailData.tools;
+        ItemSO glass = cocktailData.glass;
+
+        // 재료 출력
+        Debug.Log($"칵테일 '{cocktailName}' 만들기!");
+        Debug.Log("재료:");
+        foreach (var ingredient in ingredients)
         {
-            Debug.Log("알고리즘을 이용해 비슷한 칵테일에 수식어를 붙여야 합니다.");
+            Debug.Log($"- {ingredient.itemName}");
         }
-        selectedIngs.Clear();
-        selectedTools.Clear();
+
+        // 도구 출력
+        Debug.Log("사용할 도구:");
+        foreach (var tool in tools)
+        {
+            Debug.Log($"- {tool.itemName}");
+        }
+
+        // 유리잔 출력
+        Debug.Log($"유리잔: {glass.itemName}");
+
+        // 칵테일 만드는 과정 (구체적인 로직을 추가할 수 있음)
+        MixCocktail(ingredients, tools, glass);
     }
 
-    private CocktailDataSO ValidateCocktail()
+    private void MixCocktail(List<ItemSO> ingredients, List<ItemSO> tools, ItemSO glass)
     {
-        foreach (var cocktail in cocktailDatas.datas)
-        {
-            // 1. 재료 개수
-            if (cocktail.ingredients.Count != selectedIngs.Count) continue;
-
-
-            // 2. 재료 목록 (순서 무관)
-            var Ingredients = selectedIngs.OrderBy(i => i.itemName).ToList();
-            var RecipeIng = cocktail.ingredients.OrderBy(i => i.itemName).ToList();
-
-            if (!Ingredients.SequenceEqual(RecipeIng)) continue;
-
-
-            // 3. 도구 목록 (순서 무관)
-            var Tools = selectedTools.OrderBy(t => t.type.ToString()).ToList();
-            var RecipeTools = cocktail.tools.OrderBy(t => t.type.ToString()).ToList();
-
-            if (!Tools.SequenceEqual(RecipeTools)) continue;
-
-            // 해당 칵테일 반환
-            return cocktail;
-        }
-
-        // 모든 칵테일과 일치하지 않음
-        return null;
+        // 믹싱 과정 (간단한 예시로, 재료를 섞는다는 출력)
+        Debug.Log("칵테일 믹싱 중...");
+        // 여기에 믹싱이나 쉐이킹, 필터링 등 구체적인 과정 추가 가능
+        Debug.Log("칵테일 완성!");
     }
 }

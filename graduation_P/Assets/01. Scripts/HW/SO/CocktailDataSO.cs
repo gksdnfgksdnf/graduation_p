@@ -5,7 +5,7 @@ using UnityEngine;
 public class CocktailDataSO : ScriptableObject
 {
     public string cocktailName;
-    public List<IngredientSO> ingredients;
-    public List<ToolSO> tools;
-    public GlassSO glassType;
+    public List<ItemSO> ingredients;
+    public List<ItemSO> tools;
+    public ItemSO glass;
 }
