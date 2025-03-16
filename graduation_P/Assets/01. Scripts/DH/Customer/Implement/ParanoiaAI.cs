@@ -1,32 +1,73 @@
+using Random = UnityEngine.Random;
+
 public class ParanoiaAI : CustomerAI
 {
     protected bool enter = false;
+    protected bool reaction = false;
+
     protected int drunk = 0;
     protected float drunkMultiplier = 2f;
+
+    protected float dayFeeling = 0;
+
     protected int talkCount = 0;
     protected int orderCount = 0;
 
-    public override void Entered()
+    public override void Entered(EnterEventType enterEvt)
     {
         enter = true;
-        drunk = 0;
+
+        if (enterEvt == EnterEventType.Drunk)
+            drunk = Random.Range(40, 60);
+        else
+            drunk = 0;
+
+        if (enterEvt == EnterEventType.TerribleDay)
+            dayFeeling = -33f; // 멘탈 붕괴
+        else
+            dayFeeling = 0;
+
         talkCount = 0;
         orderCount = 0;
-        base.Entered();
+        base.Entered(enterEvt);
     }
 
     protected override void DecideNextBehaviour(AIBehaviour behaviour)
     {
         behaviour.feel = DecideFeel();
+        behaviour.behaviour = DecideBehaviourType();
+        behaviour.dialogue = DecideDialogue(behaviour);
+    }
 
+    private DialogueText DecideDialogue(AIBehaviour behaviour)
+    {
+        return dialogues.Query(
+            behaviour.feel,
+            behaviour.behaviour,
+            information.reliance,
+            drunk
+        );
+    }
+
+    private BehaviourType DecideBehaviourType()
+    {
         if (enter)
         {
-
+            enter = false;
+            return BehaviourType.Enter;
         }
-        else
+        if (reaction)
         {
-
+            reaction = false;
+            return BehaviourType.Reaction;
         }
+        if (drunk >= 90)
+            return BehaviourType.Exit;
+
+        if (orderCount >= talkCount)
+            return BehaviourType.Talk;
+        else
+            return BehaviourType.Order;
     }
 
     private CustomerFeel DecideFeel()
@@ -36,7 +77,8 @@ public class ParanoiaAI : CustomerAI
             return feel;
 
         float feelValue = information.reliance;
-        feelValue += UnityEngine.Random.Range(-30f, 30f);
+        feelValue += UnityEngine.Random.Range(-5f, 5);
+        feelValue += dayFeeling;
 
         if (feelValue >= 65f)
             feel = CustomerFeel.Perfect;
@@ -52,12 +94,17 @@ public class ParanoiaAI : CustomerAI
         return feel;
     }
 
-    protected override bool DecideVisit(int day)
+    protected override int DecideVisit(int day)
     {
         int visitValue = 0;
         visitValue += (day - information.firstAppearDay) * 20;
         visitValue += 50;
+        return visitValue;
+    }
 
-        return visitValue >= 100;
+    public override void AddCocktail(CocktailDataSO cocktail)
+    {
+        drunk += 20;
+        reaction = true;
     }
 }

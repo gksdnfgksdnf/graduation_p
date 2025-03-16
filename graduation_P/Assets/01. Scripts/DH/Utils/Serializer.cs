@@ -51,7 +51,7 @@ namespace Donet
         }
 
         #region serializable
-        public bool SerializeObject<T>(ref T value) where T : INetworkSerializable
+        public bool SerializeObject<T>(T value) where T : INetworkSerializable
         {
             try
             {
@@ -63,7 +63,7 @@ namespace Donet
                 return false;
             }
         }
-        public bool SerializeObject<T>(ref T[] array) where T : INetworkSerializable
+        public bool SerializeObject<T>(T[] array) where T : INetworkSerializable
         {
             ushort count = 0;
             if (mode == NetworkSerializeMode.Serialize)
@@ -77,12 +77,12 @@ namespace Donet
 
             for (int i = 0; i < count; i++)
             {
-                if (!SerializeObject(ref array[i]))
+                if (!SerializeObject(array[i]))
                     return false;
             }
             return true;
         }
-        public bool SerializeObject<T>(ref List<T> list) where T : INetworkSerializable, new()
+        public bool SerializeObject<T>(List<T> list) where T : INetworkSerializable, new()
         {
             ushort count = 0;
             if (mode == NetworkSerializeMode.Serialize)
@@ -99,13 +99,13 @@ namespace Donet
                 if (mode == NetworkSerializeMode.Serialize)
                 {
                     INetworkSerializable value = list[i];
-                    if (!(value is T) || !SerializeObject(ref value))
+                    if (!(value is T) || !SerializeObject(value))
                         return false;
                 }
                 else
                 {
                     T value = new T();
-                    if (!SerializeObject(ref value))
+                    if (!SerializeObject(value))
                         return false;
                     list.Add(value);
                 }

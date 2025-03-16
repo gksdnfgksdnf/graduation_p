@@ -27,11 +27,19 @@ public enum CustomerStatType
     drunk,
 }
 
+public enum EnterEventType
+{
+    None, // 85%
+    Drunk, // 10%
+    TerribleDay, // 5%
+}
+
 public class AIBehaviour
 {
     public CustomerFeel feel;
-    public BehaviourType dialogueType;
+    public BehaviourType behaviour;
     public DialogueText dialogue;
+    public string order;
 }
 
 public abstract class CustomerAI : MonoBehaviour
@@ -44,10 +52,14 @@ public abstract class CustomerAI : MonoBehaviour
 
     public virtual void Load()
     {
-        information.Load();
+        _ = information.Load();
+    }
+    public virtual void Save()
+    {
+        _ = information.Save();
     }
 
-    public virtual void Entered()
+    public virtual void Entered(EnterEventType enterEvt)
     {
         information.visitCount++;
     }
@@ -64,10 +76,7 @@ public abstract class CustomerAI : MonoBehaviour
         return behaviour;
     }
 
-    protected abstract void DecideNextBehaviour(AIBehaviour behaviour);
-    protected abstract bool DecideVisit(int day);
-
-    public void AddDecision(DialogueDecision decision) // fix information by decisions
+    public virtual void AddDecision(DialogueDecision decision) // modify information by decisions
     {
         foreach (var effect in decision.effects)
         {
@@ -75,8 +84,7 @@ public abstract class CustomerAI : MonoBehaviour
         }
     }
 
-    public void AddCocktail(CocktailDataSO cocktail) // fix information by taste
-    {
-
-    }
+    public abstract void AddCocktail(CocktailDataSO cocktail);
+    protected abstract void DecideNextBehaviour(AIBehaviour behaviour);
+    protected abstract int DecideVisit(int day);
 }
