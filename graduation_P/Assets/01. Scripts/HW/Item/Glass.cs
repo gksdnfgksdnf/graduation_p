@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Glass : Item
+public class Glass : DraggableItem
 {
     private GlassSO glass;
 
