@@ -8,6 +8,7 @@ public class CustomerInfomation : ScriptableObject
     public int progress = 0; // 100이 되었을 경우 다른 수치에 따라 엔딩을 결정함
     public int visitCount = 0; // 방문 횟수
 
+    public int firstAppearDay = 0;
     public bool caseClosed = false; // 완료된 손님인지
 
     public void AddEffect(DialogueDecision.DecisionEffect effect)

@@ -65,7 +65,7 @@ public abstract class CustomerAI : MonoBehaviour
     }
 
     protected abstract void DecideNextBehaviour(AIBehaviour behaviour);
-    protected abstract void DecideVisit(int day);
+    protected abstract bool DecideVisit(int day);
 
     public void AddDecision(DialogueDecision decision) // fix information by decisions
     {

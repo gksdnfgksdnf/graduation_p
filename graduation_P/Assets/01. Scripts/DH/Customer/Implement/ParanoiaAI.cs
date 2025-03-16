@@ -36,9 +36,7 @@ public class ParanoiaAI : CustomerAI
             return feel;
 
         float feelValue = information.reliance;
-
-        // 망상증 변수
-        feelValue += UnityEngine.Random.Range(-0.5f, 0.5f);
+        feelValue += UnityEngine.Random.Range(-30f, 30f);
 
         if (feelValue >= 65f)
             feel = CustomerFeel.Perfect;
@@ -52,11 +50,14 @@ public class ParanoiaAI : CustomerAI
             feel = CustomerFeel.Terrible;
 
         return feel;
-
     }
 
-    protected override void DecideVisit(int day)
+    protected override bool DecideVisit(int day)
     {
+        int visitValue = 0;
+        visitValue += (day - information.firstAppearDay) * 20;
+        visitValue += 50;
 
+        return visitValue >= 100;
     }
 }
