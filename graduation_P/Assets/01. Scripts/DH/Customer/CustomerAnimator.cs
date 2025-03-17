@@ -9,4 +9,14 @@ public class CustomerAnimator : MonoBehaviour
         if (renderer == null)
             renderer = GetComponentInChildren<SpriteRenderer>();
     }
+
+    public void Enter()
+    {
+        renderer.enabled = true;
+    }
+
+    public void Exit()
+    {
+        renderer.enabled = false;
+    }
 }

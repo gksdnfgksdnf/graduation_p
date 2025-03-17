@@ -5,9 +5,6 @@ public class ParanoiaAI : CustomerAI
     protected bool enter = false;
     protected bool reaction = false;
 
-    protected int drunk = 0;
-    protected float drunkMultiplier = 2f;
-
     protected float dayFeeling = 0;
 
     protected int talkCount = 0;
@@ -18,12 +15,12 @@ public class ParanoiaAI : CustomerAI
         enter = true;
 
         if (enterEvt == EnterEventType.Drunk)
-            drunk = Random.Range(40, 60);
+            information.drunk = Random.Range(40, 60);
         else
-            drunk = 0;
+            information.drunk = 0;
 
         if (enterEvt == EnterEventType.TerribleDay)
-            dayFeeling = -33f; // 멘탈 붕괴
+            dayFeeling = -33f;
         else
             dayFeeling = 0;
 
@@ -39,13 +36,13 @@ public class ParanoiaAI : CustomerAI
         behaviour.dialogue = DecideDialogue(behaviour);
     }
 
-    private DialogueText DecideDialogue(AIBehaviour behaviour)
+    private DialogueHeader DecideDialogue(AIBehaviour behaviour)
     {
         return dialogues.Query(
             behaviour.feel,
             behaviour.behaviour,
-            information.reliance,
-            drunk
+            information.drunk,
+            information.reliance
         );
     }
 
@@ -61,7 +58,7 @@ public class ParanoiaAI : CustomerAI
             reaction = false;
             return BehaviourType.Reaction;
         }
-        if (drunk >= 90)
+        if (information.drunk >= 90)
             return BehaviourType.Exit;
 
         if (orderCount >= talkCount)
@@ -86,7 +83,7 @@ public class ParanoiaAI : CustomerAI
             feel = CustomerFeel.Good;
         else if (feelValue >= 0f)
             feel = CustomerFeel.Find;
-        else if (feelValue >= -50f)
+        else if (feelValue >= -40f)
             feel = CustomerFeel.Bad;
         else
             feel = CustomerFeel.Terrible;
@@ -94,17 +91,16 @@ public class ParanoiaAI : CustomerAI
         return feel;
     }
 
-    protected override int DecideVisit(int day)
+    public override bool DecideVisit(int day)
     {
         int visitValue = 0;
-        visitValue += (day - information.firstAppearDay) * 20;
-        visitValue += 50;
-        return visitValue;
+        visitValue += (day - information.firstAppearDay) * 50;
+        return visitValue >= Random.Range(information.reliance, 100f);
     }
 
     public override void AddCocktail(CocktailDataSO cocktail)
     {
-        drunk += 20;
+        information.drunk += 20;
         reaction = true;
     }
 }

@@ -1,20 +1,19 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Customer : MonoBehaviour
 {
     public CustomerAI AI;
+    public CustomerAnimator Animator;
 
-    public List<Customer> customers;
-
-    private void Awake()
+    public void Enter(EnterEventType evt)
     {
-        if (AI == null)
-            AI = GetComponent<CustomerAI>();
+        AI.Entered(evt);
+        Animator.Enter();
     }
 
-    public void Load()
+    public void Exit()
     {
-        AI.Load();
+        AI.Exited();
+        Animator.Exit();
     }
 }

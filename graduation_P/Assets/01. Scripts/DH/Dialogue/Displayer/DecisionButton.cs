@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static DialogueDecision;
 
 public class DecisionButton : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class DecisionButton : MonoBehaviour
     private Button button;
     private TextMeshProUGUI textBase;
 
-    private DialogueDecision decision;
+    private Decision decision;
     private DecisionDisplayer displayer;
 
     public void Init()
@@ -20,12 +21,13 @@ public class DecisionButton : MonoBehaviour
         textBase = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void Active(DialogueDecision decision, DecisionDisplayer displayer)
+    public void Active(Decision decision, DecisionDisplayer displayer)
     {
         gameObject.SetActive(true);
         this.decision = decision;
         this.displayer = displayer;
         textBase.text = decision.text;
+        rectTrm.sizeDelta = textBase.GetPreferredValues() + textPadding;
         rectTrm.sizeDelta = textBase.GetPreferredValues() + textPadding;
         button.onClick.AddListener(HandleButtonClick);
     }

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static DialogueDecision;
 
 public enum BehaviourType
 {
@@ -21,10 +22,9 @@ public enum CustomerFeel
 
 public enum CustomerStatType
 {
+    drunk,
     reliance,
     progress,
-    // temporal value
-    drunk,
 }
 
 public enum EnterEventType
@@ -38,8 +38,7 @@ public class AIBehaviour
 {
     public CustomerFeel feel;
     public BehaviourType behaviour;
-    public DialogueText dialogue;
-    public string order;
+    public DialogueHeader dialogue;
 }
 
 public abstract class CustomerAI : MonoBehaviour
@@ -49,15 +48,6 @@ public abstract class CustomerAI : MonoBehaviour
     public CustomerDialogues dialogues;
 
     public List<AIBehaviour> prevBehaviours;
-
-    public virtual void Load()
-    {
-        _ = information.Load();
-    }
-    public virtual void Save()
-    {
-        _ = information.Save();
-    }
 
     public virtual void Entered(EnterEventType enterEvt)
     {
@@ -76,7 +66,7 @@ public abstract class CustomerAI : MonoBehaviour
         return behaviour;
     }
 
-    public virtual void AddDecision(DialogueDecision decision) // modify information by decisions
+    public virtual void AddDecision(Decision decision) // modify information by decisions
     {
         foreach (var effect in decision.effects)
         {
@@ -86,5 +76,5 @@ public abstract class CustomerAI : MonoBehaviour
 
     public abstract void AddCocktail(CocktailDataSO cocktail);
     protected abstract void DecideNextBehaviour(AIBehaviour behaviour);
-    protected abstract int DecideVisit(int day);
+    public abstract bool DecideVisit(int day);
 }

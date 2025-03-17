@@ -5,20 +5,38 @@ public class CustomerManager : MonoBehaviour
 {
     public static CustomerManager Instance { get; private set; }
 
-    public List<Customer> customerPrefabs = new List<Customer>();
+    public List<Customer> customers = new();
+    public Customer visitor;
+
+    [SerializeField] private bool test = true;
 
     private void Awake()
     {
         Instance = this;
-        Enter();
+        if (test)
+        {
+            EnterCustomer(GetRandomCustomer(0));
+        }
     }
 
-    public void Enter()
+    public Customer GetRandomCustomer(int day)
     {
-        foreach (var customerPrefab in customerPrefabs)
-        {
-            Customer customer = Instantiate(customerPrefab);
-            customer.Load();
-        }
+        List<Customer> visitor = customers.FindAll(visit => visit.AI.DecideVisit(day));
+        if (visitor.Count > 0)
+            return visitor[Random.Range(0, visitor.Count)];
+        else
+            return customers[Random.Range(0, customers.Count)];
+    }
+
+    public void EnterCustomer(Customer customer)
+    {
+        visitor = customer;
+        visitor.Enter(EnterEventType.None);
+    }
+
+    public void ExitCustomer()
+    {
+        visitor.Exit();
+        visitor = null;
     }
 }

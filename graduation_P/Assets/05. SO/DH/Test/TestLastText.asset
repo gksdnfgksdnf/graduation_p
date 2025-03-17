@@ -14,8 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   texts:
-  - "\uC798\uAC00"
-  - "\u3142\u3142"
+  - "\uADF8... \uADF8\uB798"
+  - "\uBBF8\uC548."
   - ...
-  decisions: []
   next: {fileID: 0}

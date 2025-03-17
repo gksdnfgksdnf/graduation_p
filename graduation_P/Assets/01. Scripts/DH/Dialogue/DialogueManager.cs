@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
-    public enum DialogueType
+    public enum SpeakerType
     {
         Player,
         Customer
@@ -14,19 +14,18 @@ public class DialogueManager : MonoBehaviour
 
     public bool test = false;
     [SerializeField] private Customer testCustomer;
-    [SerializeField] private DialogueText testDialogue;
+    [SerializeField] private DialogueObject testDialogue;
 
     public List<DialogueDisplayer> playerDisplayers;
     public List<DialogueDisplayer> customerDisplayers;
 
     private Customer customer;
-    private DialogueText dialogue;
+    private DialogueObject dialogue;
+    private DialogueObject lastDialogue;
     private DialogueDisplayer displayer;
+    private DialogueDisplayer lastDisplayer;
 
-    private int dialoguePointer = 0;
-    private DialogueText lastDialogue;
-
-    public Action onDialogueEnded;
+    public Action onNext;
 
     private void Awake()
     {
@@ -39,35 +38,30 @@ public class DialogueManager : MonoBehaviour
             EnterDialogue(testCustomer, testDialogue);
     }
 
-    public void EnterDialogue(Customer customer, DialogueText dialogue)
+    public void EnterDialogue(Customer customer, DialogueObject dialogue, DialogueDisplayer displayer = null)
     {
-        dialoguePointer = 0;
-        lastDialogue = this.dialogue;
-
         this.customer = customer;
+        this.lastDialogue = this.dialogue;
         this.dialogue = dialogue;
-
-        if (displayer != null)
+        this.lastDisplayer = displayer;
+        this.displayer = displayer != null && dialogue.type == lastDialogue.type ? displayer : GetDisplayer(dialogue);
+        if (lastDisplayer != this.displayer)
         {
-            displayer.Enable(false);
-            displayer.TextDisplayer.nextButton.onClick.RemoveListener(Next);
+            lastDisplayer?.Enable(false);
+            this.displayer.Enable(true);
         }
 
-        if (displayer == null || dialogue.type != lastDialogue.type)
-            displayer = GetDisplayer(dialogue);
-
-        displayer.Enable(true);
-        displayer.TextDisplayer.nextButton.onClick.AddListener(Next);
-        displayer.TextDisplayer.Show(dialogue.texts[dialoguePointer++]);
+        lastDialogue?.ExitDialogue(this.customer, this.displayer);
+        this.dialogue?.EnterDialogue(this.customer, this.displayer);
     }
 
-    private DialogueDisplayer GetDisplayer(DialogueText dialogue)
+    private DialogueDisplayer GetDisplayer(DialogueObject dialogue)
     {
         switch (dialogue.type)
         {
-            case DialogueType.Player:
+            case SpeakerType.Player:
                 return playerDisplayers[UnityEngine.Random.Range(0, playerDisplayers.Count)];
-            case DialogueType.Customer:
+            case SpeakerType.Customer:
                 return customerDisplayers[UnityEngine.Random.Range(0, customerDisplayers.Count)];
         }
         return null;
@@ -75,67 +69,17 @@ public class DialogueManager : MonoBehaviour
 
     public void ExitDialogue()
     {
-        customer = null;
+        lastDialogue = dialogue;
+        dialogue?.ExitDialogue(customer, displayer);
         dialogue = null;
-        dialoguePointer = 0;
-
-        if (displayer != null)
-        {
-            displayer.TextDisplayer.nextButton.onClick.RemoveListener(Next);
-            displayer.Enable(false);
-            displayer = null;
-        }
-
-        onDialogueEnded?.Invoke();
-    }
-
-    public void Next() // 화면 클릭 작용, 나오는 중 누르면 줄 스킵, 끝나면 선택지나 대화 종료 중에 결정
-    {
-        if (!displayer)
-            return;
-        if (displayer.DecisionDisplayer.IsShowDecisions())
-            return;
-        if (!displayer.TextDisplayer.IsShowComplete())
-        {
-            displayer.TextDisplayer.Skip();
-            return;
-        }
-        if (dialoguePointer == dialogue.texts.Count)
-        {
-            if (dialogue.decisions == null || dialogue.decisions.Count > 0)
-            {
-                ShowDecisions();
-                return;
-            }
-
-            if (dialogue.next != null)
-            {
-                EnterDialogue(customer, dialogue.next);
-                return;
-            }
-
-            ExitDialogue();
-            return;
-        }
-
-        displayer.TextDisplayer.Show(dialogue.texts[dialoguePointer++]);
-    }
-
-    public void Skip()
-    {
-        displayer.TextDisplayer.Skip();
-    }
-
-    private void ShowDecisions()
-    {
-        displayer.DecisionDisplayer.Show(customer, dialogue.decisions);
+        customer = null;
+        displayer.Enable(false);
+        displayer = null;
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Next();
-        }
+            onNext?.Invoke();
     }
 }

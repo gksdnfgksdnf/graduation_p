@@ -15,10 +15,6 @@ MonoBehaviour:
   type: 1
   texts:
   - ...
-  - "\uB098\uB294 \uD14D\uC2A4\uD2B8\uC57C"
-  - "\uC791\uB3D9\uD558\uBA74 \uC88B\uACA0\uB2E4"
-  decisions:
-  - {fileID: 11400000, guid: 9dac113816158024c8e451e92b3f6fba, type: 2}
-  - {fileID: 11400000, guid: bc501658c11f89f4189bd7d980beb255, type: 2}
-  - {fileID: 11400000, guid: 37b9c1671db645540afb59728dc8aa20, type: 2}
-  next: {fileID: 0}
+  - "\uC548\uB155"
+  - "\uC88B\uC740 \uC544\uCE68\uC774\uC57C"
+  next: {fileID: 11400000, guid: 89ad41bbb2cc2574d8710e99820c217e, type: 2}

@@ -4,14 +4,24 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "SO/Customer/Dialogues")]
 public class CustomerDialogues : ScriptableObject
 {
-    public List<DialogueText> enter = new();
-    public List<DialogueText> talk = new();
-    public List<DialogueText> order = new();
-    public List<DialogueText> reaction = new();
-    public List<DialogueText> exit = new();
+    public List<DialogueHeader> headers;
 
-    public DialogueText Query(CustomerFeel feel, BehaviourType behaviour, float reliance, int mindBarrier)
+    public DialogueHeader Query(CustomerFeel feel, BehaviourType behaviour, float drunk, float reliance)
     {
+        List<DialogueHeader> finds = headers.FindAll((header) =>
+        {
+            if (
+                    header.feel == feel &&
+                    header.behaviour == behaviour &&
+                    header.drunk <= drunk &&
+                    header.reliance <= reliance
+                )
+                return true;
+            return false;
+        });
+
+        if (finds.Count > 0)
+            return finds[Random.Range(0, finds.Count)];
         return null;
     }
 }
