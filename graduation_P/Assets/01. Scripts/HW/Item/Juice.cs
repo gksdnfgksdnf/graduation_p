@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Juice : Item
+public class Juice : DraggableItem
 {
     private JuiceSO juice;
 
