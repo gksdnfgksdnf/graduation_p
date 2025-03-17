@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Tool_Type
+public enum ToolType
 {
     Shaker,
     Jigger,
@@ -16,6 +16,5 @@ public enum Tool_Type
 [CreateAssetMenu(fileName = "NewTool", menuName = "SO/Item/Tool")]
 public class ToolSO : ItemSO
 {
-
-    public Tool_Type type;
+    public ToolType type;
 }

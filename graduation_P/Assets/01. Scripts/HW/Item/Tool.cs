@@ -7,7 +7,7 @@ public class Tool : DraggableItem
     private void Awake()
     {
         tool = item as ToolSO;
-        itemType = Item_Type.Tool;
+        itemType = ItemType.Tool;
     }
 
     public override void Use()

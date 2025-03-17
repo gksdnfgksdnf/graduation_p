@@ -7,7 +7,7 @@ public class Glass : DraggableItem
     private void Awake()
     {
         glass = item as GlassSO;
-        itemType = Item_Type.Glass;
+        itemType = ItemType.Glass;
     }
 
     public override void Use()

@@ -9,6 +9,11 @@ public class CocktailMaker : MonoBehaviour
     {
         MakeCocktail("Negroni");
     }
+
+    public void OrderCocktail(string cocktail)
+    {
+
+    }
     public void MakeCocktail(string cocktailName)
     {
         // 해당 칵테일 데이터 가져오기
@@ -49,9 +54,6 @@ public class CocktailMaker : MonoBehaviour
 
     private void MixCocktail(List<ItemSO> ingredients, List<ItemSO> tools, ItemSO glass)
     {
-        // 믹싱 과정 (간단한 예시로, 재료를 섞는다는 출력)
-        Debug.Log("칵테일 믹싱 중...");
-        // 여기에 믹싱이나 쉐이킹, 필터링 등 구체적인 과정 추가 가능
-        Debug.Log("칵테일 완성!");
+        
     }
 }
