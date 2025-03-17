@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Garnish : Item
+public class Garnish : DraggableItem
 {
     private void Awake()
     {

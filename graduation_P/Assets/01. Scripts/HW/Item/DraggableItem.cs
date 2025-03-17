@@ -1,40 +1,56 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableItem : Item, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class DraggableItem : Item
 {
     private Vector3 offset;
     private bool isDragging = false;
+    private Camera mainCamera;
 
-    public void OnPointerDown(PointerEventData data)
+    private void Start()
     {
-        Debug.Log("OnPointerDown 호출됨");
+        // 메인 카메라 가져오기
+        mainCamera = Camera.main;
+        if (mainCamera == null)
+        {
+            Debug.LogError("Main Camera를 찾을 수 없습니다!");
+        }
+    }
+
+    private void OnMouseDown()
+    {
+        Debug.Log("OnMouseDown 호출됨");
 
         // 드래그 시작
         isDragging = true;
 
         // 마우스와 오브젝트의 거리 계산
-        Vector3 mousePosition = GetMousePos(data);
+        Vector3 mousePosition = GetMousePos();
         offset = transform.position - mousePosition;
     }
 
-    public void OnDrag(PointerEventData data)
+    private void OnMouseDrag()
     {
         if (isDragging)
         {
-            // 마우스 위치
-            Vector3 mousePosition = GetMousePos(data);
+            // 마우스 위치 업데이트
+            Vector3 mousePosition = GetMousePos();
             transform.position = mousePosition + offset;
         }
     }
 
-    public void OnPointerUp(PointerEventData data)
+    private void OnMouseUp()
     {
+        Debug.Log("OnMouseUp 호출됨");
+
+        // 드래그 종료
         isDragging = false;
     }
 
-    private Vector3 GetMousePos(PointerEventData data)
+    private Vector3 GetMousePos()
     {
-        return Camera.main.ScreenToWorldPoint(new Vector3(data.position.x, data.position.y, Camera.main.WorldToScreenPoint(transform.position).z));
+        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f; 
+        return mousePosition;
     }
 }

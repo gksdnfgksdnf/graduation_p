@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tool : Item
+public class Tool : DraggableItem
 {
     private ToolSO tool;
 
