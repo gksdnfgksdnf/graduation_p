@@ -12,7 +12,7 @@ public class Glass : DraggableItem
 
     public override void Use()
     {
-        
+        Debug.Log("뮉싱쿨라스 솨용!!!");
     }
 
 }

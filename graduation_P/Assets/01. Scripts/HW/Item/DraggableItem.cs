@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+
 public class DraggableItem : Item
 {
     private Vector3 offset;
     private bool isDragging = false;
     private Camera mainCamera;
-
     private void Start()
     {
         mainCamera = Camera.main;
@@ -18,10 +18,12 @@ public class DraggableItem : Item
 
     private void OnMouseDown()
     {
+        gameObject.layer = LayerMask.NameToLayer("DraggingItem");
         isDragging = true;
 
         Vector3 mousePosition = GetMousePos();
         offset = transform.position - mousePosition;
+        Debug.Log("잡았냐");
     }
 
     private void OnMouseDrag()
@@ -30,12 +32,18 @@ public class DraggableItem : Item
         {
             Vector3 mousePosition = GetMousePos();
             transform.position = mousePosition + offset;
+            Debug.Log("움직이냐");
+
         }
     }
 
     private void OnMouseUp()
     {
         isDragging = false;
+        gameObject.layer = LayerMask.NameToLayer("Item");
+        Debug.Log("땠냐");
+
+
     }
 
     private Vector3 GetMousePos()

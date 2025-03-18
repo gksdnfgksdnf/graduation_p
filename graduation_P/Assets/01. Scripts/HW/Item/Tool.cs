@@ -12,7 +12,8 @@ public class Tool : DraggableItem
 
     public override void Use()
     {
-        
+        Debug.Log("도구사용!!");
+
     }
 
 }

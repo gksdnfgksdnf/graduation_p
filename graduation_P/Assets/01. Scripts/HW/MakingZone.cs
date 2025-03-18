@@ -1,5 +1,5 @@
-using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine;
 
 public class MixingZone : MonoBehaviour
 {
@@ -15,56 +15,71 @@ public class MixingZone : MonoBehaviour
 
     private void Awake()
     {
-        toolType = new List<ToolType> { ToolType.Jigger,
-                                        ToolType.MixingGlass,
-                                        ToolType.Shaker };
+        toolType = new List<ToolType> { ToolType.Jigger, ToolType.MixingGlass, ToolType.Shaker };
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-
-        if (other.CompareTag("Item"))
+        if (baseItem == null)
         {
             baseItem = other.transform.GetComponent<DraggableItem>();
-            if (baseItem.item.itemType != baseType)
-                return;
+            Debug.Log(baseItem.gameObject.name);
 
-            if (baseItem.item.itemType == ItemType.Tool)
+            if (!IsValidItemType(baseItem))
             {
-                ToolSO toolData = baseItem.item as ToolSO;
-                if (toolData != null && toolType.Contains(toolData.type))
-                {
-                    //Jigger, MixingGlass, Shaker
-                    PlaceItem();
-                }
+                Debug.Log(baseItem.item.itemType + "는 " + baseType + "와/과 일치S지 않습니다.");
+                return;
             }
-            else if (baseItem.item.itemType == ItemType.Glass)
+
+            if (CanPlaceItem(baseItem))
             {
-                //Glass
                 PlaceItem();
             }
-
-
         }
+        else
+        {
 
+            //ingredient, another tool
+            DraggableItem item = other.transform.GetComponent<DraggableItem>();
 
+            item.Use();
+        }
+    }
 
+    private bool IsValidItemType(DraggableItem item)
+    {
+        return item.item.itemType == baseType;
+    }
+
+    private bool CanPlaceItem(DraggableItem item)
+    {
+        if (item.item.itemType == ItemType.Tool)
+        {
+            ToolSO toolData = item.item as ToolSO;
+            return toolData != null && toolType.Contains(toolData.type);
+        }
+        else if (item.item.itemType == ItemType.Glass)
+        {
+            return true;
+        }
+        return false;
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Item"))
         {
-            baseItem = collision.transform.GetComponent<DraggableItem>();
-
-            addedItems.Remove(baseItem);
+            DraggableItem item = collision.transform.GetComponent<DraggableItem>();
+            if (addedItems.Contains(item))
+                addedItems.Remove(item);
+            if (baseItem == item)
+                baseItem = null;
         }
     }
 
     private void PlaceItem()
     {
-        baseItem.transform.position = transform.position; //나중에 트윈 걸 예정
-
+        baseItem.transform.position = transform.position; // 나중에 트윈 추가 예정
         addedItems.Add(baseItem);
     }
 }
