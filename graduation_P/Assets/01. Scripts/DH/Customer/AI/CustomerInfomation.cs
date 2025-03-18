@@ -1,5 +1,12 @@
 using UnityEngine;
 
+public enum EffectType
+{
+    Drunk,
+    Reliance,
+    Progress,
+}
+
 [CreateAssetMenu(menuName = "SO/Customer/Infomation")]
 public class CustomerInfomation : ScriptableObject
 {
@@ -18,13 +25,13 @@ public class CustomerInfomation : ScriptableObject
     {
         switch (effect.type)
         {
-            case CustomerStatType.drunk:
+            case EffectType.Drunk:
                 drunk = Mathf.Clamp(drunk + (effect.value * drunkMultiplier), 0f, 100f);
                 break;
-            case CustomerStatType.reliance:
+            case EffectType.Reliance:
                 reliance = Mathf.Clamp(reliance + (effect.value * relianceMultiplier), -100f, 100f);
                 break;
-            case CustomerStatType.progress:
+            case EffectType.Progress:
                 progress = Mathf.Clamp(progress + (int)effect.value, 0, 100);
                 break;
         }

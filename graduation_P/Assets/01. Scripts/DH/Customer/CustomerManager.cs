@@ -31,7 +31,7 @@ public class CustomerManager : MonoBehaviour
     public void EnterCustomer(Customer customer)
     {
         visitor = customer;
-        visitor.Enter(EnterEventType.None);
+        visitor.Enter();
     }
 
     public void ExitCustomer()

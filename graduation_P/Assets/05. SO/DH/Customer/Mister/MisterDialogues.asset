@@ -9,11 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6766f3c0aecf90847ba40fa496488a6c, type: 3}
-  m_Name: TestDecision2
+  m_Script: {fileID: 11500000, guid: 7130a8f8a55510447b4251e06dcf3c40, type: 3}
+  m_Name: MisterDialogues
   m_EditorClassIdentifier: 
-  type: 1
-  decisions:
-  - text: "\uC751"
-    effects: []
-    next: {fileID: 11400000, guid: 0a588e53aeb23f84d97a4432c9854edd, type: 2}
+  major:
+  - {fileID: 11400000, guid: 2a512cb82723f444fa7482d44a77fe09, type: 2}
+  minor: []
+  smallTalk: []
+  etc: []
+  drunkDistance: 20
+  relianceDistance: 20

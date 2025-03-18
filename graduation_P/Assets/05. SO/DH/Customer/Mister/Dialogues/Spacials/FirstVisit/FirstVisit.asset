@@ -9,9 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffed2a8dae21dca4fb06eec98f7fcc2d, type: 3}
-  m_Name: TestStat
+  m_Script: {fileID: 11500000, guid: 99366c4e0a0e11f41ac6b797d2227b71, type: 3}
+  m_Name: FirstVisit
   m_EditorClassIdentifier: 
+  Type: 0
+  behaviour: 0
+  feel: 3
   drunk: 0
   reliance: 0
-  like: 0
+  header: {fileID: 11400000, guid: 23ab7c9738ceff04399444fe3372fe2d, type: 2}
+  count: 0
+  maxCount: 1

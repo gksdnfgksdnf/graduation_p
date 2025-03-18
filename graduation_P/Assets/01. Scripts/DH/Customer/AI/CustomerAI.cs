@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using static DialogueDecision;
 
 public enum BehaviourType
 {
+    None,
     Enter,
     Talk,
     Order,
@@ -13,32 +15,43 @@ public enum BehaviourType
 
 public enum CustomerFeel
 {
+    None,
     Terrible,
     Bad,
-    Find,
+    Fine,
     Good,
     Perfect
 }
 
-public enum CustomerStatType
+public enum SpacialEvent
 {
-    drunk,
-    reliance,
-    progress,
+    None,
+    Order, // 다음 행동은 주문
+    FirstOrder, // 다음 행동은 첫 주문
+    FavoriteOrder, // 다음 행동은 특별한 주문
+    GetOut, // 다음 행동은 나감
+    FirstGetOut, // 다음 행동은 나가고 다신 돌아오지 않음
+    FirstVisit, // 첫 인사를 함
 }
 
-public enum EnterEventType
+[Serializable]
+public class SpacialBehaviour
 {
-    None, // 85%
-    Drunk, // 10%
-    TerribleDay, // 5%
+    public SpacialEvent type;
+    public AIBehaviour behaviour;
 }
 
+[Serializable]
 public class AIBehaviour
 {
     public CustomerFeel feel;
     public BehaviourType behaviour;
     public DialogueHeader dialogue;
+
+    public override string ToString()
+    {
+        return $"{feel}-{behaviour}: {dialogue.name}";
+    }
 }
 
 public abstract class CustomerAI : MonoBehaviour
@@ -47,9 +60,12 @@ public abstract class CustomerAI : MonoBehaviour
     public CustomerTaste taste;
     public CustomerDialogues dialogues;
 
+    public List<SpacialBehaviour> spacials;
     public List<AIBehaviour> prevBehaviours;
 
-    public virtual void Entered(EnterEventType enterEvt)
+    public AIBehaviour next = new();
+
+    public virtual void Entered()
     {
         information.visitCount++;
     }
@@ -60,8 +76,7 @@ public abstract class CustomerAI : MonoBehaviour
 
     public virtual AIBehaviour GetBehaviour() // return aibehaviour by infomation and taste
     {
-        AIBehaviour behaviour = new();
-        DecideNextBehaviour(behaviour);
+        AIBehaviour behaviour = DecideNextBehaviour();
         prevBehaviours.Add(behaviour);
         return behaviour;
     }
@@ -69,12 +84,13 @@ public abstract class CustomerAI : MonoBehaviour
     public virtual void AddDecision(Decision decision) // modify information by decisions
     {
         foreach (var effect in decision.effects)
-        {
             information.AddEffect(effect);
-        }
+        foreach (var evt in decision.events)
+            HandleDecisionEvent(evt);
     }
 
     public abstract void AddCocktail(CocktailDataSO cocktail);
-    protected abstract void DecideNextBehaviour(AIBehaviour behaviour);
+    protected abstract AIBehaviour DecideNextBehaviour();
+    protected abstract void HandleDecisionEvent(SpacialEvent evt);
     public abstract bool DecideVisit(int day);
 }

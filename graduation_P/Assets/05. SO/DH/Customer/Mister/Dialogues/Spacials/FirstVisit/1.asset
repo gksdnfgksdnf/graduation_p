@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffed2a8dae21dca4fb06eec98f7fcc2d, type: 3}
-  m_Name: ParanoiaInformation
+  m_Script: {fileID: 11500000, guid: 3d152ebcbd39cd545a469dcd4c19d940, type: 3}
+  m_Name: 1
   m_EditorClassIdentifier: 
-  drunk: 0
-  reliance: 0
-  like: 0
-  progress: 0
-  firstVisit: 1
-  traumaTrigger: 0
-  caseClosed: 0
+  type: 1
+  texts:
+  - "\uC548\uB155\uD558\uC2E0\uAC00"
+  - "\uC2E0\uAE30\uD55C \uC778\uD14C\uB9AC\uC5B4\uAD70"
+  next: {fileID: 11400000, guid: 81047aea8ae8a1a44bf0c626d5dcb580, type: 2}

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4848531943029617563}
   - component: {fileID: 6180679701648325591}
   m_Layer: 0
-  m_Name: ParanoiaCustomer
+  m_Name: MisterCustomer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,6 +64,12 @@ MonoBehaviour:
   information: {fileID: 11400000, guid: 40ee456211c6a0a49ac247d1f730c1d9, type: 2}
   taste: {fileID: 11400000, guid: a341a9019a3ac2843aab01a83968cc75, type: 2}
   dialogues: {fileID: 11400000, guid: 0874a935095fecd4b9107b40742105c2, type: 2}
+  spacials: []
+  prevBehaviours: []
+  next:
+    feel: 0
+    behaviour: 0
+    dialogue: {fileID: 0}
 --- !u!114 &6180679701648325591
 MonoBehaviour:
   m_ObjectHideFlags: 0

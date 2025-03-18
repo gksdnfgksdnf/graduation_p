@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6766f3c0aecf90847ba40fa496488a6c, type: 3}
-  m_Name: TestDecision3
+  m_Script: {fileID: 11500000, guid: 3d152ebcbd39cd545a469dcd4c19d940, type: 3}
+  m_Name: 2 2
   m_EditorClassIdentifier: 
   type: 1
-  decisions:
-  - text: "\uADF8\uB7EC\uAC8C"
-    effects: []
-    next: {fileID: 11400000, guid: bc501658c11f89f4189bd7d980beb255, type: 2}
+  texts:
+  - ...
+  - "\uC9C4\uC2EC\uC778\uAC00?"
+  - "\uC0B4\uBA74\uC11C \uBCC4 \uC0AC\uB78C\uC744 \uB2E4 \uBCF4\uB294\uAD70"
+  next: {fileID: 11400000, guid: 81047aea8ae8a1a44bf0c626d5dcb580, type: 2}
