@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: NewAlchole
   m_EditorClassIdentifier: 
   itemName: alchole
-  itemDescription: aaa
   itemType: 0
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   price: 2
@@ -21,5 +20,6 @@ MonoBehaviour:
   volume: 1
   isStackable: 0
   isConsumable: 0
+  ingType: 1
   alcoholContent: 11
   bitterness: 3

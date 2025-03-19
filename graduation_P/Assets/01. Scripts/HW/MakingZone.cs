@@ -1,39 +1,50 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MixingZone : MonoBehaviour
 {
-    [SerializeField]
-    private ItemType baseType;
-    [SerializeField]
-    private DraggableItem baseItem;
+    private CocktailMaker cocktailMaker;
 
-    private List<ToolType> toolType;
+    [SerializeField]
+    private ItemType baseType; 
+    [SerializeField]
+    private Item baseItem;
+
+    private List<ToolType> toolType; //useable Item
 
     private void Awake()
     {
         toolType = new List<ToolType> { ToolType.Jigger, ToolType.MixingGlass, ToolType.Shaker };
     }
 
+    private void Start()
+    {
+        cocktailMaker = FindFirstObjectByType<CocktailMaker>();
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        DraggableItem item = GetDraggableItem(other);
+        Item item = GetItem(other);
 
-        // 아이템이 없거나 유효하지 않은 타입이면 무시
-        if (item == null || !IsValidItemType(item))
+        if (item == null)
             return;
 
-        // 기본 아이템이 비어있으면 설정
         if (baseItem == null)
         {
-            baseItem = item;
-            PlaceItem(baseItem);
-            Debug.Log($"기본 아이템 설정: {baseItem.gameObject.name}");
+            if (IsValidItemType(item))
+            {
+                baseItem = item;
+                StartCoroutine(PlaceItem(item));
+                Debug.Log($"기본 아이템 설정: {baseItem.gameObject.name}");
+            }
+            else
+            {
+                Debug.Log($"이 아이템은 {baseType} 타입이어야 합니다. {item.itemData.itemType}");
+            }
         }
         else
         {
-            // 기존 아이템이 있을 때 새로운 아이템과 상호작용 처리
             HandleAdditionalItem(item);
             Debug.Log($"추가 아이템 처리: {item.gameObject.name}");
         }
@@ -41,9 +52,8 @@ public class MixingZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        DraggableItem item = GetDraggableItem(collision);
+        Item item = GetItem(collision);
 
-        // 나간 아이템이 현재 베이스 아이템이라면 제거
         if (item != null && item == baseItem)
         {
             Debug.Log($"기본 아이템 제거: {baseItem.gameObject.name}");
@@ -51,31 +61,58 @@ public class MixingZone : MonoBehaviour
         }
     }
 
-    private DraggableItem GetDraggableItem(Collider2D other)
+    private Item GetItem(Collider2D other)
     {
-        return other.transform.GetComponent<DraggableItem>();
+        return other.transform.GetComponent<Item>();
     }
 
-    private void HandleAdditionalItem(DraggableItem item)
+    private void HandleAdditionalItem(Item item)
     {
-        if (baseItem != null && baseItem != item)
+        ItemType baseItemType = item.itemData.itemType;
+        if (baseItemType == ItemType.Tool)
         {
-            Debug.Log($"기존 아이템과 새로운 아이템 상호작용: {baseItem.gameObject.name} + {item.gameObject.name}");
-            // 기존 아이템과 상호작용 처리
-            baseItem.Use();  // 예시: 기존 아이템이 상호작용하는 로직
+            cocktailMaker.UseTool(item as Tool);
+        }
+        else if(baseItemType == ItemType.Ingredient)
+        {
+
+            cocktailMaker.AddIngredient(item as Ingredient);
+        }
+    }
+
+    private bool IsValidItemType(Item item)
+    {
+        ItemType itemType = item.itemData.itemType;
+
+        if (itemType != baseType)
+            return false;
+
+        if (itemType == ItemType.Tool)
+        {
+            ToolSO toolData = item.itemData as ToolSO;
+            if (toolData != null && toolType.Contains(toolData.toolType))
+                return true;
+
+            Debug.Log(toolData.toolType + "은 올바른 도구가 아닙니다!");
         }
 
-        // 새로운 아이템 사용
-        item.Use();
+
+        return true;
     }
 
-    private bool IsValidItemType(DraggableItem item)
-    {
-        return item.item.itemType == baseType;
-    }
 
-    private void PlaceItem(DraggableItem item)
+    private IEnumerator PlaceItem(Item item)
     {
-        item.transform.position = transform.position; // 나중에 트윈 추가 예정
+        while (Vector3.Distance(item.transform.position, transform.position) > 0.01f)
+        {
+            item.transform.position = Vector3.Lerp(
+                item.transform.position,
+                transform.position,
+                item.smoothSpeed * Time.deltaTime
+            );
+            yield return null;
+        }
+
+        item.transform.position = transform.position;
     }
 }

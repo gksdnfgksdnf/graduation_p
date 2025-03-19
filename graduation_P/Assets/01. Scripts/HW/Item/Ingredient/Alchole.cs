@@ -1,14 +1,12 @@
 using UnityEngine;
 
-public class Alchole : DraggableItem
+public class Alchole : Item
 {
-
     private AlcholeSO alchole;
 
     private void Awake()
     {
-        alchole = item as AlcholeSO;
-        itemType = ItemType.Ingredient;
+        alchole = itemData as AlcholeSO;
 
     }
 

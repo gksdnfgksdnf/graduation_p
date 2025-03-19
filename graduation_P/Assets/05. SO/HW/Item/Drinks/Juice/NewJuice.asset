@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: NewJuice
   m_EditorClassIdentifier: 
   itemName: Juice
-  itemDescription: Mango
   itemType: 0
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   price: 2
@@ -21,5 +20,6 @@ MonoBehaviour:
   volume: 2
   isStackable: 0
   isConsumable: 0
+  ingType: 5
   sweetness: 0
   sourness: 0

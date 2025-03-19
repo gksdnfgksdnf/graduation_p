@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class Soda : DraggableItem
+public class Soda : Item
 {
     private SodaSO soda;
 
     private void Awake()
     {
-        soda = item as SodaSO;
-        itemType = ItemType.Ingredient;
+        soda = itemData as SodaSO;
     }
     public override void Use()
     {
