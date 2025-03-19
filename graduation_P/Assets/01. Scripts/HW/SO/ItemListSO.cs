@@ -14,20 +14,20 @@ public class ItemListSO : ScriptableObject
 
     private void OnEnable()
     {
-        foreach (var item in itemList)
-        {
-            // 이름으로 저장
-            if (!itemsByName.ContainsKey(item.itemName))
-                itemsByName[item.itemName] = item;
+        //foreach (var item in itemList)
+        //{
+        //    // 이름으로 저장
+        //    if (!itemsByName.ContainsKey(item.itemName))
+        //        itemsByName[item.itemName] = item;
 
-            // 타입으로 저장
-            var itemType = item.GetType();
+        //    // 타입으로 저장
+        //    var itemType = item.GetType();
 
-            if (!itemsByType.ContainsKey(itemType))
-                itemsByType[itemType] = new List<ItemSO>();
+        //    if (!itemsByType.ContainsKey(itemType))
+        //        itemsByType[itemType] = new List<ItemSO>();
 
-            itemsByType[itemType].Add(item);
-        }
+        //    itemsByType[itemType].Add(item);
+        //}
     }
 
     public ItemSO GetItemByName(string name)
