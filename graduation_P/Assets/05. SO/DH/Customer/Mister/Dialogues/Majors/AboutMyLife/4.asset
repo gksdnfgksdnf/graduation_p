@@ -9,12 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79b947def8477f44ad1ee10a88826d6, type: 3}
-  m_Name: 2 2
+  m_Script: {fileID: 11500000, guid: 6766f3c0aecf90847ba40fa496488a6c, type: 3}
+  m_Name: 4
   m_EditorClassIdentifier: 
   type: 1
-  texts:
-  - "\uC544\uC27D\uAC8C \uB410\uC2B5\uB2C8\uB2E4."
-  next: {fileID: 0}
-  nextBehaviour: 0
-  specialEvent: 1
+  decisions:
+  - text: "\uB098\uB3C4 \uB610\uD55C \uADF8\uB7AC\uB2E4."
+    effects: []
+    nextBehaviour: 0
+    specialEvt: 0
+    next: {fileID: 0}

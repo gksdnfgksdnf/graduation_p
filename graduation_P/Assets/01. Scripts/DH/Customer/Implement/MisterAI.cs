@@ -1,12 +1,9 @@
-using System.Linq;
-using Random = UnityEngine.Random;
-
 public class MisterAI : CustomerAI
 {
     public override bool DecideVisit(int day)
     {
-        if (day == 1)
+        if (day == 1 || day % 6 == 0)
             return true;
-        return Random.Range(0, 100) > 15;
+        return false;
     }
 }

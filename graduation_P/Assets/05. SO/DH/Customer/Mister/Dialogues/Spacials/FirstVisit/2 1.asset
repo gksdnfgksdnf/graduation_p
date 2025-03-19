@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   texts:
-  - "\uD760..."
+  - "\uC74C..."
+  - "\uAC04\uB2E8\uD55C \uAC78\uB85C \uD558\uB098 \uBD80\uD0C1\uB4DC\uB9AC\uC8E0."
   next: {fileID: 0}
   nextBehaviour: 0
   specialEvent: 2

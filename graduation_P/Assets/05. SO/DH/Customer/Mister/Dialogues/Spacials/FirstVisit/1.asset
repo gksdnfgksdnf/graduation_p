@@ -14,5 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   texts:
-  - "\uC88B\uC740 \uAC00\uAC8C\uAD70\uC694"
+  - "\uCC98\uC74C \uBD59\uACA0\uC2B5\uB2C8\uB2E4."
+  - "\uD639\uC2DC \uC2DC\uAC04 \uB418\uC2ED\uB2C8\uAE4C?"
+  - "(\uD29C\uD1A0\uB9AC\uC5BC \uCE90\uB9AD\uD130\uC785\uB2C8\uB2E4.)"
   next: {fileID: 11400000, guid: 81047aea8ae8a1a44bf0c626d5dcb580, type: 2}

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(menuName = "SO/Dialogue/Decision")]
+[CreateAssetMenu(menuName = "DialogueDecision")]
 public class DialogueDecision : DialogueObject
 {
     [Serializable]

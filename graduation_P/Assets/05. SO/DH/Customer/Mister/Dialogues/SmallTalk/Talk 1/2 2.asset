@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f79b947def8477f44ad1ee10a88826d6, type: 3}
+  m_Script: {fileID: 11500000, guid: 3d152ebcbd39cd545a469dcd4c19d940, type: 3}
   m_Name: 2 2
   m_EditorClassIdentifier: 
   type: 1
   texts:
-  - "\uC544\uC27D\uAC8C \uB410\uC2B5\uB2C8\uB2E4."
+  - "\uC544\uC8FC \uB0C9\uC815\uD55C\uBD84\uC774\uAD70\uC694."
   next: {fileID: 0}
-  nextBehaviour: 0
-  specialEvent: 1

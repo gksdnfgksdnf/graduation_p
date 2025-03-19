@@ -1,10 +1,13 @@
+using System.Collections;
 using UnityEngine;
 
 public class Customer : MonoBehaviour
 {
     public CustomerAI AI;
     public CustomerAnimator Animator;
-    public AIBehaviour current;
+    public AIBehaviour curr;
+    public AIBehaviour prev;
+    public float behaviourTime = 2f;
 
     public void Enter()
     {
@@ -37,23 +40,38 @@ public class Customer : MonoBehaviour
 
     public void PlayBehaviour(AIBehaviour behaviour)
     {
-        current = behaviour;
+        curr = behaviour;
         DialogueManager.Instance.EnterDialogue(this, behaviour.dialogue.header);
         DialogueManager.Instance.onExit += HandleBehaviourEnd;
     }
 
     public void HandleBehaviourEnd()
     {
-        switch (current.behaviour)
+        DialogueManager.Instance.onExit -= HandleBehaviourEnd;
+        prev = curr;
+        curr = null;
+        StartCoroutine(WaitNextBehaviour());
+    }
+
+    private IEnumerator WaitNextBehaviour()
+    {
+        yield return new WaitForSeconds(behaviourTime + Random.Range(0f, 1f));
+        PlayNextBehaviour();
+    }
+
+    public void PlayNextBehaviour()
+    {
+
+        switch (prev.behaviour)
         {
-            case BehaviourType.None:
-                PlayBehaviour(AI.GetBehaviour());
-                break;
             case BehaviourType.Enter:
                 PlayBehaviour(AI.GetBehaviour());
                 break;
             case BehaviourType.Talk:
                 PlayBehaviour(AI.GetBehaviour());
+                break;
+            case BehaviourType.Order:
+
                 break;
             case BehaviourType.Reaction:
                 PlayBehaviour(AI.GetBehaviour());

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Dialogue/Event")]
+[CreateAssetMenu(menuName = "DialogueEvent")]
 public class DialogueEvent : DialogueText
 {
     public BehaviourType nextBehaviour;

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Dialogue/Text")]
+[CreateAssetMenu(menuName = "DialogueText")]
 public class DialogueText : DialogueObject // default text dialogue
 {
     public List<string> texts;
