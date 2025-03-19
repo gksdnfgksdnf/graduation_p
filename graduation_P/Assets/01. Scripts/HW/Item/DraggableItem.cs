@@ -1,40 +1,52 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DraggableItem : Item, IDragHandler, IPointerDownHandler, IPointerUpHandler
+
+public class DraggableItem : Item
 {
     private Vector3 offset;
     private bool isDragging = false;
-
-    public void OnPointerDown(PointerEventData data)
+    private Camera mainCamera;
+    private void Start()
     {
-        Debug.Log("OnPointerDown 호출됨");
-
-        // 드래그 시작
-        isDragging = true;
-
-        // 마우스와 오브젝트의 거리 계산
-        Vector3 mousePosition = GetMousePos(data);
-        offset = transform.position - mousePosition;
-    }
-
-    public void OnDrag(PointerEventData data)
-    {
-        if (isDragging)
+        mainCamera = Camera.main;
+        if (mainCamera == null)
         {
-            // 마우스 위치
-            Vector3 mousePosition = GetMousePos(data);
-            transform.position = mousePosition + offset;
+            Debug.LogError("Main Camera can't be find!");
         }
     }
 
-    public void OnPointerUp(PointerEventData data)
+    private void OnMouseDown()
     {
-        isDragging = false;
+        gameObject.layer = LayerMask.NameToLayer("DraggingItem");
+        isDragging = true;
+
+        Vector3 mousePosition = GetMousePos();
+        offset = transform.position - mousePosition;
     }
 
-    private Vector3 GetMousePos(PointerEventData data)
+    private void OnMouseDrag()
     {
-        return Camera.main.ScreenToWorldPoint(new Vector3(data.position.x, data.position.y, Camera.main.WorldToScreenPoint(transform.position).z));
+        if (isDragging)
+        {
+            Vector3 mousePosition = GetMousePos();
+            transform.position = mousePosition + offset;
+
+        }
+    }
+
+    private void OnMouseUp()
+    {
+        isDragging = false;
+        gameObject.layer = LayerMask.NameToLayer("Item");
+
+
+    }
+
+    private Vector3 GetMousePos()
+    {
+        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0f; 
+        return mousePosition;
     }
 }

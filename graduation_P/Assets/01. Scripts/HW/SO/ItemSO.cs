@@ -1,7 +1,8 @@
 using UnityEngine;
 
-public enum Item_Type
+public enum ItemType
 {
+    Cocktail,
     Ingredient,
     Tool,
     Glass
@@ -12,7 +13,7 @@ public class ItemSO : ScriptableObject
     [Header("기본 정보")]
     public string itemName;
     public string itemDescription;
-    public Item_Type itemType;
+    public ItemType itemType;
     //public ItemRarity rarity;
     public Sprite icon;
 
