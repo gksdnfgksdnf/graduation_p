@@ -20,15 +20,4 @@ public class Cocktail
     {
         return ingredients;
     }
-
-    public string GetName()
-    {
-        // 단순히 재료 이름을 합쳐서 반환
-        string name = "칵테일: ";
-        foreach (var ingredient in ingredients)
-        {
-            name += ingredient.name + " ";
-        }
-        return name.Trim();
-    }
 }

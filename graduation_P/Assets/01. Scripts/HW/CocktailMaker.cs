@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -34,7 +35,11 @@ public class CocktailMaker : MonoBehaviour
 
     private void CompleteCocktail()
     {
-        Debug.Log("칵테일 완성: " + currentCocktail.GetName());
-        // 완성된 칵테일을 처리하는 로직
+        Debug.Log("칵테일 완성: " + currentCocktail);
+    }
+
+    public void UseTool(Tool tool)
+    {
+        //이제 뭔가를 담고있는애인지, 다른곳에 사용되는 애인지를 구분해야함.
     }
 }

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507f955b5b49f44418d143e6d9721ac5, type: 3}
+  m_Name: Tabasko
+  m_EditorClassIdentifier: 
+  itemName: Tabasco
+  itemType: 1
+  icon: {fileID: 0}
+  price: 0
+  weight: 0
+  volume: 0
+  isStackable: 0
+  isConsumable: 0
+  ingType: 3
+  sweetness: 0
+  sourness: 0
+  bitness: 0

@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class MixingZone : MonoBehaviour
 {
+    private CocktailMaker cocktailMaker;
+
     [SerializeField]
     private ItemType baseType; 
     [SerializeField]
@@ -17,6 +19,10 @@ public class MixingZone : MonoBehaviour
         toolType = new List<ToolType> { ToolType.Jigger, ToolType.MixingGlass, ToolType.Shaker };
     }
 
+    private void Start()
+    {
+        cocktailMaker = FindFirstObjectByType<CocktailMaker>();
+    }
     private void OnTriggerEnter2D(Collider2D other)
     {
         Item item = GetItem(other);
@@ -48,24 +54,30 @@ public class MixingZone : MonoBehaviour
     {
         Item item = GetItem(collision);
 
-        // 나간 아이템이 현재 베이스 아이템이라면 제거
         if (item != null && item == baseItem)
         {
             Debug.Log($"기본 아이템 제거: {baseItem.gameObject.name}");
-            baseItem = null;  // 기본 아이템 제거
+            baseItem = null;
         }
     }
 
     private Item GetItem(Collider2D other)
     {
-        return other.transform.GetComponent<Item>();  // 드래그 가능한 아이템 반환
+        return other.transform.GetComponent<Item>();
     }
 
     private void HandleAdditionalItem(Item item)
     {
-        // 기본 아이템이 설정되어 있을 때, 새로운 아이템을 추가하는 처리
-        // 아이템 간 상호작용 (예시로 Use() 함수 호출)
-        item.Use();
+        ItemType baseItemType = item.itemData.itemType;
+        if (baseItemType == ItemType.Tool)
+        {
+            cocktailMaker.UseTool(item as Tool);
+        }
+        else if(baseItemType == ItemType.Ingredient)
+        {
+
+            cocktailMaker.AddIngredient(item as Ingredient);
+        }
     }
 
     private bool IsValidItemType(Item item)
@@ -93,7 +105,6 @@ public class MixingZone : MonoBehaviour
     {
         while (Vector3.Distance(item.transform.position, transform.position) > 0.01f)
         {
-            // 매 프레임마다 이동
             item.transform.position = Vector3.Lerp(
                 item.transform.position,
                 transform.position,
