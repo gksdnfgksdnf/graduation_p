@@ -5,7 +5,6 @@ using UnityEngine;
 public class CustomerDialogues : ScriptableObject
 {
     public List<DialogueHeader> major;
-    public List<DialogueHeader> minor;
     public List<DialogueHeader> smallTalk;
     public List<DialogueHeader> etc;
 
@@ -18,11 +17,6 @@ public class CustomerDialogues : ScriptableObject
 
         List<DialogueHeader> finds = FindAll(major, feel, behaviour, drunk, reliance, findClose);
         if (finds.Count > 0)
-            result = finds[Random.Range(0, finds.Count)];
-        else
-            finds = FindAll(minor, feel, behaviour, drunk, reliance, findClose);
-
-        if (finds.Count > 0 && result == null)
             result = finds[Random.Range(0, finds.Count)];
         else
             finds = FindAll(smallTalk, feel, behaviour, drunk, reliance, false);

@@ -68,6 +68,8 @@ public abstract class CustomerAI : MonoBehaviour
     public virtual void Entered()
     {
         information.visitCount++;
+        if (information.visitCount == 1)
+            HandleDecisionEvent(SpacialEvent.FirstVisit);
     }
 
     public virtual void Exited()

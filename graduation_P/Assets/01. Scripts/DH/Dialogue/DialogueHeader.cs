@@ -3,7 +3,6 @@ using UnityEngine;
 public enum DialogueType
 {
     Major,
-    Minor,
     SmallTalk,
     ETC
 }
