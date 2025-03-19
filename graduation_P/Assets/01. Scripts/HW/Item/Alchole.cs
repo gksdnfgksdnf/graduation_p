@@ -8,7 +8,7 @@ public class Alchole : DraggableItem
     private void Awake()
     {
         alchole = item as AlcholeSO;
-        itemType = Item_Type.Ingredient;
+        itemType = ItemType.Ingredient;
 
     }
 

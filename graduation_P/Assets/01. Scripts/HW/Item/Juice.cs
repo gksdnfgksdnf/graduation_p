@@ -7,7 +7,7 @@ public class Juice : DraggableItem
     private void Awake()
     {
         juice = item as JuiceSO;
-        itemType = Item_Type.Ingredient;
+        itemType = ItemType.Ingredient; 
     }
 
     public override void Use()

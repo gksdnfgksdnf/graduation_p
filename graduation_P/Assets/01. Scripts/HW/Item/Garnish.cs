@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class Garnish : Item
+public class Garnish : DraggableItem
 {
     private void Awake()
     {
-        itemType = Item_Type.Ingredient;
+        itemType = ItemType.Ingredient;
     }
 
     public override void Use()
