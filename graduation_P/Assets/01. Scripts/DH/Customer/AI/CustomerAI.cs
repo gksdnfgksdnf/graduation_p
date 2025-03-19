@@ -76,10 +76,14 @@ public abstract class CustomerAI : MonoBehaviour
 
     public virtual void Entered()
     {
+        information.visitCount++;
         information.drunk = 0;
+        next = null;
+        ordered = null;
+        served = null;
         talkCount = 0;
         orderCount = 0;
-        information.visitCount++;
+
         if (information.visitCount == 1)
             SetSpecialEvent(SpecialEvent.FirstVisit);
         else
@@ -87,6 +91,9 @@ public abstract class CustomerAI : MonoBehaviour
     }
     public virtual void Exited()
     {
+        next = null;
+        ordered = null;
+        served = null;
     }
 
     public virtual AIBehaviour GetBehaviour() // return aibehaviour by infomation and taste
@@ -119,19 +126,24 @@ public abstract class CustomerAI : MonoBehaviour
         switch (evt)
         {
             case BehaviourType.Enter:
-                next = new AIBehaviour() { behaviour = BehaviourType.Enter };
+                if (next == null)
+                    next = new AIBehaviour() { behaviour = BehaviourType.Enter };
                 break;
             case BehaviourType.Talk:
-                next = new AIBehaviour() { behaviour = BehaviourType.Talk };
+                if (next == null)
+                    next = new AIBehaviour() { behaviour = BehaviourType.Talk };
                 break;
             case BehaviourType.Order:
-                next = new AIBehaviour() { behaviour = BehaviourType.Order };
+                if (next == null)
+                    next = new AIBehaviour() { behaviour = BehaviourType.Order };
                 break;
             case BehaviourType.Reaction:
-                next = new AIBehaviour() { behaviour = BehaviourType.Reaction };
+                if (next == null)
+                    next = new AIBehaviour() { behaviour = BehaviourType.Reaction };
                 break;
             case BehaviourType.Exit:
-                next = new AIBehaviour() { behaviour = BehaviourType.Exit };
+                if (next == null)
+                    next = new AIBehaviour() { behaviour = BehaviourType.Exit };
                 break;
         }
     }

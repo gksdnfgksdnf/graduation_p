@@ -4,7 +4,6 @@ public class Customer : MonoBehaviour
 {
     public CustomerAI AI;
     public CustomerAnimator Animator;
-
     public AIBehaviour current;
 
     public void Enter()
@@ -28,6 +27,7 @@ public class Customer : MonoBehaviour
     public void Serve(CocktailDataSO cocktail)
     {
         AI.ServeCocktail(cocktail);
+        PlayBehaviour(AI.GetBehaviour());
     }
 
     public AIBehaviour GetBehaviour()

@@ -11,7 +11,7 @@ public class CustomerDialogues : ScriptableObject
     public float drunkDistance = 20f;
     public float relianceDistance = 20f;
 
-    public DialogueHeader Query(CustomerFeel feel, BehaviourType behaviour, float drunk, float reliance, bool findClose = false)
+    public DialogueHeader Query(CustomerFeel feel, BehaviourType behaviour, float drunk, float reliance, bool findClose = true)
     {
         DialogueHeader result = null;
 
@@ -31,7 +31,7 @@ public class CustomerDialogues : ScriptableObject
         return result;
     }
 
-    public List<DialogueHeader> FindAll(List<DialogueHeader> headers, CustomerFeel feel, BehaviourType behaviour, float drunk, float reliance, bool findClose = false)
+    public List<DialogueHeader> FindAll(List<DialogueHeader> headers, CustomerFeel feel, BehaviourType behaviour, float drunk, float reliance, bool findClose = true)
     {
         return headers.FindAll((header) =>
         {
