@@ -1,21 +1,30 @@
 using UnityEngine;
 
-public enum DialogueType
-{
-    Major,
-    SmallTalk,
-    ETC
-}
-
-[CreateAssetMenu(menuName = "SO/Dialogue/Header")]
+[CreateAssetMenu(menuName = "DialogueHeader")]
 public class DialogueHeader : ScriptableObject
 {
-    public DialogueType Type;
+    public DialogueObject header;
+
+    [Header("Requirements")]
     public BehaviourType behaviour = BehaviourType.Enter;
     public CustomerFeel feel = CustomerFeel.Fine;
-    public float drunk = 0;
-    public float reliance = 0;
-    public DialogueObject header;
+    [Range(0f, 100f)]
+    public float minDrunk = 0f;
+    [Range(0f, 100f)]
+    public float maxDrunk = 100f;
+    [Range(-100f, 100f)]
+    public float minReliance = -100f;
+    [Range(-100f, 100f)]
+    public float maxReliance = 100f;
+
+    [Header("Reuse")]
     public int count = 0;
     public int maxCount = 1;
+
+    [Header("Ignore")]
+    public bool ignoreType = false;
+    public bool ignoreFeel = false;
+    public bool ignoreDrunk = false;
+    public bool ignoreReliance = false;
+    public bool infiniteCount = false;
 }

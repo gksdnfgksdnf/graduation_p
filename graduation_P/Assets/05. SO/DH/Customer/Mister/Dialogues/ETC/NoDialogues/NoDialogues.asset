@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99366c4e0a0e11f41ac6b797d2227b71, type: 3}
+  m_Name: NoDialogues
+  m_EditorClassIdentifier: 
+  header: {fileID: 11400000, guid: 9f2127e2434e3a2439c68e5e748b3469, type: 2}
+  behaviour: 2
+  feel: 3
+  drunk: 0
+  reliance: 0
+  count: 0
+  maxCount: 1

@@ -186,8 +186,7 @@ public abstract class CustomerAI : MonoBehaviour
             behaviour.feel,
             behaviour.behaviour,
             information.drunk,
-            information.reliance,
-            true
+            information.reliance
         );
     }
     protected virtual BehaviourType DecideBehaviourType()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "SO/Dialogue/Order")]
+[CreateAssetMenu(menuName = "DialogueOrder")]
 public class DialogueOrder : DialogueText
 {
     [Header("Order")]
