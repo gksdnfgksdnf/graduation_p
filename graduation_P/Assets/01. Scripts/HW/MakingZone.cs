@@ -78,9 +78,4 @@ public class MixingZone : MonoBehaviour
     {
         item.transform.position = transform.position; // 나중에 트윈 추가 예정
     }
-
-    private void OnMouseDown()
-    {
-        Debug.Log("Mixing zone Click");
-    }
 }
