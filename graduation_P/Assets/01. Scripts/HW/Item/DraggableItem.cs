@@ -1,52 +1,69 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-
 
 public class DraggableItem : Item
 {
-    private Vector3 offset;
     private bool isDragging = false;
-    private Camera mainCamera;
+    private Vector3 offset;
+    private Camera mainCam;
+    private float smoothSpeed = 10f;
+    private float maxSpeed = 10f; // 최대 속도 제한
+
     private void Start()
     {
-        mainCamera = Camera.main;
-        if (mainCamera == null)
-        {
-            Debug.LogError("Main Camera can't be find!");
-        }
+        mainCam = Camera.main;
     }
 
-    private void OnMouseDown()
+    private void Update()
     {
-        gameObject.layer = LayerMask.NameToLayer("DraggingItem");
-        isDragging = true;
-
         Vector3 mousePosition = GetMousePos();
-        offset = transform.position - mousePosition;
-    }
 
-    private void OnMouseDrag()
-    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            if (IsMouseOverItem(mousePosition))
+            {
+                isDragging = true;
+                offset = transform.position - mousePosition;
+                gameObject.layer = LayerMask.NameToLayer("DraggingItem");
+            }
+        }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (isDragging)
+            {
+                isDragging = false;
+                gameObject.layer = LayerMask.NameToLayer("Item");
+            }
+        }
+
+
         if (isDragging)
         {
-            Vector3 mousePosition = GetMousePos();
-            transform.position = mousePosition + offset;
+            // 부드럽게 따라가기 (Lerp 사용)
+            transform.position = Vector3.Lerp(transform.position, mousePosition, smoothSpeed * Time.deltaTime);
 
+            // 속도가 너무 빨라지지 않도록 제한
+            Vector3 direction = (mousePosition - transform.position).normalized;
+            float distance = Vector3.Distance(transform.position, mousePosition);
+            transform.position = transform.position + direction * Mathf.Min(maxSpeed * Time.deltaTime, distance);
         }
     }
 
-    private void OnMouseUp()
-    {
-        isDragging = false;
-        gameObject.layer = LayerMask.NameToLayer("Item");
-
-
-    }
 
     private Vector3 GetMousePos()
     {
-        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f; 
+        Vector3 mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0; // Z 값 고정
         return mousePosition;
+    }
+
+    private bool IsMouseOverItem(Vector3 mousePosition)
+    {
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null)
+        {
+            return collider.OverlapPoint(mousePosition);
+        }
+        return false;
     }
 }
