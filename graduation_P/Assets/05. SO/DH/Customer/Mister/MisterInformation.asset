@@ -12,10 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffed2a8dae21dca4fb06eec98f7fcc2d, type: 3}
   m_Name: MisterInformation
   m_EditorClassIdentifier: 
+  customerName: Mister
   drunk: 0
+  drunkMultiplier: 1
   reliance: 0
-  like: 0
+  relianceMultiplier: 1
   progress: 0
-  firstVisit: 1
-  traumaTrigger: 0
+  visitCount: 0
+  firstAppearDay: 0
   caseClosed: 0

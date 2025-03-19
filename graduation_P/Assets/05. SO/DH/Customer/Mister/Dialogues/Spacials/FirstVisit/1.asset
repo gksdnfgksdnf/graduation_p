@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   texts:
-  - ...
+  - "\uC88B\uC740 \uAC00\uAC8C\uAD70\uC694"
   next: {fileID: 11400000, guid: 81047aea8ae8a1a44bf0c626d5dcb580, type: 2}

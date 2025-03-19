@@ -17,6 +17,12 @@ public class DialogueText : DialogueObject // default text dialogue
         this.customer = customer;
         this.displayer = displayer;
 
+        if (texts.Count == 0)
+        {
+            DialogueManager.Instance.ExitDialogue();
+            return;
+        }
+
         textPtr = 0;
         DialogueManager.Instance.onNext += Next;
         displayer.TextDisplayer.Show(texts[textPtr++]);

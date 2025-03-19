@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99366c4e0a0e11f41ac6b797d2227b71, type: 3}
   m_Name: FirstOrder
   m_EditorClassIdentifier: 
-  Type: 0
-  behaviour: 0
-  feel: 3
+  Type: 2
+  behaviour: 3
+  feel: 0
   drunk: 0
   reliance: 0
-  header: {fileID: 11400000, guid: 23ab7c9738ceff04399444fe3372fe2d, type: 2}
+  header: {fileID: 11400000, guid: 1f866de5315f942499ef2370e92c8ed1, type: 2}
   count: 0
   maxCount: 1

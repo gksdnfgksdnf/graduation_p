@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueDisplayer lastDisplayer;
 
     public Action onNext;
+    public Action onExit;
 
     private void Awake()
     {
@@ -75,6 +76,7 @@ public class DialogueManager : MonoBehaviour
         customer = null;
         displayer.Enable(false);
         displayer = null;
+        onExit?.Invoke();
     }
 
     private void Update()

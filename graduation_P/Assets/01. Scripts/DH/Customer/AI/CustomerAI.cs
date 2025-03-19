@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static DialogueDecision;
 
@@ -23,21 +24,19 @@ public enum CustomerFeel
     Perfect
 }
 
-public enum SpacialEvent
+public enum SpecialEvent
 {
     None,
-    Order, // 다음 행동은 주문
+    CaseClose, // 끝남
     FirstOrder, // 다음 행동은 첫 주문
-    FavoriteOrder, // 다음 행동은 특별한 주문
-    GetOut, // 다음 행동은 나감
-    FirstGetOut, // 다음 행동은 나가고 다신 돌아오지 않음
     FirstVisit, // 첫 인사를 함
 }
 
 [Serializable]
-public class SpacialBehaviour
+public class SpecialBehaviour
 {
-    public SpacialEvent type;
+    public string name;
+    public SpecialEvent type;
     public AIBehaviour behaviour;
 }
 
@@ -60,18 +59,32 @@ public abstract class CustomerAI : MonoBehaviour
     public CustomerTaste taste;
     public CustomerDialogues dialogues;
 
-    public List<SpacialBehaviour> spacials;
+    public List<SpecialBehaviour> specials;
     public List<AIBehaviour> prevBehaviours;
 
     public AIBehaviour next = new();
+    public CocktailDataSO ordered = null;
+    public CocktailDataSO served = null;
+
+    protected int talkCount = 0;
+    protected int orderCount = 0;
+
+    private void Awake()
+    {
+        information = Instantiate(information);
+    }
 
     public virtual void Entered()
     {
+        information.drunk = 0;
+        talkCount = 0;
+        orderCount = 0;
         information.visitCount++;
         if (information.visitCount == 1)
-            HandleDecisionEvent(SpacialEvent.FirstVisit);
+            SetSpecialEvent(SpecialEvent.FirstVisit);
+        else
+            SetBehaviourType(BehaviourType.Enter);
     }
-
     public virtual void Exited()
     {
     }
@@ -87,12 +100,114 @@ public abstract class CustomerAI : MonoBehaviour
     {
         foreach (var effect in decision.effects)
             information.AddEffect(effect);
-        foreach (var evt in decision.events)
-            HandleDecisionEvent(evt);
+        SetBehaviourType(decision.nextBehaviour);
+        SetSpecialEvent(decision.specialEvt);
     }
 
-    public abstract void AddCocktail(CocktailDataSO cocktail);
-    protected abstract AIBehaviour DecideNextBehaviour();
-    protected abstract void HandleDecisionEvent(SpacialEvent evt);
+    public virtual void OrderCocktail(CocktailDataSO cocktail)
+    {
+        ordered = cocktail;
+    }
+    public virtual void ServeCocktail(CocktailDataSO cocktail)
+    {
+        served = cocktail;
+        SetBehaviourType(BehaviourType.Reaction);
+    }
+
+    public virtual void SetBehaviourType(BehaviourType evt) // set next behaviour type
+    {
+        switch (evt)
+        {
+            case BehaviourType.Enter:
+                next = new AIBehaviour() { behaviour = BehaviourType.Enter };
+                break;
+            case BehaviourType.Talk:
+                next = new AIBehaviour() { behaviour = BehaviourType.Talk };
+                break;
+            case BehaviourType.Order:
+                next = new AIBehaviour() { behaviour = BehaviourType.Order };
+                break;
+            case BehaviourType.Reaction:
+                next = new AIBehaviour() { behaviour = BehaviourType.Reaction };
+                break;
+            case BehaviourType.Exit:
+                next = new AIBehaviour() { behaviour = BehaviourType.Exit };
+                break;
+        }
+    }
+    public virtual void SetSpecialEvent(SpecialEvent evt) // handle evt
+    {
+        switch (evt)
+        {
+            case SpecialEvent.CaseClose:
+                information.caseClosed = true;
+                next = specials.First(s => s.type == SpecialEvent.CaseClose).behaviour;
+                break;
+            case SpecialEvent.FirstOrder:
+                next = specials.First(s => s.type == SpecialEvent.FirstOrder).behaviour;
+                break;
+            case SpecialEvent.FirstVisit:
+                next = specials.First(s => s.type == SpecialEvent.FirstVisit).behaviour;
+                break;
+        }
+    }
+
+    #region DecideBehaviour
+    protected virtual AIBehaviour DecideNextBehaviour()
+    {
+        if (next == null)
+            next = new();
+        AIBehaviour behaviour = next;
+        next = null;
+
+        if (behaviour.feel == CustomerFeel.None)
+            behaviour.feel = DecideFeel();
+        if (behaviour.behaviour == BehaviourType.None)
+            behaviour.behaviour = DecideBehaviourType();
+        if (behaviour.dialogue == null)
+            behaviour.dialogue = DecideDialogue(behaviour);
+        return behaviour;
+    }
+    protected virtual DialogueHeader DecideDialogue(AIBehaviour behaviour)
+    {
+        return dialogues.Query(
+            behaviour.feel,
+            behaviour.behaviour,
+            information.drunk,
+            information.reliance,
+            true
+        );
+    }
+    protected virtual BehaviourType DecideBehaviourType()
+    {
+        if (information.drunk >= 90)
+            return BehaviourType.Exit;
+
+        if (ordered != null)
+            return BehaviourType.Talk;
+        else
+            return BehaviourType.Order;
+    }
+    protected virtual CustomerFeel DecideFeel()
+    {
+        CustomerFeel feel = CustomerFeel.Fine;
+
+        float feelValue = information.reliance;
+        feelValue += UnityEngine.Random.Range(-5f, 5);
+
+        if (feelValue >= 60f)
+            feel = CustomerFeel.Perfect;
+        else if (feelValue >= 20f)
+            feel = CustomerFeel.Good;
+        else if (feelValue >= -20f)
+            feel = CustomerFeel.Fine;
+        else if (feelValue >= -60f)
+            feel = CustomerFeel.Bad;
+        else
+            feel = CustomerFeel.Terrible;
+        return feel;
+    }
+    #endregion
+
     public abstract bool DecideVisit(int day);
 }

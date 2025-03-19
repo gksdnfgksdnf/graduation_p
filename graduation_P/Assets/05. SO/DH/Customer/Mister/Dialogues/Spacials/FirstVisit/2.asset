@@ -18,11 +18,13 @@ MonoBehaviour:
     effects:
     - type: 1
       value: 3
-    events: 02000000
+    nextBehaviour: 0
+    specialEvt: 0
     next: {fileID: 11400000, guid: 548705f5086196f479af79d4643bd7c7, type: 2}
   - text: "\uADF8\uB300\uB85C \uB098\uAC00\uB77C\uACE0 \uD55C\uB2E4"
     effects:
     - type: 1
       value: -999
-    events: 05000000
-    next: {fileID: 11400000, guid: cdf4c187952505641adf0cabac171773, type: 2}
+    nextBehaviour: 0
+    specialEvt: 0
+    next: {fileID: 11400000, guid: c88f32e9fcca32143a1b79f3b7b6977c, type: 2}

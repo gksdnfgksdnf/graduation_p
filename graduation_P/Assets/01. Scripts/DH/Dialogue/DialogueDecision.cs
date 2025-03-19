@@ -18,7 +18,8 @@ public class DialogueDecision : DialogueObject
     {
         public string text;
         public List<DecisionEffect> effects;
-        public List<SpacialEvent> events;
+        public BehaviourType nextBehaviour;
+        public SpecialEvent specialEvt;
         public DialogueObject next;
     }
 

@@ -49,6 +49,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   AI: {fileID: 4848531943029617563}
   Animator: {fileID: 6180679701648325591}
+  current:
+    feel: 0
+    behaviour: 0
+    dialogue: {fileID: 0}
 --- !u!114 &4848531943029617563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,12 +68,32 @@ MonoBehaviour:
   information: {fileID: 11400000, guid: 40ee456211c6a0a49ac247d1f730c1d9, type: 2}
   taste: {fileID: 11400000, guid: a341a9019a3ac2843aab01a83968cc75, type: 2}
   dialogues: {fileID: 11400000, guid: 0874a935095fecd4b9107b40742105c2, type: 2}
-  spacials: []
+  specials:
+  - name: Get Out
+    type: 1
+    behaviour:
+      feel: 1
+      behaviour: 5
+      dialogue: {fileID: 11400000, guid: 0398b65eed423b34b9c1680060965d9c, type: 2}
+  - name: First Visit
+    type: 3
+    behaviour:
+      feel: 3
+      behaviour: 1
+      dialogue: {fileID: 11400000, guid: 2a512cb82723f444fa7482d44a77fe09, type: 2}
+  - name: FirstOrder
+    type: 2
+    behaviour:
+      feel: 4
+      behaviour: 3
+      dialogue: {fileID: 11400000, guid: c0e9819e55cac6d4882cbe072abb9c45, type: 2}
   prevBehaviours: []
   next:
     feel: 0
     behaviour: 0
     dialogue: {fileID: 0}
+  ordered: {fileID: 0}
+  served: {fileID: 0}
 --- !u!114 &6180679701648325591
 MonoBehaviour:
   m_ObjectHideFlags: 0
