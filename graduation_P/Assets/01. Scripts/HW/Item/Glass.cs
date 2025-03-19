@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class Glass : DraggableItem
+public class Glass : Item
 {
     private GlassSO glass;
 
     private void Awake()
     {
-        glass = item as GlassSO;
-        itemType = ItemType.Glass;
+        glass = itemData as GlassSO;
     }
 
     public override void Use()

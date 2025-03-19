@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76ec5babf122f041acfe2b4e49d1257, type: 3}
-  m_Name: Jin
+  m_Script: {fileID: 11500000, guid: 507f955b5b49f44418d143e6d9721ac5, type: 3}
+  m_Name: Lemon
   m_EditorClassIdentifier: 
-  itemName: Jin
+  itemName: LemonGanish
   itemType: 1
-  icon: {fileID: 0}
-  price: 0
-  weight: 0
-  volume: 0
+  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  price: 2
+  weight: 2
+  volume: 2
   isStackable: 0
   isConsumable: 0
-  ingType: 1
-  alcoholContent: 0
-  bitterness: 0
+  ingType: 3
+  sweetness: 6
+  sourness: 0

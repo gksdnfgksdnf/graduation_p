@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public enum Glass_Type
+public enum GlassType
 {
     Shot,
     Rock,
@@ -22,6 +22,6 @@ public enum Glass_Type
 [CreateAssetMenu(fileName = "NewGlass", menuName = "SO/Item/Glass")]
 public class GlassSO : ItemSO
 {
-    public Glass_Type type;
+    public GlassType glassType;
 }
 

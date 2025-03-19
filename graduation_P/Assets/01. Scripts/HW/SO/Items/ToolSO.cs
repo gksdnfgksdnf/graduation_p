@@ -16,5 +16,5 @@ public enum ToolType
 [CreateAssetMenu(fileName = "NewTool", menuName = "SO/Item/Tool")]
 public class ToolSO : ItemSO
 {
-    public ToolType type;
+    public ToolType toolType;
 }

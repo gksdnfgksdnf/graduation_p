@@ -9,17 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b76ec5babf122f041acfe2b4e49d1257, type: 3}
-  m_Name: Jin
+  m_Script: {fileID: 11500000, guid: 39290777c8534dd48b8cd90e3fdc42fa, type: 3}
+  m_Name: Strainer
   m_EditorClassIdentifier: 
-  itemName: Jin
-  itemType: 1
-  icon: {fileID: 0}
+  itemName: Strainer
+  itemType: 2
+  icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   price: 0
   weight: 0
   volume: 0
   isStackable: 0
   isConsumable: 0
-  ingType: 1
-  alcoholContent: 0
-  bitterness: 0
+  toolType: 5
