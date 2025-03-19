@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7130a8f8a55510447b4251e06dcf3c40, type: 3}
   m_Name: MisterDialogues
   m_EditorClassIdentifier: 
-  major:
-  - {fileID: 11400000, guid: 2a512cb82723f444fa7482d44a77fe09, type: 2}
-  minor: []
+  major: []
   smallTalk: []
-  etc: []
-  drunkDistance: 20
-  relianceDistance: 20
+  defaultTalk:
+  - {fileID: 11400000, guid: 98e7d23f36d2732408218699891e7724, type: 2}
+  - {fileID: 11400000, guid: cc2342520317ddf42a7c350c5b5a8221, type: 2}
+  - {fileID: 11400000, guid: 53d1125d58b4952409b5c7ae5a7d57c9, type: 2}
+  - {fileID: 11400000, guid: bb0ab17fcc701b046953578867e0ae9c, type: 2}
+  - {fileID: 11400000, guid: f9b2a5ae3325f9b45949523a2bec2feb, type: 2}

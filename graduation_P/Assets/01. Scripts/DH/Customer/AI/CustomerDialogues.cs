@@ -6,16 +6,16 @@ public class CustomerDialogues : ScriptableObject
 {
     public List<DialogueHeader> major;
     public List<DialogueHeader> smallTalk;
-    public List<DialogueHeader> etc;
+    public List<DialogueHeader> defaultTalk;
 
-    private void Awake()
+    public void Initialize()
     {
         for (int i = 0; i < major.Count; i++)
             major[i] = Instantiate(major[i]);
         for (int i = 0; i < smallTalk.Count; i++)
             smallTalk[i] = Instantiate(smallTalk[i]);
-        for (int i = 0; i < etc.Count; i++)
-            etc[i] = Instantiate(etc[i]);
+        for (int i = 0; i < defaultTalk.Count; i++)
+            defaultTalk[i] = Instantiate(defaultTalk[i]);
     }
 
     public DialogueHeader Query(CustomerFeel feel, BehaviourType behaviour, float drunk, float reliance)
@@ -35,15 +35,9 @@ public class CustomerDialogues : ScriptableObject
 
         if (result == null)
         {
-            finds = FindAll(etc, feel, behaviour, drunk, reliance);
+            finds = FindAll(defaultTalk, feel, behaviour, drunk, reliance);
             if (finds.Count > 0)
                 result = finds[Random.Range(0, finds.Count)];
-        }
-
-        if (result == null)
-        {
-            result = etc[Random.Range(0, etc.Count)];
-            Debug.Log("return random dialogue!");
         }
 
         result.count++;
@@ -56,11 +50,11 @@ public class CustomerDialogues : ScriptableObject
         return headers.FindAll((header) =>
         {
             if (
-                    (header.feel == feel || header.ignoreFeel) &&
-                    (header.behaviour == behaviour || header.ignoreType) &&
-                    (header.maxDrunk > drunk && drunk >= header.minDrunk || header.ignoreDrunk) &&
-                    (header.maxReliance > reliance && reliance >= header.minReliance || header.ignoreReliance) &&
-                    (header.count >= header.maxCount || header.infiniteCount)
+                    (header.ignoreFeel || header.feels.Contains(feel)) &&
+                    (header.ignoreType || header.behaviour == behaviour) &&
+                    (header.ignoreDrunk || header.maxDrunk >= drunk && drunk >= header.minDrunk) &&
+                    (header.ignoreReliance || header.maxReliance >= reliance && reliance >= header.minReliance) &&
+                    (header.infiniteCount || header.maxCount > header.count)
                 )
                 return true;
             return false;

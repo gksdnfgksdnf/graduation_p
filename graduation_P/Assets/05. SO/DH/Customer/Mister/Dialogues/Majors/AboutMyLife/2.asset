@@ -14,17 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   decisions:
-  - text: "\uD55C \uC794 \uAD8C\uD55C\uB2E4."
+  - text: "\uC5B4\uB5BB\uAC8C \uB418\uC5C8\uB294\uAC00."
     effects:
-    - type: 1
-      value: 3
+    - type: 2
+      value: 5
     nextBehaviour: 0
     specialEvt: 0
-    next: {fileID: 11400000, guid: 548705f5086196f479af79d4643bd7c7, type: 2}
-  - text: "\uC548 \uC0AC\uC694."
-    effects:
-    - type: 1
-      value: -999
-    nextBehaviour: 0
-    specialEvt: 0
-    next: {fileID: 11400000, guid: c88f32e9fcca32143a1b79f3b7b6977c, type: 2}
+    next: {fileID: 11400000, guid: f9de2eca1fd6efd48a95d88cc02cd8fa, type: 2}

@@ -72,6 +72,7 @@ public abstract class CustomerAI : MonoBehaviour
     private void Awake()
     {
         information = Instantiate(information);
+        dialogues.Initialize();
     }
 
     public virtual void Entered()

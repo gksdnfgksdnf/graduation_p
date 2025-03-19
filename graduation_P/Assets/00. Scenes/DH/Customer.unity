@@ -1307,6 +1307,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5101840573430018325, guid: b136698062f5bbe4c88fd3fc0182d14e, type: 3}
+      propertyPath: m_fontSize
+      value: 54
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101840573430018325, guid: b136698062f5bbe4c88fd3fc0182d14e, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 54
+      objectReference: {fileID: 0}
     - target: {fileID: 7696461164037717701, guid: b136698062f5bbe4c88fd3fc0182d14e, type: 3}
       propertyPath: m_Name
       value: Dialogue

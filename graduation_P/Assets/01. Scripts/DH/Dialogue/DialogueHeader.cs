@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "DialogueHeader")]
@@ -7,7 +8,7 @@ public class DialogueHeader : ScriptableObject
 
     [Header("Requirements")]
     public BehaviourType behaviour = BehaviourType.Enter;
-    public CustomerFeel feel = CustomerFeel.Fine;
+    public List<CustomerFeel> feels = new();
     [Range(0f, 100f)]
     public float minDrunk = 0f;
     [Range(0f, 100f)]

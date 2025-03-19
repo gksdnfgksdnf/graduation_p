@@ -14,6 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   texts:
-  - "\uC9C4 \uD53C\uC988(Gin Fizz)\\n\uD558\uB098 \uBD80\uD0C1\uB4DC\uB9B4\uAC8C\uC694"
+  - "\uC2DC\uC791\uC740 \uAC04\uB2E8\uD558\uAC8C"
+  - "\uC62C\uB4DC \uD328\uC158\uB4DC \uD558\uB098 \uBD80\uD0C1\uB4DC\uB9BD\uB2C8\uB2E4."
   next: {fileID: 0}
-  cocktail: {fileID: 11400000, guid: 3e37cb9e864e97147b56d9578a6712e3, type: 2}
+  format: 0
+  cocktail: {fileID: 11400000, guid: 6f9fa017268bdc9469b5834d5d9b49af, type: 2}
+  reroll: 0
+  randomCocktails: []
