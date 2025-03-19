@@ -2,6 +2,7 @@ using UnityEngine;
 
 public enum ItemType
 {
+    Cocktail,
     Ingredient,
     Tool,
     Glass

@@ -23,7 +23,6 @@ public class DraggableItem : Item
 
         Vector3 mousePosition = GetMousePos();
         offset = transform.position - mousePosition;
-        Debug.Log("잡았냐");
     }
 
     private void OnMouseDrag()
@@ -32,7 +31,6 @@ public class DraggableItem : Item
         {
             Vector3 mousePosition = GetMousePos();
             transform.position = mousePosition + offset;
-            Debug.Log("움직이냐");
 
         }
     }
@@ -41,7 +39,6 @@ public class DraggableItem : Item
     {
         isDragging = false;
         gameObject.layer = LayerMask.NameToLayer("Item");
-        Debug.Log("땠냐");
 
 
     }
