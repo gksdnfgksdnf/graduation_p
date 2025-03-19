@@ -9,16 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39290777c8534dd48b8cd90e3fdc42fa, type: 3}
-  m_Name: NewTool
+  m_Script: {fileID: 11500000, guid: 86bb6446aee764647816ed9d8e5f9655, type: 3}
+  m_Name: LemonJuice
   m_EditorClassIdentifier: 
-  itemName: Tool
-  itemDescription: Shaker
+  itemName: Juice
+  itemDescription: Mango
   itemType: 1
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  price: 0
-  weight: 0
-  volume: 0
+  price: 2
+  weight: 2
+  volume: 2
   isStackable: 0
   isConsumable: 0
-  type: 0
+  sweetness: 0
+  sourness: 0
