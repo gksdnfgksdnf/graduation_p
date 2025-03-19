@@ -24,8 +24,11 @@ MonoBehaviour:
   cocktailName: 
   ingredients:
   - {fileID: 11400000, guid: 0e6a34dd366f3954c85a188ad0ed5f07, type: 2}
+  - {fileID: 11400000, guid: 0e6a34dd366f3954c85a188ad0ed5f07, type: 2}
+  Syrups:
+  - {fileID: 11400000, guid: 5313a9da66af1e448b0102abadc51f27, type: 2}
   juices:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 56c5ef2cc7ee5aa408a421d196b8cb53, type: 2}
   sodas:
   - {fileID: 11400000, guid: c1a67e2454521c24ebdb29310c397bf7, type: 2}
   tools:

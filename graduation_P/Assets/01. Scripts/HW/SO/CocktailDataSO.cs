@@ -6,6 +6,7 @@ public class CocktailDataSO : ItemSO
 {
     public string cocktailName;
     public List<AlcholeSO> ingredients;
+    public List<SyrupSO> syrups;
     public List<JuiceSO> juices;
     public List<SodaSO> sodas;
     public List<ItemSO> tools;
