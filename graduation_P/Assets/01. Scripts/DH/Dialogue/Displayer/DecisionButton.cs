@@ -1,7 +1,7 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static DialogueDecision;
 
 public class DecisionButton : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class DecisionButton : MonoBehaviour
     private TextMeshProUGUI textBase;
 
     private Decision decision;
-    private DecisionDisplayer displayer;
+    private Action<Decision> callback;
 
     public void Init()
     {
@@ -21,11 +21,11 @@ public class DecisionButton : MonoBehaviour
         textBase = GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    public void Active(Decision decision, DecisionDisplayer displayer)
+    public void Active(Decision decision, Action<Decision> callback)
     {
         gameObject.SetActive(true);
         this.decision = decision;
-        this.displayer = displayer;
+        this.callback = callback;
         textBase.text = decision.text;
         rectTrm.sizeDelta = textBase.GetPreferredValues() + textPadding;
         rectTrm.sizeDelta = textBase.GetPreferredValues() + textPadding;
@@ -36,13 +36,13 @@ public class DecisionButton : MonoBehaviour
     {
         button.onClick.RemoveListener(HandleButtonClick);
         textBase.text = "";
-        displayer = null;
+        callback = null;
         decision = null;
         gameObject.SetActive(false);
     }
 
     private void HandleButtonClick()
     {
-        displayer.Select(decision);
+        callback?.Invoke(decision);
     }
 }

@@ -6,24 +6,25 @@ using UnityEngine.UI;
 public class TextDisplayer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI textBase;
+    [SerializeField] private Button nextButton;
+    [SerializeField] private Canvas canvas;
+    [SerializeField] private CanvasGroup group;
 
-    public Button nextButton;
     public float textShowInterval = 0.1f;
-    public Vector2 textPadding = new Vector2(30, 30);
 
     private Coroutine coroutine;
-    private RectTransform rectTrm;
 
     public void Init()
     {
-        rectTrm = transform as RectTransform;
+        if (canvas == null)
+            canvas = GetComponent<Canvas>();
+        if (canvas.worldCamera == null)
+            canvas.worldCamera = Camera.main;
+        if (group == null)
+            group = GetComponent<CanvasGroup>();
+        Enable(false);
     }
-
-    public bool IsShowComplete()
-    {
-        return coroutine == null;
-    }
-
+    public bool IsShowComplete() => coroutine == null;
     public void Enable(bool enable)
     {
         if (coroutine != null)
@@ -33,6 +34,10 @@ public class TextDisplayer : MonoBehaviour
         }
 
         textBase.text = "";
+
+        group.alpha = enable ? 1 : 0;
+        group.interactable = enable;
+        group.blocksRaycasts = enable;
     }
 
     public void Show(string message)
@@ -44,7 +49,6 @@ public class TextDisplayer : MonoBehaviour
         }
 
         textBase.text = message;
-        rectTrm.sizeDelta = textBase.GetPreferredValues() + textPadding;
         coroutine = StartCoroutine(ShowText());
     }
 
@@ -52,7 +56,6 @@ public class TextDisplayer : MonoBehaviour
     {
         ShowAllText();
     }
-
     private IEnumerator ShowText()
     {
         int textMax = textBase.text.Length;
@@ -69,7 +72,6 @@ public class TextDisplayer : MonoBehaviour
         }
         coroutine = null;
     }
-
     private void ShowAllText()
     {
         if (coroutine != null)

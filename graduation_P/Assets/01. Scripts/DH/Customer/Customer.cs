@@ -1,84 +1,60 @@
-using System.Collections;
 using UnityEngine;
+
+public enum BehaviourType
+{
+    None,
+    Enter,
+    Talk,
+    Question,
+    Answer,
+    Order,
+    Reaction,
+    Exit,
+}
+
+public class CustomerBehaviour
+{
+    public BehaviourType type;
+    public DialogueObject dialogue;
+}
 
 public class Customer : MonoBehaviour
 {
-    public CustomerAI AI;
     public CustomerAnimator Animator;
-    public AIBehaviour curr;
-    public AIBehaviour prev;
-    public float behaviourTime = 2f;
+    public CustomerDialogue Dialogue;
+    public CustomerDialogues Dialogues;
+    public CustomerInfomation Infomation;
+    public CustomerTaste Taste;
 
-    public void Enter()
+    public virtual void Enter()
     {
-        AI.Entered();
         Animator.Enter();
-        PlayBehaviour(AI.GetBehaviour());
     }
 
-    public void Exit()
+    public virtual void Exit()
     {
-        AI.Exited();
         Animator.Exit();
     }
 
-    public void Order(CocktailDataSO cocktail)
+    public virtual void Talk()
     {
-        AI.OrderCocktail(cocktail);
+
     }
 
-    public void Serve(CocktailDataSO cocktail)
+    public virtual void Question()
     {
-        AI.ServeCocktail(cocktail);
-        PlayBehaviour(AI.GetBehaviour());
+
+    }
+    public virtual void Answer(Customer from, DialogueDecision decision)
+    {
+
     }
 
-    public AIBehaviour GetBehaviour()
+    public virtual void Order()
     {
-        return AI.GetBehaviour();
     }
 
-    public void PlayBehaviour(AIBehaviour behaviour)
+    public virtual void Serve(CocktailDataSO cocktail)
     {
-        curr = behaviour;
-        DialogueManager.Instance.EnterDialogue(this, behaviour.dialogue.header);
-        DialogueManager.Instance.onExit += HandleBehaviourEnd;
-    }
-
-    public void HandleBehaviourEnd()
-    {
-        DialogueManager.Instance.onExit -= HandleBehaviourEnd;
-        prev = curr;
-        curr = null;
-        StartCoroutine(WaitNextBehaviour());
-    }
-
-    private IEnumerator WaitNextBehaviour()
-    {
-        yield return new WaitForSeconds(behaviourTime + Random.Range(0f, 1f));
-        PlayNextBehaviour();
-    }
-
-    public void PlayNextBehaviour()
-    {
-
-        switch (prev.behaviour)
-        {
-            case BehaviourType.Enter:
-                PlayBehaviour(AI.GetBehaviour());
-                break;
-            case BehaviourType.Talk:
-                PlayBehaviour(AI.GetBehaviour());
-                break;
-            case BehaviourType.Order:
-
-                break;
-            case BehaviourType.Reaction:
-                PlayBehaviour(AI.GetBehaviour());
-                break;
-            case BehaviourType.Exit:
-                Exit();
-                break;
-        }
     }
 }
