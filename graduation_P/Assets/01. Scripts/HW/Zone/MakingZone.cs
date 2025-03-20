@@ -60,13 +60,21 @@ public class MixingZone : BaseZone
     private void HandleAdditionalItem(Item item)
     {
         ItemType baseItemType = item.itemData.itemType;
-        if (baseItemType == ItemType.Tool)
+
+        switch (baseItemType)
         {
-            cocktailMaker.UseTool(item as Tool);
-        }
-        else if (baseItemType == ItemType.Ingredient)
-        {
-            cocktailMaker.AddIngredient(item as Ingredient);
+            case ItemType.Tool:
+                cocktailMaker.UseTool(item as Tool);
+                break;
+            case ItemType.Ingredient:
+                cocktailMaker.AddIngredient(item as Ingredient);
+                break;
+            case ItemType.Glass:
+                cocktailMaker.UseGlass(item as Glass);
+                break;
+            default:
+                break;
+
         }
     }
 
@@ -83,7 +91,7 @@ public class MixingZone : BaseZone
             return toolType.Contains(toolData.toolType);
         }
 
-        return true; //기본 아이템 타입은 같음
+        return true;
     }
 
 }
