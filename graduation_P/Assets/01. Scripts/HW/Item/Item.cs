@@ -14,35 +14,35 @@ public class Item : MonoBehaviour
     private Vector3 mousePosition;
     private Camera mainCam;
 
+    private Collider2D col;
+
     private void Start()
     {
         mainCam = Camera.main;
         smoothSpeed = 15f;
+        col = GetComponent<Collider2D>();
     }
 
     private void Update()
     {
         if (!canDrag) return;
 
-        mousePosition = GetMousePos();
-
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            if (IsMouseOverItem(mousePosition))
-            {
-                isDragging = true;
-                offset = transform.position - mousePosition;
-                gameObject.layer = LayerMask.NameToLayer("DraggingItem");
-            }
+            mousePosition = GetMousePos();
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonDown(0) && IsMouseOverItem(mousePosition))
         {
-            if (isDragging)
-            {
-                isDragging = false;
-                gameObject.layer = LayerMask.NameToLayer("Item");
-            }
+            isDragging = true;
+            offset = transform.position - mousePosition;
+            gameObject.layer = LayerMask.NameToLayer("DraggingItem");
+        }
+
+        if (Input.GetMouseButtonUp(0) && isDragging)
+        {
+            isDragging = false;
+            gameObject.layer = LayerMask.NameToLayer("Item");
         }
     }
 
@@ -61,19 +61,14 @@ public class Item : MonoBehaviour
 
     private Vector3 GetMousePos()
     {
-        Vector3 mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0; // Z 값 고정
+        mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
         return mousePosition;
     }
 
     private bool IsMouseOverItem(Vector3 mousePosition)
     {
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null)
-        {
-            return collider.OverlapPoint(mousePosition);
-        }
-        return false;
+        return col?.OverlapPoint(mousePosition) ?? false; //if collider is null, it'll be return false.
     }
 
 

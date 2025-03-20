@@ -3,14 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MixingZone : MonoBehaviour
+public class MixingZone : BaseZone
 {
     private CocktailMaker cocktailMaker;
-
-    [SerializeField]
-    private ItemType baseType; 
-    [SerializeField]
-    private Item baseItem;
 
     private List<ToolType> toolType; //useable Item
 
@@ -61,11 +56,6 @@ public class MixingZone : MonoBehaviour
         }
     }
 
-    private Item GetItem(Collider2D other)
-    {
-        return other.transform.GetComponent<Item>();
-    }
-
     private void HandleAdditionalItem(Item item)
     {
         ItemType baseItemType = item.itemData.itemType;
@@ -73,46 +63,34 @@ public class MixingZone : MonoBehaviour
         {
             cocktailMaker.UseTool(item as Tool);
         }
-        else if(baseItemType == ItemType.Ingredient)
+        else if (baseItemType == ItemType.Ingredient)
         {
-
             cocktailMaker.AddIngredient(item as Ingredient);
         }
     }
 
-    private bool IsValidItemType(Item item)
+    protected override bool IsValidItemType(Item item)
     {
-        ItemType itemType = item.itemData.itemType;
+        base.IsValidItemType(item);
 
-        if (itemType != baseType)
-            return false;
+        //if (item.itemData.itemType == ItemType.Tool)
+        //{
+        //    ToolSO toolData = item.itemData as ToolSO;
+        //    if (toolData != null && toolType.Contains(toolData.toolType))
+        //        return true;
 
-        if (itemType == ItemType.Tool)
+        //    Debug.Log(toolData.toolType + "은 올바른 도구가 아닙니다!");
+        //}
+
+        //return true;
+
+        if (item.itemData is ToolSO toolData && toolType.Contains(toolData.toolType))
         {
-            ToolSO toolData = item.itemData as ToolSO;
-            if (toolData != null && toolType.Contains(toolData.toolType))
-                return true;
-
-            Debug.Log(toolData.toolType + "은 올바른 도구가 아닙니다!");
+            return true;
         }
 
+        Debug.Log((item.itemData as ToolSO)?.toolType + "은 올바른 도구가 아닙니다!");
+        return false;
 
-        return true;
-    }
-
-
-    private IEnumerator PlaceItem(Item item)
-    {
-        while (Vector3.Distance(item.transform.position, transform.position) > 0.01f)
-        {
-            item.transform.position = Vector3.Lerp(
-                item.transform.position,
-                transform.position,
-                item.smoothSpeed * Time.deltaTime
-            );
-            yield return null;
-        }
-
-        item.transform.position = transform.position;
     }
 }
