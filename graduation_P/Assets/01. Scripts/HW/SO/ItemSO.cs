@@ -15,11 +15,6 @@ public class ItemSO : ScriptableObject
     public string itemName;
     public ItemType itemType;
     public Sprite icon;
-
-    public int price;
-    public float weight;
-    public float volume;
-    public bool isStackable;
     public bool isConsumable;
 
 }

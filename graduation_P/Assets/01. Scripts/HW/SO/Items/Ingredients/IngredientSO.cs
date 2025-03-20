@@ -7,7 +7,9 @@ public enum IngredientType
     Syrup,
     Garnish,
     Soda,
-    Juice
+    Juice,
+    Sauce,
+    Ice
 }
 
 public class IngredientSO : ItemSO

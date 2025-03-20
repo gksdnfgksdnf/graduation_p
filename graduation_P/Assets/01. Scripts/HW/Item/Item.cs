@@ -6,7 +6,9 @@ public class Item : MonoBehaviour
 {
     public ItemSO itemData;
 
-    public float smoothSpeed { get; private set; }
+    protected Vector3 origin;
+
+    public float smoothSpeed;
     public bool canDrag = true;
 
     private bool isDragging = false;
@@ -15,7 +17,10 @@ public class Item : MonoBehaviour
     private Camera mainCam;
 
     private Collider2D col;
-
+    private void Awake()
+    {
+        origin = transform.position;
+    }
     private void Start()
     {
         mainCam = Camera.main;

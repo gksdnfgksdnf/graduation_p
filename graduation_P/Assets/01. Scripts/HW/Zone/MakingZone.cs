@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MixingZone : BaseZone
@@ -71,26 +72,18 @@ public class MixingZone : BaseZone
 
     protected override bool IsValidItemType(Item item)
     {
-        base.IsValidItemType(item);
+        // 기본 아이템 타입
+        if (!base.IsValidItemType(item))
+            return false;
 
-        //if (item.itemData.itemType == ItemType.Tool)
-        //{
-        //    ToolSO toolData = item.itemData as ToolSO;
-        //    if (toolData != null && toolType.Contains(toolData.toolType))
-        //        return true;
-
-        //    Debug.Log(toolData.toolType + "은 올바른 도구가 아닙니다!");
-        //}
-
-        //return true;
-
-        if (item.itemData is ToolSO toolData && toolType.Contains(toolData.toolType))
+        // ToolSO 일때
+        if (item.itemData is ToolSO toolData)
         {
-            return true;
+            // 가능한 도구인지
+            return toolType.Contains(toolData.toolType);
         }
 
-        Debug.Log((item.itemData as ToolSO)?.toolType + "은 올바른 도구가 아닙니다!");
-        return false;
-
+        return true; //기본 아이템 타입은 같음
     }
+
 }
