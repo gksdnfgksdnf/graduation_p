@@ -13,12 +13,7 @@ MonoBehaviour:
   m_Name: HighBall
   m_EditorClassIdentifier: 
   itemName: HighBall
-  itemDescription: 
   itemType: 3
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  price: 2
-  weight: 2
-  volume: 2
-  isStackable: 0
   isConsumable: 0
-  type: 3
+  glassType: 3
