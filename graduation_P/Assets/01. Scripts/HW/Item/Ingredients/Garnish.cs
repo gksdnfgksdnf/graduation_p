@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Garnish : Item
+public class Garnish : Ingredient
 {
     GanishSO garnishSO;
     private void Awake()

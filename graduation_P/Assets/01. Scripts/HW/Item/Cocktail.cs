@@ -1,14 +1,11 @@
 using System.Collections.Generic;
 
-public class Cocktail
+public class Cocktail : Item
 {
-    private CocktailDataSO cocktailData;
     private List<Ingredient> ingredients = new List<Ingredient>();
-    private Glass glass;
-
-    public void SetGlass(Glass glass)
+    private void Awake()
     {
-        this.glass = glass;
+        Initialize(ItemType.Cocktail);
     }
 
     public void AddIngredient(Ingredient ingredient)

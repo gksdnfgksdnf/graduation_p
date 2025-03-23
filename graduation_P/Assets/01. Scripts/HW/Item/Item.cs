@@ -1,16 +1,15 @@
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UIElements;
 
 public class Item : MonoBehaviour
 {
     public ItemSO itemData;
-    protected ItemType itemType;
+
+    [HideInInspector]
+    public ItemType itemType;
 
     #region ItemMove
     protected Vector3 origin;
 
-    public float smoothSpeed;
     public bool canDrag = true;
 
     private bool isDragging = false;
@@ -19,6 +18,9 @@ public class Item : MonoBehaviour
     private Camera mainCam;
 
     private Collider2D col;
+
+    [HideInInspector]
+    public float smoothSpeed;
     #endregion
 
     private void Awake()
@@ -69,11 +71,6 @@ public class Item : MonoBehaviour
         }
     }
 
-    public virtual void Use()
-    {
-        Debug.Log("아이템 사용");
-    }
-
     private Vector3 GetMousePos()
     {
         mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
@@ -84,6 +81,10 @@ public class Item : MonoBehaviour
     private bool IsMouseOverItem(Vector3 mousePosition)
     {
         return col?.OverlapPoint(mousePosition) ?? false; //if collider is null, it'll be return false.
+    }
+    public virtual void Use()
+    {
+        Debug.Log("아이템 사용");
     }
 
 

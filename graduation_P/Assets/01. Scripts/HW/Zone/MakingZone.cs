@@ -36,7 +36,7 @@ public class MixingZone : BaseZone
             }
             else
             {
-                Debug.Log($"이 아이템은 {baseType} 타입이어야 합니다. {item.itemData.itemType}");
+                Debug.Log($"이 아이템은 {baseType} 타입이어야 합니다. {item.itemType}");
             }
         }
         else
@@ -59,7 +59,7 @@ public class MixingZone : BaseZone
 
     private void HandleAdditionalItem(Item item)
     {
-        ItemType baseItemType = item.itemData.itemType;
+        ItemType baseItemType = item.itemType;
 
         switch (baseItemType)
         {
@@ -70,7 +70,7 @@ public class MixingZone : BaseZone
                 cocktailMaker.AddIngredient(item as Ingredient);
                 break;
             case ItemType.Glass:
-                cocktailMaker.UseGlass(item as Glass);
+                //cocktailMaker.UseGlass(item as Glass);
                 break;
             default:
                 break;

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Soda : Item
+public class Soda : Ingredient
 {
     private SodaSO soda;
 
@@ -8,6 +8,7 @@ public class Soda : Item
     {
         soda = itemData as SodaSO;
     }
+
     public override void Use()
     {
         

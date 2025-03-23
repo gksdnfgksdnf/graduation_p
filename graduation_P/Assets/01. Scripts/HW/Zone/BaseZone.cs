@@ -18,7 +18,7 @@ public class BaseZone : MonoBehaviour
 
     protected virtual bool IsValidItemType(Item item)
     {
-        return baseType == item.itemData.itemType;
+        return baseType == item.itemType;
     }
 
     protected virtual IEnumerator PlaceItem(Item item)
