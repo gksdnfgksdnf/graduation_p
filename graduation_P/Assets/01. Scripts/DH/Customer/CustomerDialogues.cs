@@ -1,40 +1,57 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
+
+[Serializable]
+public class EventDialogue
+{
+    public string evt;
+    public BehaviourType behaviour;
+    public DialogueHeader dialogue;
+}
 
 [CreateAssetMenu(menuName = "SO/Customer/Dialogues")]
 public class CustomerDialogues : ScriptableObject
 {
-    public List<DialogueHeader> headers;
+    [Header("list")]
+    public List<EventDialogue> events;
+    public List<DialogueHeader> enter;
+    public List<DialogueHeader> talk;
+    public List<DialogueHeader> order;
+    public List<DialogueHeader> reaction;
+    public List<DialogueHeader> exit;
 
-    private List<DialogueHeader> enter;
-    private List<DialogueHeader> talk;
-    private List<DialogueHeader> order;
-    private List<DialogueHeader> reaction;
-    private List<DialogueHeader> exit;
+    [Header("runtime")]
+    public List<EventDialogue> events_runtime;
+    public List<DialogueHeader> enter_runtime;
+    public List<DialogueHeader> talk_runtime;
+    public List<DialogueHeader> order_runtime;
+    public List<DialogueHeader> reaction_runtime;
+    public List<DialogueHeader> exit_runtime;
+
 
     public void Initialize()
     {
-        foreach (var header in headers)
-        {
-            switch (header.behaviour)
-            {
-                case BehaviourType.Enter:
-                    enter.Add(header);
-                    break;
-                case BehaviourType.Talk:
-                    talk.Add(header);
-                    break;
-                case BehaviourType.Order:
-                    order.Add(header);
-                    break;
-                case BehaviourType.Reaction:
-                    reaction.Add(header);
-                    break;
-                case BehaviourType.Exit:
-                    exit.Add(header);
-                    break;
-            }
-        }
+        events_runtime = new List<EventDialogue>();
+        enter_runtime = new List<DialogueHeader>();
+        talk_runtime = new List<DialogueHeader>();
+        order_runtime = new List<DialogueHeader>();
+        reaction_runtime = new List<DialogueHeader>();
+        exit_runtime = new List<DialogueHeader>();
+
+        foreach (var i in events)
+            events_runtime.Add(new EventDialogue() { evt = i.evt, behaviour = i.behaviour, dialogue = Instantiate(i.dialogue) });
+        foreach (var i in enter)
+            enter_runtime.Add(Instantiate(i));
+        foreach (var i in talk)
+            talk_runtime.Add(Instantiate(i));
+        foreach (var i in order)
+            order_runtime.Add(Instantiate(i));
+        foreach (var i in reaction)
+            reaction_runtime.Add(Instantiate(i));
+        foreach (var i in exit)
+            exit_runtime.Add(Instantiate(i));
     }
 
     public DialogueHeader Query(BehaviourType behaviour, float drunk, float reliance)
@@ -64,8 +81,7 @@ public class CustomerDialogues : ScriptableObject
         return result;
     }
 
-    public DialogueHeader Find
-        (List<DialogueHeader> headers, BehaviourType behaviour, float drunk, float reliance)
+    public DialogueHeader Find(List<DialogueHeader> headers, BehaviourType behaviour, float drunk, float reliance)
     {
         headers.FindAll((header) =>
         {

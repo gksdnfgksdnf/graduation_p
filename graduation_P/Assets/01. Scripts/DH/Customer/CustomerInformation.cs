@@ -8,7 +8,7 @@ public enum EffectType
 }
 
 [CreateAssetMenu(menuName = "SO/Customer/Infomation")]
-public class CustomerInfomation : ScriptableObject
+public class CustomerInformation : ScriptableObject
 {
     public string customerName;
     public float drunk = 0; // 취기에 따른 대화 해금

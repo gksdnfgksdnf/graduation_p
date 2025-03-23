@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CustomerDialogue : MonoBehaviour
+public class CustomerDialoguer : MonoBehaviour
 {
     public TextDisplayer dialogueDisplayer;
 

@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 public enum BehaviourType
@@ -5,8 +6,6 @@ public enum BehaviourType
     None,
     Enter,
     Talk,
-    Question,
-    Answer,
     Order,
     Reaction,
     Exit,
@@ -18,13 +17,19 @@ public class CustomerBehaviour
     public DialogueObject dialogue;
 }
 
-public class Customer : MonoBehaviour
+public abstract class Customer : MonoBehaviour
 {
     public CustomerAnimator Animator;
-    public CustomerDialogue Dialogue;
+    public CustomerDialoguer Dialoguer;
     public CustomerDialogues Dialogues;
-    public CustomerInfomation Infomation;
+    public CustomerInformation Infomation;
     public CustomerTaste Taste;
+
+    protected virtual void Awake()
+    {
+        Dialoguer.ExitDialogue();
+        Dialogues.Initialize();
+    }
 
     public virtual void Enter()
     {
@@ -36,25 +41,22 @@ public class Customer : MonoBehaviour
         Animator.Exit();
     }
 
-    public virtual void Talk()
+    public virtual void Talk(BehaviourType behaviour)
     {
-
+        DialogueHeader dialogue = Dialogues.Query(behaviour, Infomation.drunk, Infomation.reliance);
+        Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public virtual void Question()
+    public virtual void Talk(DialogueHeader dialogue)
     {
-
-    }
-    public virtual void Answer(Customer from, DialogueDecision decision)
-    {
-
+        Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public virtual void Order()
+    public virtual void Talk(string evt)
     {
+        DialogueHeader dialogue = Dialogues.events_runtime.FirstOrDefault(evtHeader => evtHeader.evt == evt).dialogue;
+        Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public virtual void Serve(CocktailDataSO cocktail)
-    {
-    }
+    public abstract bool Visit(int day, DayPhase phase);
 }
