@@ -5,7 +5,9 @@ using UnityEngine.UIElements;
 public class Item : MonoBehaviour
 {
     public ItemSO itemData;
+    protected ItemType itemType;
 
+    #region ItemMove
     protected Vector3 origin;
 
     public float smoothSpeed;
@@ -17,15 +19,23 @@ public class Item : MonoBehaviour
     private Camera mainCam;
 
     private Collider2D col;
+    #endregion
+
     private void Awake()
     {
         origin = transform.position;
     }
+
     private void Start()
     {
         mainCam = Camera.main;
         smoothSpeed = 15f;
         col = GetComponent<Collider2D>();
+    }
+
+    public void Initialize(ItemType type)
+    {
+        itemType = type;
     }
 
     private void Update()
