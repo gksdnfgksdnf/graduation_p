@@ -8,16 +8,16 @@ public class Item : MonoBehaviour
     public ItemType itemType;
 
     #region ItemMove
-    protected Vector3 origin;
+    protected Vector3 _origin;
 
     public bool canDrag = true;
 
-    private bool isDragging = false;
-    private Vector3 offset;
-    private Vector3 mousePosition;
-    private Camera mainCam;
+    private bool _isDragging = false;
+    private Vector3 _offset;
+    private Vector3 _mousePosition;
+    private Camera _mainCam;
 
-    private Collider2D col;
+    private Collider2D _col;
 
     [HideInInspector]
     public float smoothSpeed;
@@ -25,14 +25,14 @@ public class Item : MonoBehaviour
 
     private void Awake()
     {
-        origin = transform.position;
+        _origin = transform.position;
     }
 
     private void Start()
     {
-        mainCam = Camera.main;
+        _mainCam = Camera.main;
         smoothSpeed = 15f;
-        col = GetComponent<Collider2D>();
+        _col = GetComponent<Collider2D>();
     }
 
     public void Initialize(ItemType type)
@@ -46,41 +46,41 @@ public class Item : MonoBehaviour
 
         if (Input.GetMouseButton(0))
         {
-            mousePosition = GetMousePos();
+            _mousePosition = GetMousePos();
         }
 
-        if (Input.GetMouseButtonDown(0) && IsMouseOverItem(mousePosition))
+        if (Input.GetMouseButtonDown(0) && IsMouseOverItem(_mousePosition))
         {
-            isDragging = true;
-            offset = transform.position - mousePosition;
+            _isDragging = true;
+            _offset = transform.position - _mousePosition;
             gameObject.layer = LayerMask.NameToLayer("DraggingItem");
         }
 
-        if (Input.GetMouseButtonUp(0) && isDragging)
+        if (Input.GetMouseButtonUp(0) && _isDragging)
         {
-            isDragging = false;
+            _isDragging = false;
             gameObject.layer = LayerMask.NameToLayer("Item");
         }
     }
 
     private void FixedUpdate()
     {
-        if (isDragging)
+        if (_isDragging)
         {
-            transform.position = Vector3.Lerp(transform.position, mousePosition + offset, smoothSpeed * Time.fixedDeltaTime);
+            transform.position = Vector3.Lerp(transform.position, _mousePosition + _offset, smoothSpeed * Time.fixedDeltaTime);
         }
     }
 
     private Vector3 GetMousePos()
     {
-        mousePosition = mainCam.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        return mousePosition;
+        _mousePosition = _mainCam.ScreenToWorldPoint(Input.mousePosition);
+        _mousePosition.z = 0;
+        return _mousePosition;
     }
 
     private bool IsMouseOverItem(Vector3 mousePosition)
     {
-        return col?.OverlapPoint(mousePosition) ?? false; //if collider is null, it'll be return false.
+        return _col?.OverlapPoint(mousePosition) ?? false; //if collider is null, it'll be return false.
     }
     public virtual void Use()
     {

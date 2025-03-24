@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Ingredient : Item
 {
-    private void Awake()
+    protected virtual void Awake()
     {
         itemType = ItemType.Ingredient;
     }

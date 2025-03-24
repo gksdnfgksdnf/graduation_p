@@ -122,7 +122,7 @@ public abstract class CustomerAI : MonoBehaviour
         SetBehaviourType(BehaviourType.Reaction);
     }
 
-    public virtual void SetBehaviourType(BehaviourType evt) // set next behaviour toolType
+    public virtual void SetBehaviourType(BehaviourType evt) // set next behaviour _toolType
     {
         switch (evt)
         {

@@ -4,8 +4,9 @@ public class Juice : Ingredient
 {
     private JuiceSO juice;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         juice = itemData as JuiceSO;
     }
 

@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class BaseZone : MonoBehaviour
 {
-    [SerializeField]
     public ItemType baseType;
-
-    [SerializeField]
     public Item baseItem;
 
     protected Item GetItem(Collider2D other)
