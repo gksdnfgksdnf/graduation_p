@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 
@@ -41,18 +42,18 @@ public abstract class Customer : MonoBehaviour
         Animator.Exit();
     }
 
-    public virtual void Talk(BehaviourType behaviour)
+    public virtual void Talk(BehaviourType behaviour, Action callback)
     {
         DialogueHeader dialogue = Dialogues.Query(behaviour, Infomation.drunk, Infomation.reliance);
         Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public virtual void Talk(DialogueHeader dialogue)
+    public virtual void Talk(DialogueHeader dialogue, Action callback)
     {
         Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public virtual void Talk(string evt)
+    public virtual void Talk(string evt, Action callback)
     {
         DialogueHeader dialogue = Dialogues.events_runtime.FirstOrDefault(evtHeader => evtHeader.evt == evt).dialogue;
         Dialoguer.EnterDialogue(this, dialogue.header);
