@@ -467,6 +467,7 @@ MonoBehaviour:
   itemType: 0
   canDrag: 1
   smoothSpeed: 0
+  toolData: {fileID: 0}
 --- !u!1 &307704369
 GameObject:
   m_ObjectHideFlags: 0
@@ -779,8 +780,8 @@ GameObject:
   m_Component:
   - component: {fileID: 409233777}
   - component: {fileID: 409233780}
-  - component: {fileID: 409233782}
   - component: {fileID: 409233783}
+  - component: {fileID: 409233784}
   m_Layer: 6
   m_Name: Cocktail
   m_TagString: Item
@@ -847,19 +848,36 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
-  m_Color: {r: 0.554717, g: 0.554717, b: 0.554717, a: 1}
+  m_Sprite: {fileID: 7111969943574635211, guid: 56aae30fd1f1c964a9f73edf71cc8bf6, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 9.23, y: 14.79}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!70 &409233782
-CapsuleCollider2D:
+--- !u!114 &409233783
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 409233776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331f48f21ce482a4690246adaa5220f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemData: {fileID: 11400000, guid: d966ad1aa2c6a214784399fb38504a4b, type: 2}
+  itemType: 0
+  canDrag: 1
+  smoothSpeed: 0
+  ingredients: []
+--- !u!61 &409233784
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -893,24 +911,17 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1, y: 2}
-  m_Direction: 0
---- !u!114 &409233783
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 409233776}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 331f48f21ce482a4690246adaa5220f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: d966ad1aa2c6a214784399fb38504a4b, type: 2}
-  itemType: 0
-  canDrag: 1
-  smoothSpeed: 0
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.846, y: 2.958}
+    newSize: {x: 9.23, y: 14.79}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1.846, y: 2.958}
+  m_EdgeRadius: 0
 --- !u!1 &1159237883
 GameObject:
   m_ObjectHideFlags: 0
