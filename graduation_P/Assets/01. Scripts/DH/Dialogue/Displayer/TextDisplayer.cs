@@ -1,5 +1,4 @@
-using Cysharp.Threading.Tasks;
-using System.Threading;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,10 +13,9 @@ public class TextDisplayer : MonoBehaviour
 
     public UnityEvent onClick => nextButton.onClick;
 
-    public int textShowInterval = 100;
+    public float textShowInterval = 0.1f;
 
-    private UniTask task;
-    private CancellationTokenSource cancellation;
+    private EventWaiter localWaiter = new EventWaiter();
 
     public void Init()
     {
@@ -29,11 +27,10 @@ public class TextDisplayer : MonoBehaviour
             group = GetComponent<CanvasGroup>();
         Enable(false);
     }
-    public bool IsShowComplete() => task.Status == UniTaskStatus.Succeeded || cancellation.IsCancellationRequested;
     public void Enable(bool enable)
     {
-        if (!IsShowComplete())
-            cancellation.Cancel();
+        if (!localWaiter.IsCompleted)
+            localWaiter.IsCompleted = true;
 
         textBase.text = "";
         group.alpha = enable ? 1 : 0;
@@ -43,38 +40,41 @@ public class TextDisplayer : MonoBehaviour
 
     public void Skip()
     {
-        if (IsShowComplete())
-            return;
-
-        cancellation.Cancel();
+        if (!localWaiter.IsCompleted)
+        {
+            localWaiter.IsCompleted = true;
+            textBase.ForceMeshUpdate();
+            textBase.maxVisibleCharacters = textBase.text.Length;
+        }
     }
 
-    public async UniTask Show(string message)
+    public EventWaiter Show(string message)
     {
         onClick.AddListener(Skip);
         textBase.text = message;
-        cancellation = new CancellationTokenSource();
-        await ShowText(cancellation);
-        onClick.RemoveListener(Skip);
+        localWaiter.IsCompleted = false;
+        StartCoroutine(ShowText());
+        return localWaiter;
     }
 
-    private async UniTask ShowText(CancellationTokenSource cancellation)
+    private IEnumerator ShowText()
     {
         int textMax = textBase.text.Length;
+        var wait = new WaitForSeconds(textShowInterval);
 
         textBase.ForceMeshUpdate();
         textBase.maxVisibleCharacters = 0;
 
-        for (int i = 0; i < textMax; i++)
+        for (int i = 0; i < textMax && !localWaiter.IsCompleted; i++)
         {
-            await UniTask.Delay(textShowInterval, cancellationToken: cancellation.Token);
+            yield return wait;
+            if (localWaiter.IsCompleted)
+                yield break;
             textBase.ForceMeshUpdate();
-            if (cancellation.IsCancellationRequested)
-            {
-                textBase.maxVisibleCharacters = textBase.text.Length;
-                return;
-            }
             textBase.maxVisibleCharacters++;
         }
+
+        onClick.RemoveListener(Skip);
+        localWaiter.IsCompleted = true;
     }
 }

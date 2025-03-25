@@ -1,8 +1,9 @@
-using Cysharp.Threading.Tasks;
+using System;
 using UnityEngine;
 
 public abstract class DialogueObject : ScriptableObject
 {
     public DialogueType type;
-    public abstract UniTask<DialogueObject> Dialogue(Customer customer);
+
+    public abstract void Dialogue(Customer customer, DialogueEventWaiter waiter);
 }

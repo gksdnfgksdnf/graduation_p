@@ -1,4 +1,4 @@
-using Cysharp.Threading.Tasks;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -9,25 +9,54 @@ public class DialogueText : DialogueObject // default text dialogue
     public List<string> texts;
     public DialogueObject next;
 
+    private Customer customer;
     private TextDisplayer displayer;
+    private DialogueEventWaiter waiter;
 
-    public override async UniTask<DialogueObject> Dialogue(Customer customer)
+    private EventWaiter localWaiter = new EventWaiter();
+
+    public override void Dialogue(Customer customer, DialogueEventWaiter waiter)
     {
-        Debug.Log("Enter Texts");
+        this.customer = customer;
+        this.displayer = customer.Displayer;
+        this.waiter = waiter;
 
-        displayer = customer.Displayer;
+        localWaiter.IsCompleted = false;
+        customer.StartCoroutine(Show());
+    }
+
+    private IEnumerator Show()
+    {
         foreach (string text in texts)
         {
-            await displayer.Show(text);
+            if (localWaiter.IsCompleted)
+                yield break;
 
-            bool wait = false;
-            UnityAction waitNext = () => wait = true;
-            displayer.onClick.AddListener(waitNext);
-            await UniTask.WaitUntil(() => wait);
-            displayer.onClick.RemoveListener(waitNext);
+            EventWaiter textWaiter = displayer.Show(text);
+            yield return new WaitUntil(() => textWaiter.IsCompleted);
+
+            bool waitClick = false;
+            UnityAction clickAction = () => waitClick = true;
+            displayer.onClick.AddListener(clickAction);
+            yield return new WaitUntil(() => waitClick);
+            displayer.onClick.RemoveListener(clickAction);
         }
-        displayer = null;
 
-        return next;
+        localWaiter.IsCompleted = true;
+
+        waiter.next = next;
+        waiter.IsCompleted = true;
+    }
+
+    public void SkipAll()
+    {
+        if (!localWaiter.IsCompleted)
+        {
+            localWaiter.IsCompleted = true;
+            displayer.Show(texts[^1]);
+            displayer.Skip();
+            waiter.next = next;
+            waiter.IsCompleted = true;
+        }
     }
 }

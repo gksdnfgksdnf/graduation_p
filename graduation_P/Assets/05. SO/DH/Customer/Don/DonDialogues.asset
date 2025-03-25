@@ -15,6 +15,7 @@ MonoBehaviour:
   events: []
   dialogues:
   - {fileID: 11400000, guid: 644da7dda57254148bf47c6ad07b16eb, type: 2}
+  - {fileID: 11400000, guid: 698b5374c41b57f46966210646ffed94, type: 2}
   events_runtime: []
   dialogues_runtime:
   - {fileID: 0}

@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,13 +18,22 @@ public class CustomerManager : MonoBehaviour
         Instance = this;
     }
 
-    public async UniTask PhaseUpdate(int day, DayPhase phase)
+    private void Start()
     {
-        var newCus = Customers.FindAll(cus => !Visitors.Contains(cus) && cus.Visit(day, phase));
-        foreach (var cus in newCus)
-            await cus.Enter();
+        DayManager.Instance.onPhase.Add(PhaseUpdate);
+    }
 
-        Visitors.AddRange(newCus);
+    public void PhaseUpdate(EventWaiter waiter)
+    {
+        DayPhase phase = DayManager.Instance.phase;
+        int day = DayManager.Instance.day;
+
+        var newCustomer = Customers.FindAll(cus => !Visitors.Contains(cus) && cus.Visit(day, phase));
+        foreach (var customer in newCustomer)
+            customer.Enter();
+        Visitors.AddRange(newCustomer);
+
+        waiter.IsCompleted = true;
     }
 
     public Customer FindVisitor(DialogueType customer)
@@ -36,11 +44,9 @@ public class CustomerManager : MonoBehaviour
         return null;
     }
 
-    public async UniTask HourUpdate(DayPhase phase, int hour)
+    public void HourUpdate(EventWaiter waiter)
     {
-        foreach (var cus in Visitors)
-        {
-            await DialogueManager.Instance.PlayDialogue(cus.Dialogue());
-        }
+        var customer = Visitors[Random.Range(0, Customers.Count)];
+        DialogueManager.Instance.PlayDialogue(customer.Dialogue(), waiter);
     }
 }

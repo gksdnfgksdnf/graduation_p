@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public enum BehaviourType
@@ -28,10 +27,9 @@ public abstract class Customer : MonoBehaviour
         Exit();
     }
 
-    public virtual async UniTask Enter()
+    public void Enter()
     {
         Animator.Enter();
-        await UniTask.Delay(10);
     }
 
     public virtual void Exit()
@@ -51,4 +49,9 @@ public abstract class Customer : MonoBehaviour
     }
 
     public abstract bool Visit(int day, DayPhase phase);
+
+    public void Serve(Cocktail served)
+    {
+        Debug.Log("Served!");
+    }
 }

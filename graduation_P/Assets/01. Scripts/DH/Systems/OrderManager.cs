@@ -2,33 +2,39 @@ using Cysharp.Threading.Tasks;
 using System;
 using UnityEngine;
 
+public delegate void CocktailServedEvent(CocktailDataSO wanted, Cocktail served);
+
 public class OrderManager : MonoBehaviour
 {
     public static OrderManager Instance { get; private set; }
 
-    [field: SerializeField] public CocktailDataSO ordered { get; private set; }
-    public Action<CocktailDataSO> onOrdered;
+    [field: SerializeField] public CocktailDataSO wanted { get; private set; }
+    public Action<CocktailDataSO> onWanted;
+    public CocktailServedEvent onServed;
 
-    private bool serve = false;
-    private Cocktail served;
+    [SerializeField] private Cocktail testCocktail;
 
     private void Awake()
     {
         Instance = this;
     }
 
-    public async UniTask<Cocktail> Order(CocktailDataSO cocktail)
+    public void Order(CocktailDataSO cocktail)
     {
-        ordered = cocktail;
-        onOrdered?.Invoke(cocktail);
-        serve = false;
-        await UniTask.WaitUntil(() => serve);
-        return served;
+        wanted = cocktail;
+        onWanted?.Invoke(cocktail);
     }
 
-    public void Serve(Cocktail cocktail)
+    public void Serve(Cocktail served)
     {
-        serve = true;
-        served = cocktail;
+        onServed?.Invoke(wanted, served);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            Serve(testCocktail);
+        }
     }
 }

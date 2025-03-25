@@ -6,7 +6,7 @@ public class DecisionManager : MonoBehaviour
 {
     public static DecisionManager Instance { get; private set; }
 
-    [SerializeField] private DecisionDisplayer displayer;
+    public DecisionDisplayer displayer;
     [SerializeField] private CanvasGroup group;
 
     private void Awake()
@@ -14,14 +14,6 @@ public class DecisionManager : MonoBehaviour
         Instance = this;
         displayer.Init();
         Enable(false);
-    }
-
-    public async UniTask<Decision> Decision(List<Decision> decisions)
-    {
-        Enable(true);
-        Decision result = await displayer.Show(decisions);
-        Enable(false);
-        return result;
     }
 
     public void Enable(bool enable)

@@ -1,11 +1,11 @@
-using Cysharp.Threading.Tasks;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public enum DayPhase
 {
-    Sunset,
+    Shadow,
     Midnight,
     Dreamy
 }
@@ -14,17 +14,17 @@ public class DayManager : MonoBehaviour
 {
     public static DayManager Instance { get; private set; }
 
-    public List<Func<UniTask>> onDayEnter = new();
-    public List<Func<UniTask>> onDayExit = new();
-    public List<Func<DayPhase, UniTask>> onPhase = new();
-    public List<Func<int, UniTask>> onHour = new();
+    public List<Action<EventWaiter>> onDayEnter = new();
+    public List<Action<EventWaiter>> onDayExit = new();
+    public List<Action<EventWaiter>> onPhase = new();
+    public List<Action<EventWaiter>> onHour = new();
 
     public Timer Timer { get; private set; }
     public float timeMultiplier = 2f;
 
     public int day = 1;
-    public int hour = 6;
-    public DayPhase phase = DayPhase.Sunset;
+    public DayPhase phase = DayPhase.Shadow;
+    public int hour = 0;
 
     private void Awake()
     {
@@ -34,38 +34,42 @@ public class DayManager : MonoBehaviour
 
     public void StartDay()
     {
-        DayCycle();
+        StartCoroutine(DayCycle());
     }
 
-    private async void DayCycle()
+    private IEnumerator DayCycle()
     {
-        hour = 18;
-        phase = DayPhase.Sunset;
-        await UniTask.WhenAll(onDayEnter.Select(t => t()));
+        hour = 0;
+        phase = DayPhase.Shadow;
+
+        yield return StartCoroutine(EventWaiter.WaitInvoker(onDayEnter));
 
         for (int i = 0; i < 3; i++)
         {
             phase = (DayPhase)i;
-            await UniTask.WhenAll(onPhase.Select(t => t(phase)));
+            yield return StartCoroutine(EventWaiter.WaitInvoker(onPhase));
+
             for (int j = 0; j < 3; j++)
             {
                 TimerUI.Instance.SetHour(hour % 24);
                 TimerUI.Instance.SetMinute(0f);
+                Debug.Log("Hour Event Start");
+                yield return StartCoroutine(EventWaiter.WaitInvoker(onHour));
+                Debug.Log("Hour Event End");
+
                 bool timer = false;
-                await UniTask.WhenAll(onHour.Select(t => t(hour)));
                 Timer.StartTimer(timeMultiplier, () =>
                 {
                     timer = true;
                     hour++;
                 });
-                await UniTask.WaitUntil(() => timer);
+                yield return new WaitUntil(() => timer);
             }
         }
 
         TimerUI.Instance.SetHour(3);
         TimerUI.Instance.SetMinute(0f);
-
+        yield return StartCoroutine(EventWaiter.WaitInvoker(onDayExit));
         day++;
-        await UniTask.WhenAll(onDayExit.Select(t => t()));
     }
 }

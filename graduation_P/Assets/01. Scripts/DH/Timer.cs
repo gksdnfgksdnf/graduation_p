@@ -5,7 +5,8 @@ public class Timer : MonoBehaviour
 {
     public float time = 0f;
     public float timeMultiplier = 1f;
-    public bool timePaused = true;
+    public bool timeStarted = false;
+    public bool timePaused = false;
 
     public Action onTimerEnd = null;
     private Action callback = null;
@@ -15,12 +16,14 @@ public class Timer : MonoBehaviour
         time = 0;
         this.timeMultiplier = timeMultiplier;
         this.callback = callback;
+        timeStarted = true;
     }
 
     public void StopTimer()
     {
         time = 0;
         callback = null;
+        timeStarted = false;
     }
 
     public void PauseTimer(bool paused)
@@ -39,10 +42,10 @@ public class Timer : MonoBehaviour
 
     private void Update()
     {
-        if (!timePaused)
+        if (!timePaused && timeStarted)
         {
             time += Time.deltaTime * timeMultiplier;
-            if (time >= 60f)
+            if (time >= 20f)
             {
                 callback?.Invoke();
                 onTimerEnd?.Invoke();
