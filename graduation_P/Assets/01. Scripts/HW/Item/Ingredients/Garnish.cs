@@ -1,10 +1,12 @@
 using UnityEngine;
 
-public class Garnish : Item
+public class Garnish : Ingredient
 {
     GanishSO garnishSO;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         garnishSO = itemData as GanishSO;
     }
 

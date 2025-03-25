@@ -20,7 +20,7 @@ public class ServingZone : BaseZone
             }
             else
             {
-                Debug.Log($"이 아이템은 {baseType} 타입이어야 합니다. {item.itemData.itemType}");
+                Debug.Log($"이 아이템은 {baseType} 타입이어야 합니다. {item.itemType}");
             }
         }
     }

@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class Soda : Item
+public class Soda : Ingredient
 {
     private SodaSO soda;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         soda = itemData as SodaSO;
     }
+
     public override void Use()
     {
         

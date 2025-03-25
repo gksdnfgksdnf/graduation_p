@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class BaseZone : MonoBehaviour
 {
-    [SerializeField]
     public ItemType baseType;
-
-    [SerializeField]
     public Item baseItem;
 
     protected Item GetItem(Collider2D other)
@@ -18,7 +15,7 @@ public class BaseZone : MonoBehaviour
 
     protected virtual bool IsValidItemType(Item item)
     {
-        return baseType == item.itemData.itemType;
+        return baseType == item.itemType;
     }
 
     protected virtual IEnumerator PlaceItem(Item item)

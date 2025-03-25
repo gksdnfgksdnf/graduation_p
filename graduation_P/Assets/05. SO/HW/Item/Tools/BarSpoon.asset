@@ -15,9 +15,8 @@ MonoBehaviour:
   itemName: BarSpoon
   itemType: 2
   icon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  price: 0
-  weight: 0
-  volume: 0
-  isStackable: 0
   isConsumable: 0
   toolType: 3
+  isContainer: 0
+  requireTools: []
+  ingredients: []

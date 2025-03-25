@@ -1,24 +1,14 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class MixingZone : BaseZone
 {
     private CocktailMaker cocktailMaker;
 
-    private List<ToolType> toolType; //useable Item
-
-    private void Awake()
-    {
-        toolType = new List<ToolType> { ToolType.Jigger, ToolType.MixingGlass, ToolType.Shaker };
-    }
-
     private void Start()
     {
         cocktailMaker = FindFirstObjectByType<CocktailMaker>();
     }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Item item = GetItem(other);
@@ -36,13 +26,12 @@ public class MixingZone : BaseZone
             }
             else
             {
-                Debug.Log($"이 아이템은 {baseType} 타입이어야 합니다. {item.itemData.itemType}");
+                Debug.Log($"이 아이템은 {baseType} 타입이 아니거나 올바르지 않은 도구입니다.");
             }
         }
         else
         {
             HandleAdditionalItem(item);
-            Debug.Log($"추가 아이템 처리: {item.gameObject.name}");
         }
     }
 
@@ -59,20 +48,20 @@ public class MixingZone : BaseZone
 
     private void HandleAdditionalItem(Item item)
     {
-        ItemType baseItemType = item.itemData.itemType;
+        ItemType baseItemType = item.itemType;
+
+        Debug.Log(baseItemType);
 
         switch (baseItemType)
         {
             case ItemType.Tool:
-                cocktailMaker.UseTool(item as Tool);
+                cocktailMaker.ProcessUseTool(baseItem, item as Tool);
                 break;
             case ItemType.Ingredient:
-                cocktailMaker.AddIngredient(item as Ingredient);
-                break;
-            case ItemType.Glass:
-                cocktailMaker.UseGlass(item as Glass);
+                cocktailMaker.ProcessAddIngredient(baseItem, item as Ingredient);
                 break;
             default:
+                Debug.Log("유효하지 않은 아이템 타입" + baseItemType);
                 break;
 
         }
@@ -86,10 +75,7 @@ public class MixingZone : BaseZone
 
         // ToolSO 일때
         if (item.itemData is ToolSO toolData)
-        {
-            // 가능한 도구인지
-            return toolType.Contains(toolData.toolType);
-        }
+            return toolData.isContainer;
 
         return true;
     }
