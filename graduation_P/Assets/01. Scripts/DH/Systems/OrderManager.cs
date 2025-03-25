@@ -29,5 +29,6 @@ public class OrderManager : MonoBehaviour
     public void Serve(Cocktail cocktail)
     {
         serve = true;
+        served = cocktail;
     }
 }
