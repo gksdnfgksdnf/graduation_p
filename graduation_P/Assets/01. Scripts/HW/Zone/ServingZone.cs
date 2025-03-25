@@ -17,6 +17,7 @@ public class ServingZone : BaseZone
                 baseItem = item;
                 StartCoroutine(PlaceItem(item));
                 Debug.Log($"칵테일 서빙 준비 완료 : {baseItem.gameObject.name}");
+                cocktailMaker.FinishMakeCocktail();
             }
             else
             {

@@ -7,6 +7,13 @@ public class BaseZone : MonoBehaviour
     public ItemType baseType;
     public Item baseItem;
 
+    protected CocktailMaker cocktailMaker;
+
+    private void Start()
+    {
+        cocktailMaker = FindFirstObjectByType<CocktailMaker>();
+    }
+
     protected Item GetItem(Collider2D other)
     {
         Item item = other.transform.GetComponent<Item>();
