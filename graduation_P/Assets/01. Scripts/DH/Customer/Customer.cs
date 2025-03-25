@@ -1,5 +1,4 @@
-using System;
-using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public enum BehaviourType
@@ -12,29 +11,27 @@ public enum BehaviourType
     Exit,
 }
 
-public class CustomerBehaviour
-{
-    public BehaviourType type;
-    public DialogueObject dialogue;
-}
-
 public abstract class Customer : MonoBehaviour
 {
+    public DialogueType type;
+
     public CustomerAnimator Animator;
-    public CustomerDialoguer Dialoguer;
     public CustomerDialogues Dialogues;
-    public CustomerInformation Infomation;
+    public CustomerInformation Information;
     public CustomerTaste Taste;
+    public TextDisplayer Displayer;
 
     protected virtual void Awake()
     {
-        Dialoguer.ExitDialogue();
         Dialogues.Initialize();
+        Displayer.Init();
+        Exit();
     }
 
-    public virtual void Enter()
+    public virtual async UniTask Enter()
     {
         Animator.Enter();
+        await UniTask.Delay(10);
     }
 
     public virtual void Exit()
@@ -42,21 +39,15 @@ public abstract class Customer : MonoBehaviour
         Animator.Exit();
     }
 
-    public virtual void Talk(BehaviourType behaviour, Action callback)
+    public virtual DialogueHeader Dialogue()
     {
-        DialogueHeader dialogue = Dialogues.Query(behaviour, Infomation.drunk, Infomation.reliance);
-        Dialoguer.EnterDialogue(this, dialogue.header);
+        return Dialogues.Query(Information.drunk, Information.reliance);
     }
 
-    public virtual void Talk(DialogueHeader dialogue, Action callback)
+    public virtual void AddDecision(Decision decision)
     {
-        Dialoguer.EnterDialogue(this, dialogue.header);
-    }
-
-    public virtual void Talk(string evt, Action callback)
-    {
-        DialogueHeader dialogue = Dialogues.events_runtime.FirstOrDefault(evtHeader => evtHeader.evt == evt).dialogue;
-        Dialoguer.EnterDialogue(this, dialogue.header);
+        foreach (var effect in decision.effects)
+            Information.AddEffect(effect.type, effect.value);
     }
 
     public abstract bool Visit(int day, DayPhase phase);

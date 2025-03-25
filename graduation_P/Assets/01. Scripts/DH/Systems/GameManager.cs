@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -11,18 +12,32 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        DayManager.Instance.onPhase.Add(HandlePhaseChange);
+        DayManager.Instance.onHour.Add(HandleHourChange);
         DayManager.Instance.StartDay();
-        DayManager.Instance.onPhase += HandlePhaseChange;
-        DayManager.Instance.onHour += HandleHourChange;
     }
 
-    private void HandlePhaseChange(DayPhase phase)
+    private async UniTask HandlePhaseChange(DayPhase phase)
     {
-        CustomerManager.Instance.PhaseUpdate(DayManager.Instance.day, phase);
+        var timer = DayManager.Instance.Timer;
+        float originTimeMultiplier = timer.timeMultiplier;
+
+        DayManager.Instance.onPhase.Add(HandlePhaseChange);
+        timer.timeMultiplier = 0.05f;
+        await CustomerManager.Instance.PhaseUpdate(DayManager.Instance.day, phase);
+        timer.timeMultiplier = originTimeMultiplier;
+        DayManager.Instance.onPhase.Remove(HandlePhaseChange);
     }
 
-    private void HandleHourChange(int hour)
+    private async UniTask HandleHourChange(int hour)
     {
-        CustomerManager.Instance.HourUpdate(DayManager.Instance.phase, hour);
+        var timer = DayManager.Instance.Timer;
+        float originTimeMultiplier = timer.timeMultiplier;
+
+        DayManager.Instance.onHour.Add(HandleHourChange);
+        timer.timeMultiplier = 0.05f;
+        await CustomerManager.Instance.HourUpdate(DayManager.Instance.phase, hour);
+        timer.timeMultiplier = originTimeMultiplier;
+        DayManager.Instance.onHour.Remove(HandleHourChange);
     }
 }

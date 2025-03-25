@@ -1,4 +1,6 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public enum DayPhase
@@ -8,19 +10,14 @@ public enum DayPhase
     Dreamy
 }
 
-public delegate void DayEvent(int day);
-public delegate void PhaseEvent(DayPhase phase);
-public delegate void HourEvent(int hour);
-
-
 public class DayManager : MonoBehaviour
 {
     public static DayManager Instance { get; private set; }
 
-    public DayEvent onDayEnter;
-    public DayEvent onDayExit;
-    public PhaseEvent onPhase;
-    public HourEvent onHour;
+    public List<Func<UniTask>> onDayEnter = new();
+    public List<Func<UniTask>> onDayExit = new();
+    public List<Func<DayPhase, UniTask>> onPhase = new();
+    public List<Func<int, UniTask>> onHour = new();
 
     public Timer Timer { get; private set; }
     public float timeMultiplier = 2f;
@@ -37,31 +34,31 @@ public class DayManager : MonoBehaviour
 
     public void StartDay()
     {
-        StartCoroutine(DayCycle());
+        DayCycle();
     }
 
-    private IEnumerator DayCycle()
+    private async void DayCycle()
     {
         hour = 18;
         phase = DayPhase.Sunset;
-        onDayEnter?.Invoke(day);
+        await UniTask.WhenAll(onDayEnter.Select(t => t()));
 
         for (int i = 0; i < 3; i++)
         {
             phase = (DayPhase)i;
-            onPhase?.Invoke(phase);
+            await UniTask.WhenAll(onPhase.Select(t => t(phase)));
             for (int j = 0; j < 3; j++)
             {
                 TimerUI.Instance.SetHour(hour % 24);
                 TimerUI.Instance.SetMinute(0f);
                 bool timer = false;
-                onHour?.Invoke(hour);
+                await UniTask.WhenAll(onHour.Select(t => t(hour)));
                 Timer.StartTimer(timeMultiplier, () =>
                 {
                     timer = true;
                     hour++;
                 });
-                yield return new WaitUntil(() => timer);
+                await UniTask.WaitUntil(() => timer);
             }
         }
 
@@ -69,6 +66,6 @@ public class DayManager : MonoBehaviour
         TimerUI.Instance.SetMinute(0f);
 
         day++;
-        onDayExit?.Invoke(day);
+        await UniTask.WhenAll(onDayExit.Select(t => t()));
     }
 }

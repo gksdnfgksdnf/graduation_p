@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,4 +22,11 @@ public class Decision
 public class DialogueDecision : DialogueObject
 {
     public List<Decision> decisions;
+
+    public override async UniTask<DialogueObject> Dialogue(Customer customer)
+    {
+        Decision result = await DecisionManager.Instance.Decision(decisions);
+        customer.AddDecision(result);
+        return result.next;
+    }
 }

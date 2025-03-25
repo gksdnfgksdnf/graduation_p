@@ -21,7 +21,7 @@ public class CustomerInformation : ScriptableObject
     public int firstAppearDay = 0;
     public bool caseClosed = false; // 완료된 손님인지
 
-    public void AddEffect(EffectType type, int value)
+    public void AddEffect(EffectType type, float value)
     {
         switch (type)
         {

@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7130a8f8a55510447b4251e06dcf3c40, type: 3}
-  m_Name: DonDialogues
+  m_Script: {fileID: 11500000, guid: 3d152ebcbd39cd545a469dcd4c19d940, type: 3}
+  m_Name: 3
   m_EditorClassIdentifier: 
-  events: []
-  dialogues:
-  - {fileID: 11400000, guid: 644da7dda57254148bf47c6ad07b16eb, type: 2}
-  events_runtime: []
-  dialogues_runtime:
-  - {fileID: 0}
+  type: 0
+  texts:
+  - "\uACE0\uB9D9\uC18C"
+  - "\uC798 \uB9C8\uC2DC\uACA0\uB124"
+  next: {fileID: 0}

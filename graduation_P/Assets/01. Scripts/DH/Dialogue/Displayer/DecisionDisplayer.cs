@@ -1,4 +1,4 @@
-using System;
+using Cysharp.Threading.Tasks;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,11 +7,15 @@ public class DecisionDisplayer : MonoBehaviour
     public List<DecisionButton> buttons;
 
     private bool isShow = false;
+    private Decision selected = null;
 
     public void Init()
     {
         for (int i = 0; i < buttons.Count; i++)
+        {
             buttons[i].Init();
+            buttons[i].Inactive();
+        }
     }
 
     public bool IsShowDecisions()
@@ -19,13 +23,16 @@ public class DecisionDisplayer : MonoBehaviour
         return isShow;
     }
 
-    public void Show(DialogueDecision decision, Action<Decision> callback)
+    public async UniTask<Decision> Show(List<Decision> decisions)
     {
-        callback += Select;
-
-        for (int i = 0; i < decision.decisions.Count; i++)
-            buttons[i].Active(decision.decisions[i], callback);
+        for (int i = 0; i < decisions.Count; i++)
+            buttons[i].Active(decisions[i], Select);
         isShow = true;
+
+        await UniTask.WaitWhile(() => isShow);
+
+        Unshow();
+        return selected;
     }
 
     public void Unshow()
@@ -37,6 +44,7 @@ public class DecisionDisplayer : MonoBehaviour
 
     public void Select(Decision decision)
     {
-        Unshow();
+        selected = decision;
+        isShow = false;
     }
 }

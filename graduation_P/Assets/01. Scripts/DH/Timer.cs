@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class Timer : MonoBehaviour
 {
-    public float time { get; private set; } = 0f;
-    public float timeMultiplier { get; private set; } = 1f;
-    public bool timePaused { get; private set; } = true;
+    public float time = 0f;
+    public float timeMultiplier = 1f;
+    public bool timePaused = true;
 
     public Action onTimerEnd = null;
     private Action callback = null;

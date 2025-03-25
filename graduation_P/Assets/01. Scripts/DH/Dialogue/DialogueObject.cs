@@ -1,7 +1,8 @@
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public abstract class DialogueObject : ScriptableObject
 {
-    public virtual void EnterDialogue(Customer customer) { }
-    public virtual void ExitDialogue(Customer customer) { }
+    public DialogueType type;
+    public abstract UniTask<DialogueObject> Dialogue(Customer customer);
 }

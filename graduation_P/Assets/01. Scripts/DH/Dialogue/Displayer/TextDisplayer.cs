@@ -1,6 +1,8 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
+using System.Threading;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class TextDisplayer : MonoBehaviour
@@ -10,9 +12,12 @@ public class TextDisplayer : MonoBehaviour
     [SerializeField] private Canvas canvas;
     [SerializeField] private CanvasGroup group;
 
-    public float textShowInterval = 0.1f;
+    public UnityEvent onClick => nextButton.onClick;
 
-    private Coroutine coroutine;
+    public int textShowInterval = 100;
+
+    private UniTask task;
+    private CancellationTokenSource cancellation;
 
     public void Init()
     {
@@ -24,62 +29,52 @@ public class TextDisplayer : MonoBehaviour
             group = GetComponent<CanvasGroup>();
         Enable(false);
     }
-    public bool IsShowComplete() => coroutine == null;
+    public bool IsShowComplete() => task.Status == UniTaskStatus.Succeeded || cancellation.IsCancellationRequested;
     public void Enable(bool enable)
     {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
+        if (!IsShowComplete())
+            cancellation.Cancel();
 
         textBase.text = "";
-
         group.alpha = enable ? 1 : 0;
         group.interactable = enable;
         group.blocksRaycasts = enable;
     }
 
-    public void Show(string message)
-    {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
-
-        textBase.text = message;
-        coroutine = StartCoroutine(ShowText());
-    }
-
     public void Skip()
     {
-        ShowAllText();
+        if (IsShowComplete())
+            return;
+
+        cancellation.Cancel();
     }
-    private IEnumerator ShowText()
+
+    public async UniTask Show(string message)
+    {
+        onClick.AddListener(Skip);
+        textBase.text = message;
+        cancellation = new CancellationTokenSource();
+        await ShowText(cancellation);
+        onClick.RemoveListener(Skip);
+    }
+
+    private async UniTask ShowText(CancellationTokenSource cancellation)
     {
         int textMax = textBase.text.Length;
 
         textBase.ForceMeshUpdate();
         textBase.maxVisibleCharacters = 0;
 
-        var wait = new WaitForSeconds(textShowInterval);
         for (int i = 0; i < textMax; i++)
         {
-            yield return wait;
+            await UniTask.Delay(textShowInterval, cancellationToken: cancellation.Token);
             textBase.ForceMeshUpdate();
+            if (cancellation.IsCancellationRequested)
+            {
+                textBase.maxVisibleCharacters = textBase.text.Length;
+                return;
+            }
             textBase.maxVisibleCharacters++;
         }
-        coroutine = null;
-    }
-    private void ShowAllText()
-    {
-        if (coroutine != null)
-        {
-            StopCoroutine(coroutine);
-            coroutine = null;
-        }
-
-        textBase.maxVisibleCharacters = textBase.text.Length;
     }
 }

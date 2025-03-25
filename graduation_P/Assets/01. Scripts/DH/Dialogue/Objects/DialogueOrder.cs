@@ -1,9 +1,15 @@
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "DialogueOrder")]
-public class DialogueOrder : DialogueText
+public class DialogueOrder : DialogueObject
 {
-    [Header("Order")]
     public CocktailDataSO cocktail;
+    public DialogueObject next;
+
+    public override async UniTask<DialogueObject> Dialogue(Customer customer)
+    {
+        await OrderManager.Instance.Order(cocktail);
+        return null;
+    }
 }
