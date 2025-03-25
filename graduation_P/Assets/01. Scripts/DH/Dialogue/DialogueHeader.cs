@@ -8,7 +8,6 @@ public class DialogueHeader : ScriptableObject
 
     [Header("Requirements")]
     public BehaviourType behaviour = BehaviourType.Enter;
-    public List<CustomerFeel> feels = new();
     [Range(0f, 100f)]
     public float minDrunk = 0f;
     [Range(0f, 100f)]
@@ -21,11 +20,5 @@ public class DialogueHeader : ScriptableObject
     [Header("Reuse")]
     public int count = 0;
     public int maxCount = 1;
-
-    [Header("Ignore")]
-    public bool ignoreType = false;
-    public bool ignoreFeel = false;
-    public bool ignoreDrunk = false;
-    public bool ignoreReliance = false;
     public bool infiniteCount = false;
 }

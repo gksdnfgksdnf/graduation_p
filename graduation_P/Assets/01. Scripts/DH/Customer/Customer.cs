@@ -1,84 +1,63 @@
-using System.Collections;
+using System;
+using System.Linq;
 using UnityEngine;
 
-public class Customer : MonoBehaviour
+public enum BehaviourType
 {
-    public CustomerAI AI;
-    public CustomerAnimator Animator;
-    public AIBehaviour curr;
-    public AIBehaviour prev;
-    public float behaviourTime = 2f;
+    None,
+    Enter,
+    Talk,
+    Order,
+    Reaction,
+    Exit,
+}
 
-    public void Enter()
+public class CustomerBehaviour
+{
+    public BehaviourType type;
+    public DialogueObject dialogue;
+}
+
+public abstract class Customer : MonoBehaviour
+{
+    public CustomerAnimator Animator;
+    public CustomerDialoguer Dialoguer;
+    public CustomerDialogues Dialogues;
+    public CustomerInformation Infomation;
+    public CustomerTaste Taste;
+
+    protected virtual void Awake()
     {
-        AI.Entered();
-        Animator.Enter();
-        PlayBehaviour(AI.GetBehaviour());
+        Dialoguer.ExitDialogue();
+        Dialogues.Initialize();
     }
 
-    public void Exit()
+    public virtual void Enter()
     {
-        AI.Exited();
+        Animator.Enter();
+    }
+
+    public virtual void Exit()
+    {
         Animator.Exit();
     }
 
-    public void Order(CocktailDataSO cocktail)
+    public virtual void Talk(BehaviourType behaviour, Action callback)
     {
-        AI.OrderCocktail(cocktail);
+        DialogueHeader dialogue = Dialogues.Query(behaviour, Infomation.drunk, Infomation.reliance);
+        Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public void Serve(CocktailDataSO cocktail)
+    public virtual void Talk(DialogueHeader dialogue, Action callback)
     {
-        AI.ServeCocktail(cocktail);
-        PlayBehaviour(AI.GetBehaviour());
+        Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public AIBehaviour GetBehaviour()
+    public virtual void Talk(string evt, Action callback)
     {
-        return AI.GetBehaviour();
+        DialogueHeader dialogue = Dialogues.events_runtime.FirstOrDefault(evtHeader => evtHeader.evt == evt).dialogue;
+        Dialoguer.EnterDialogue(this, dialogue.header);
     }
 
-    public void PlayBehaviour(AIBehaviour behaviour)
-    {
-        curr = behaviour;
-        DialogueManager.Instance.EnterDialogue(this, behaviour.dialogue.header);
-        DialogueManager.Instance.onExit += HandleBehaviourEnd;
-    }
-
-    public void HandleBehaviourEnd()
-    {
-        DialogueManager.Instance.onExit -= HandleBehaviourEnd;
-        prev = curr;
-        curr = null;
-        StartCoroutine(WaitNextBehaviour());
-    }
-
-    private IEnumerator WaitNextBehaviour()
-    {
-        yield return new WaitForSeconds(behaviourTime + Random.Range(0f, 1f));
-        PlayNextBehaviour();
-    }
-
-    public void PlayNextBehaviour()
-    {
-
-        switch (prev.behaviour)
-        {
-            case BehaviourType.Enter:
-                PlayBehaviour(AI.GetBehaviour());
-                break;
-            case BehaviourType.Talk:
-                PlayBehaviour(AI.GetBehaviour());
-                break;
-            case BehaviourType.Order:
-
-                break;
-            case BehaviourType.Reaction:
-                PlayBehaviour(AI.GetBehaviour());
-                break;
-            case BehaviourType.Exit:
-                Exit();
-                break;
-        }
-    }
+    public abstract bool Visit(int day, DayPhase phase);
 }

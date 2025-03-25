@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,38 +6,34 @@ public class CustomerManager : MonoBehaviour
 {
     public static CustomerManager Instance { get; private set; }
 
-    public List<Customer> customers = new();
-    public Customer visitor;
+    public List<Customer> Customers = new();
+    public List<Customer> Visitors = new();
 
-    [SerializeField] private bool test = true;
-
-    private void Awake()
+    public void PhaseUpdate(int day, DayPhase phase)
     {
-        Instance = this;
-        if (test)
+        Visitors.AddRange(Customers.FindAll(cus =>
         {
-            EnterCustomer(GetRandomCustomer(0));
+            if (!Visitors.Contains(cus) && cus.Visit(day, phase))
+            {
+                cus.Enter();
+                return true;
+            }
+            return false;
+        }));
+    }
+
+    public void HourUpdate(DayPhase phase, int hour)
+    {
+        StartCoroutine(VisitorUpdate());
+    }
+
+    private IEnumerator VisitorUpdate()
+    {
+        DayManager.Instance.Timer.PauseTimer(true);
+        foreach (var cus in Visitors)
+        {
+            yield return null;
         }
-    }
-
-    public Customer GetRandomCustomer(int day)
-    {
-        List<Customer> visitor = customers.FindAll(visit => visit.AI.DecideVisit(day));
-        if (visitor.Count > 0)
-            return visitor[Random.Range(0, visitor.Count)];
-        else
-            return customers[Random.Range(0, customers.Count)];
-    }
-
-    public void EnterCustomer(Customer customer)
-    {
-        visitor = customer;
-        visitor.Enter();
-    }
-
-    public void ExitCustomer()
-    {
-        visitor.Exit();
-        visitor = null;
+        DayManager.Instance.Timer.PauseTimer(false);
     }
 }
