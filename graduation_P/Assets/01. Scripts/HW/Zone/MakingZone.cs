@@ -2,13 +2,6 @@ using UnityEngine;
 
 public class MixingZone : BaseZone
 {
-    private CocktailMaker cocktailMaker;
-
-    private void Start()
-    {
-        cocktailMaker = FindFirstObjectByType<CocktailMaker>();
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         Item item = GetItem(other);
