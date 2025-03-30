@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class Tool : Item, IIngredientContainer
 {
+    [HideInInspector]
     public ToolSO toolData;
     private ToolType _toolType;
 
