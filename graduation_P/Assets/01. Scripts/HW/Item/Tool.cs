@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Tool : Item, IIngredientContainer
@@ -6,6 +7,8 @@ public class Tool : Item, IIngredientContainer
     [HideInInspector]
     public ToolSO toolData;
     private ToolType _toolType;
+
+    public List<Item> Items { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
     private void Awake()
     {

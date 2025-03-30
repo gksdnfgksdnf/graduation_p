@@ -5,6 +5,9 @@ public class Cocktail : Item, IIngredientContainer
 {
     [SerializeField]
     private List<Ingredient> ingredients = new List<Ingredient>();
+
+    public List<Item> Items { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+
     private void Awake()
     {
         Initialize(ItemType.Cocktail);
