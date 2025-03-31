@@ -18,7 +18,7 @@
     padding-bottom: 0;
     padding-left: 0;
     -unity-font-definition: initial;
-    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
 }
 
 .title-label {
@@ -41,13 +41,20 @@
     transition-timing-function: ease, ease, ease-in-out-back, ease-in-out-back;
     left: 1920px;
     -unity-font-definition: initial;
-    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
 }
 
 .clicked {
 }
 
 .appear {
+}
+
+.disappear {
+}
+
+.label.disappear {
+    left: 0;
 }
 
 .label.appear {
@@ -143,6 +150,9 @@
     top: 0;
 }
 
+.appear {
+}
+
 #clear-panel {
     top: -100%;
     align-items: center;
@@ -175,4 +185,7 @@
 }
 
 .fade {
+}
+
+.title-label.disappear {
 }

@@ -4,13 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
-
-
 public class MainScreen_UI : MonoBehaviour
 {
     private UIDocument _uiDocument;
     private VisualElement _settingContainer;
-    private VisualElement _loadContainer;
 
     private Label _title;
     private Label _start;
@@ -19,7 +16,6 @@ public class MainScreen_UI : MonoBehaviour
 
     private bool _isAddClass = true;
 
-    private bool _anyPanelActived = false;
 
     private void Awake()
     {
@@ -37,7 +33,6 @@ public class MainScreen_UI : MonoBehaviour
 
         var root = _uiDocument.rootVisualElement;
         _settingContainer = root.Q("setting-container");
-        _loadContainer = root.Q("load-container");
         _title = root.Q<Label>("title");
         _start = root.Q<Label>("start");
         _setting = root.Q<Label>("setting");
@@ -46,7 +41,7 @@ public class MainScreen_UI : MonoBehaviour
         var buttons = root.Query(className: "button").ToList();
         var exitButtons = root.Query("exit").ToList();
 
-        StartCoroutine( InitializeClass());
+        StartCoroutine(InitializeClass());
 
 
         _start.RegisterCallback<ClickEvent>(HandleMainScreenClickEvent);
@@ -57,7 +52,10 @@ public class MainScreen_UI : MonoBehaviour
         {
             //_fade.style.display = DisplayStyle.Flex;
             //_fade.style.backgroundColor = new StyleColor(new Color(0, 0, 0, 1));
-
+            _title.RemoveFromClassList("");
+            _start.RemoveFromClassList("");
+            _setting.RemoveFromClassList("");
+            _exit.RemoveFromClassList("");
         });
 
         _setting.RegisterCallback<ClickEvent>(evt =>
