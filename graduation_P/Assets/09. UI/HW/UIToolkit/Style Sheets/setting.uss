@@ -1,0 +1,133 @@
+.box-label {
+    -unity-text-align: middle-center;
+    font-size: 45px;
+    color: rgba(255, 255, 255, 0.47);
+    -unity-text-outline-width: 0;
+    text-shadow: 10px 10px 1px rgba(74, 74, 74, 0.43);
+    -unity-font-style: normal;
+    transition-duration: 0.2s, 0.2s, 1s, 1s;
+    transition-property: font-size, color, left, rotate;
+    transition-timing-function: ease, ease, ease-in-out-back, ease-in-out-back;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font-definition: initial;
+}
+
+.setting-label {
+    -unity-text-align: middle-center;
+    color: rgb(255, 255, 255);
+    text-shadow: 10px 0 1px rgb(102, 104, 128);
+    -unity-font-style: normal;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 30px;
+    margin-right: 0;
+    margin-left: 0;
+    margin-bottom: 30px;
+    transition-duration: 0.2s, 0.2s, 1s, 1s;
+    transition-property: font-size, color, left, rotate;
+    transition-timing-function: ease, ease, ease-in-out-back, ease-in-out-back;
+    -unity-font-definition: initial;
+    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+}
+
+.exit-label {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    color: rgba(255, 0, 0, 0.47);
+    font-size: 80px;
+    transition-property: font-size, color;
+    transition-duration: 0.2s, 0.2s;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    -unity-font-definition: initial;
+    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font-style: normal;
+}
+
+.pannel {
+    transition-duration: 0.2s;
+    width: 55%;
+    height: 50%;
+}
+
+.hover {
+}
+
+.box-label.hover {
+    color: rgb(255, 255, 255);
+}
+
+.box-label:hover {
+    color: rgb(255, 255, 255);
+}
+
+.exit-label:hover {
+    font-size: 90px;
+    color: rgb(255, 0, 0);
+}
+
+.button {
+    background-color: rgb(109, 111, 126);
+    transition-duration: 0.2s;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    flex-basis: 220px;
+    height: 110px;
+}
+
+.button #button {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: rgb(152, 154, 175);
+    position: absolute;
+    top: -5px;
+    width: 220px;
+    height: 110px;
+    align-items: center;
+    justify-content: center;
+    transition-property: top;
+    transition-duration: 0.1s;
+}
+
+.button #button.button-clicked {
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    background-color: rgb(152, 154, 175);
+    position: absolute;
+    top: 0;
+    width: 220px;
+    height: 110px;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-clicked {
+}

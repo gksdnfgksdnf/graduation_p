@@ -1,0 +1,43 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/setting.uss?fileID=7433441132597879392&amp;guid=fb8b76bd59b653c458b7730c03c4a349&amp;type=3#setting" />
+    <engine:VisualElement name="container" style="flex-grow: 1;">
+        <engine:VisualElement name="setting-container" style="align-items: center; justify-content: center; flex-grow: 1;">
+            <engine:VisualElement name="window" style="transition-duration: 0.2s; top: auto; width: 70%; height: 70%;">
+                <engine:Label tabindex="-1" text="설정" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-label" class="setting-label" style="align-items: flex-end; flex-basis: 150px; -unity-font-style: normal; font-size: 80px; background-image: url(&quot;project://database/Assets/03.%20Assets/HW/kenney_ui-pack-space-expansion/PNG/Grey/Default/button_square_header_small_square_screws.png?fileID=-1454008276&amp;guid=679d1e41aa3507f47b4855bee818ef61&amp;type=3#button_square_header_small_square_screws_0&quot;); padding-top: 0; padding-bottom: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-right: 0; padding-left: 0; color: rgb(255, 255, 255);">
+                    <engine:VisualElement name="exit" style="flex-grow: 1; margin-right: 30px; align-items: center; height: 100px; width: 100px; justify-content: center;">
+                        <engine:Label tabindex="-1" text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="x" class="exit-label" />
+                    </engine:VisualElement>
+                </engine:Label>
+                <engine:VisualElement name="content" picking-mode="Ignore" style="flex-grow: 1; align-items: center; justify-content: center; background-image: url(&quot;project://database/Assets/03.%20Assets/HW/kenney_ui-pack-space-expansion/PNG/Grey/Default/button_square_header_small_square_screws.png?fileID=-1903271683&amp;guid=679d1e41aa3507f47b4855bee818ef61&amp;type=3#button_square_header_small_square_screws_1&quot;);">
+                    <engine:VisualElement name="sounds" style="flex-grow: 1; width: 100%; height: 65%; align-items: center; justify-content: center; flex-shrink: 1;">
+                        <engine:VisualElement name="master-sound" class="slider-visual" style="flex-direction: row; align-items: center; justify-content: center;">
+                            <engine:VisualElement name="label-visual" picking-mode="Ignore" class="setting-label-visual">
+                                <engine:Label name="slider-label" text="전체 음량" class="slider-label" />
+                            </engine:VisualElement>
+                            <engine:Slider label="asdf" name="master" high-value="1" page-size="0" inverted="false" direction="Horizontal" show-input-field="false" style="flex-shrink: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 700px;" />
+                        </engine:VisualElement>
+                        <engine:VisualElement name="bgm-sound" class="slider-visual" style="flex-direction: row; align-items: center; justify-content: center;">
+                            <engine:VisualElement name="label-visual" picking-mode="Ignore" class="setting-label-visual">
+                                <engine:Label name="slider-label" text="배경음" class="slider-label" style="display: flex; position: relative; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: normal; -unity-text-align: middle-center;" />
+                            </engine:VisualElement>
+                            <engine:Slider label="aa" name="bgm" high-value="1" page-size="0" inverted="false" direction="Horizontal" show-input-field="false" style="flex-shrink: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 700px;" />
+                        </engine:VisualElement>
+                        <engine:VisualElement name="sfx-sound" class="slider-visual" style="flex-direction: row; align-items: center; justify-content: center;">
+                            <engine:VisualElement name="label-visual" picking-mode="Ignore" class="setting-label-visual" style="-unity-font-style: normal;">
+                                <engine:Label name="slider-label" text="효과음" class="slider-label" style="display: flex; position: relative; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; -unity-font-style: normal; -unity-text-align: middle-center;" />
+                            </engine:VisualElement>
+                            <engine:Slider label="bb" name="sfx" high-value="1" page-size="0" inverted="false" direction="Horizontal" show-input-field="false" style="flex-shrink: 1; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; width: 700px;" />
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                    <engine:VisualElement name="buttons" style="width: 100%; height: 35%; align-items: center; justify-content: center;">
+                        <engine:VisualElement name="game-exit-button" class="button" style="flex-basis: 110px; width: 220px;">
+                            <engine:VisualElement name="button" picking-mode="Ignore">
+                                <engine:Label tabindex="-1" text="게임 종료" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit" picking-mode="Ignore" class="box-label" />
+                            </engine:VisualElement>
+                        </engine:VisualElement>
+                    </engine:VisualElement>
+                </engine:VisualElement>
+            </engine:VisualElement>
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,0 +1,139 @@
+.slider-label {
+    transition-property: font-size, color;
+    transition-duration: 0.2s, 0.2s;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    text-shadow: 3px 3px 0 rgb(102, 104, 128);
+    top: 0;
+    -unity-font-style: normal;
+    -unity-text-align: middle-center;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    -unity-font-definition: initial;
+    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+}
+
+.slider {
+    height: 80px;
+    background-image: url("project://database/Assets/10.UIToolkit/HW/UIAcceptSlider/UIAcceptSlider/Sprites/circleSliced.png?fileID=21300000&guid=28fc02f4d8f9c194e90966deeb232252&type=3#circleSliced");
+    -unity-background-image-tint-color: rgb(152, 154, 175);
+    border-top-left-radius: 43px;
+    border-top-right-radius: 43px;
+    border-bottom-right-radius: 43px;
+    border-bottom-left-radius: 43px;
+    -unity-slice-scale: 1.5px;
+}
+
+.slider Label {
+    display: none;
+}
+
+.slider #unity-drag-container {
+    background-color: rgb(102, 104, 128);
+    margin-right: 30px;
+    margin-left: 30px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    color: rgb(152, 154, 175);
+}
+
+.slider #unity-tracker {
+    background-color: rgb(102, 104, 128);
+    flex-grow: 1;
+    position: relative;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    overflow: hidden;
+    top: 0;
+}
+
+.slider #unity-dragger {
+    width: 50px;
+    height: 100%;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    top: 0;
+    background-color: rgb(102, 104, 128);
+}
+
+.bar {
+    width: 2000px;
+    height: 100%;
+    background-color: rgb(255, 255, 255);
+    align-self: flex-end;
+    margin-right: 20px;
+    transition-property: background-color;
+    transition-duration: 0.2s;
+    transition-timing-function: ease;
+    transition-delay: 0s;
+}
+
+.setting-label-visual {
+    width: 220px;
+    height: 80px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    left: 0;
+    top: 0;
+}
+
+.new-dragger {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url("project://database/Assets/10.UIToolkit/HW/UIAcceptSlider/UIAcceptSlider/Sprites/circleSliced.png?fileID=21300000&guid=28fc02f4d8f9c194e90966deeb232252&type=3#circleSliced");
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border-bottom-left-radius: 50px;
+    -unity-background-image-tint-color: rgb(218, 220, 231);
+}
+
+.slider-label-clicked {
+}
+
+.slider-label.slider-label-clicked {
+}
+
+.slider-label:hover {
+    font-size: 45px;
+}
+
+.slider-visual {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 30px;
+    margin-left: 0;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+}
