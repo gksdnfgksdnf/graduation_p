@@ -1,0 +1,5 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/setting.uss?fileID=7433441132597879392&amp;guid=fb8b76bd59b653c458b7730c03c4a349&amp;type=3#setting" />
+    <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/MainScreen.uss?fileID=7433441132597879392&amp;guid=b5a65e67472b05848b0f6836cc3c84c9&amp;type=3#MainScreen" />
+    <engine:VisualElement name="container" style="flex-grow: 1;" />
+</engine:UXML>
