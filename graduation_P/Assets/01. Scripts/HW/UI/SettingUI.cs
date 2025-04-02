@@ -1,11 +1,15 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class SettingUI : BaseUI
 {
-    private VisualElement root;
+    private VisualElement _root;
+
+    private VisualElement _settingRoot;
 
     private List<(Button, Action)> _btnActions = new List<(Button, Action)>();
     private List<(Slider, Action<ChangeEvent<float>>)> _sliderActions = new List<(Slider, Action<ChangeEvent<float>>)>();
@@ -26,17 +30,13 @@ public class SettingUI : BaseUI
 
     private void OnEnable()
     {
-        root = _uiDocument.rootVisualElement;
 
-        InitElements();
-
-        RegisterBtnEvents();
-
-        RegisterSliderEvents();
     }
 
     public void InitUI()
     {
+        _settingRoot = _root.Q("setting-container");
+
         InitElements();
 
         RegisterBtnEvents();
@@ -54,6 +54,7 @@ public class SettingUI : BaseUI
         _master = root.Q<Slider>("master-slider");
         _bgm    = root.Q<Slider>(   "bgm-slider");
         _sfx    = root.Q<Slider>(   "sfx-slider");
+
     }
 
     #region AddActions
@@ -72,7 +73,7 @@ public class SettingUI : BaseUI
 
         foreach ((Button, Action) item in _btnActions)
         {
-            item.Item1.clicked += item.Item2;
+            //item.Item1.clicked += item.Item2;
         }
     }
     private void RegisterSliderEvents()
@@ -118,8 +119,42 @@ public class SettingUI : BaseUI
     {
         Debug.Log("초기화 버튼이 눌렸습니다.");
     }
-
-
-
     #endregion
+
+    public override void Close()
+    {
+
+    }
+
+    public override void Open()
+    {
+        _root = visualTreeAsset.CloneTree();
+
+        root.Q("container").Add(_root);
+
+        _root.style.flexGrow = 1;
+
+        _root.style.position = Position.Absolute;
+
+        _root.style.width = new Length(100, LengthUnit.Percent);
+        _root.style.height = new Length(100, LengthUnit.Percent);
+
+        InitUI();
+
+        StartCoroutine(InitializeClass());
+
+
+        //_root.style.display = DisplayStyle.None;
+        //_settingRoot = _settingAsset.CloneTree();
+        //_root.Q("container").Add(_settingRoot);
+        //_settingRoot.style.flexGrow = 1;
+        //_settingUI.InitUI();
+    }
+
+    private IEnumerator InitializeClass()
+    {
+        yield return new WaitForSeconds(.1f);
+        _settingRoot.Q("window").AddToClassList("appear");
+    }
+
 }

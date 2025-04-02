@@ -1,7 +1,8 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/setting.uss?fileID=7433441132597879392&amp;guid=fb8b76bd59b653c458b7730c03c4a349&amp;type=3#setting" />
-    <engine:VisualElement name="setting-container" style="align-items: center; justify-content: center; flex-grow: 1;">
-        <engine:VisualElement name="window" style="transition-duration: 0.2s; top: auto; width: 70%; height: 70%;">
+    <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/MainScreen.uss?fileID=7433441132597879392&amp;guid=b5a65e67472b05848b0f6836cc3c84c9&amp;type=3#MainScreen" />
+    <engine:VisualElement name="setting-container" style="visibility: visible;">
+        <engine:VisualElement name="window">
             <engine:Label tabindex="-1" text="설정" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting-label" class="setting-label" style="align-items: flex-end; flex-basis: 150px; -unity-font-style: normal; font-size: 80px; background-image: url(&quot;project://database/Assets/03.%20Assets/HW/kenney_ui-pack-space-expansion/PNG/Grey/Default/button_square_header_small_square_screws.png?fileID=-1454008276&amp;guid=679d1e41aa3507f47b4855bee818ef61&amp;type=3#button_square_header_small_square_screws_0&quot;); padding-top: 0; padding-bottom: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-right: 0; padding-left: 0; color: rgb(255, 255, 255);">
                 <engine:VisualElement name="exit" style="flex-grow: 1; margin-right: 30px; align-items: center; height: 100px; width: 100px; justify-content: center;">
                     <engine:Label tabindex="-1" text="X" parse-escape-sequences="true" display-tooltip-when-elided="true" name="x" class="exit-label" />

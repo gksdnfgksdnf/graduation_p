@@ -1,18 +1,17 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/MainScreen.uss?fileID=7433441132597879392&amp;guid=b5a65e67472b05848b0f6836cc3c84c9&amp;type=3#MainScreen" />
-    <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/setting.uss?fileID=7433441132597879392&amp;guid=fb8b76bd59b653c458b7730c03c4a349&amp;type=3#setting" />
     <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/test.uss?fileID=7433441132597879392&amp;guid=94366404b26bfb140a890b9a0704e046&amp;type=3#test" />
-    <engine:VisualElement name="main-container" style="flex-grow: 1; align-items: flex-start; position: absolute; width: 100%; height: 100%;">
+    <engine:VisualElement name="main-container" style="flex-grow: 1; align-items: flex-start; position: absolute; width: 100%; height: 100%; visibility: visible;">
         <engine:VisualElement name="visual-panel" style="flex-grow: 0; height: 100%; width: 50%; flex-direction: column; align-items: flex-start; padding-left: 100px;">
-            <engine:Label tabindex="-1" text="Making cocktail is fun!!" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="title-label disappear" style="flex-shrink: 1; -unity-text-align: middle-left;" />
-            <engine:VisualElement name="start-visual" class="label-visual" style="align-items: center; justify-content: center;">
-                <engine:Label tabindex="-1" text="시작" parse-escape-sequences="true" display-tooltip-when-elided="true" name="start" class="label" style="transition-delay: 0s, 0s, 0.1s;" />
+            <engine:Label tabindex="-1" text="Cocktail" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="title-label" style="flex-shrink: 1; -unity-text-align: middle-left;" />
+            <engine:VisualElement name="start-visual" class="label-visual">
+                <engine:Label tabindex="-1" text="시작" parse-escape-sequences="true" display-tooltip-when-elided="true" name="start" class="label" />
             </engine:VisualElement>
             <engine:VisualElement name="setting-visual" class="label-visual" style="flex-grow: 0;">
-                <engine:Label tabindex="-1" text="설정" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting" class="label" style="transition-delay: 0s, 0s, 0.2s;" />
+                <engine:Label tabindex="-1" text="설정" parse-escape-sequences="true" display-tooltip-when-elided="true" name="setting" class="label" />
             </engine:VisualElement>
             <engine:VisualElement name="exit-visual" class="label-visual" style="flex-grow: 0;">
-                <engine:Label tabindex="-1" text="나가기" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit" class="label" style="transition-delay: 0s, 0s, 0.3s;" />
+                <engine:Label tabindex="-1" text="나가기" parse-escape-sequences="true" display-tooltip-when-elided="true" name="exit" class="label" />
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>

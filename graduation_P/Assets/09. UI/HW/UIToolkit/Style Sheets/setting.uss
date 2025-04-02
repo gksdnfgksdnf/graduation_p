@@ -16,7 +16,7 @@
     padding-right: 0;
     padding-bottom: 0;
     padding-left: 0;
-    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
     -unity-font-definition: initial;
 }
 
@@ -37,7 +37,7 @@
     transition-property: font-size, color, left, rotate;
     transition-timing-function: ease, ease, ease-in-out-back, ease-in-out-back;
     -unity-font-definition: initial;
-    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
 }
 
 .exit-label {
@@ -54,7 +54,7 @@
     margin-bottom: 0;
     margin-left: 0;
     -unity-font-definition: initial;
-    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
     -unity-font-style: normal;
 }
 
@@ -130,4 +130,30 @@
 }
 
 .button-clicked {
+}
+
+#setting-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transition-duration: 0.4s;
+    transition-property: translate;
+    left: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+#setting-container #window {
+    width: 70%;
+    height: 70%;
+    transition-duration: 0.4s;
+    transition-property: all;
+    left: 0;
+}
+
+#setting-container #window.appear {
+    width: 70%;
+    height: 70%;
+    transition-duration: 0.4s;
+    left: -100%;
 }
