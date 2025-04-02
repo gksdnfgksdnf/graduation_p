@@ -3,7 +3,7 @@
     <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/test.uss?fileID=7433441132597879392&amp;guid=94366404b26bfb140a890b9a0704e046&amp;type=3#test" />
     <engine:VisualElement name="main-container" style="flex-grow: 1; align-items: flex-start; position: absolute; width: 100%; height: 100%; visibility: visible;">
         <engine:VisualElement name="visual-panel" style="flex-grow: 0; height: 100%; width: 50%; flex-direction: column; align-items: flex-start; padding-left: 100px;">
-            <engine:Label tabindex="-1" text="Cocktail" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="title-label" style="flex-shrink: 1; -unity-text-align: middle-left;" />
+            <engine:Label tabindex="-1" text="Cocktail" parse-escape-sequences="true" display-tooltip-when-elided="true" name="title" class="title-label" style="flex-shrink: 1;" />
             <engine:VisualElement name="start-visual" class="label-visual">
                 <engine:Label tabindex="-1" text="시작" parse-escape-sequences="true" display-tooltip-when-elided="true" name="start" class="label" />
             </engine:VisualElement>

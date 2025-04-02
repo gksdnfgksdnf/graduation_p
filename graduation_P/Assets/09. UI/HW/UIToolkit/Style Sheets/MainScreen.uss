@@ -19,6 +19,7 @@
     -unity-font-definition: initial;
     -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
     transition-delay: 0s, 0s;
+    left: 0;
 }
 
 .title-label {
@@ -42,6 +43,7 @@
     -unity-font-definition: initial;
     -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
     transition-delay: 0s, 0s;
+    left: 0;
 }
 
 .clicked {
