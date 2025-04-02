@@ -53,24 +53,16 @@
 .disappear {
 }
 
-.label.appear.disappear {
+.label.disappear {
     left: -1920px;
 }
 
-.title-label.appear.disappear {
+.title-label.disappear {
     left: -1920px;
-}
-
-.label.appear {
-    left: 0;
 }
 
 .label.clicked {
     rotate: 720deg;
-}
-
-.title-label.appear {
-    left: 0;
 }
 
 .title-label.clicked {
