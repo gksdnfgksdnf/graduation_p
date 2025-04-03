@@ -7,12 +7,24 @@ public partial class CustomScrollView : ScrollView
     private bool isDragging = false;
     private Vector2 previousPointerPosition;
     private Vector2 velocity = Vector2.zero;
-    private float decelerationRate = 0.95f; // 감속률
 
     public CustomScrollView()
     {
         this.verticalScrollerVisibility = ScrollerVisibility.Hidden;
         this.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
+
+        if (mode == ScrollViewMode.Vertical)
+        {
+            contentContainer.style.height = new Length(1000, LengthUnit.Pixel);
+        }
+        else if (mode == ScrollViewMode.Horizontal)
+        {
+            contentContainer.style.flexGrow = 0;
+            contentContainer.style.width = new Length(100, LengthUnit.Percent);
+            contentContainer.style.height = StyleKeyword.Auto;
+            contentContainer.style.flexDirection = FlexDirection.Column;
+            contentContainer.style.flexWrap = Wrap.Wrap;
+        }
 
         RegisterCallback<PointerDownEvent>(OnPointerDown);
         RegisterCallback<PointerMoveEvent>(OnPointerMove);
@@ -25,8 +37,6 @@ public partial class CustomScrollView : ScrollView
         isDragging = true;
         velocity = Vector2.zero;
         previousPointerPosition = evt.position;
-
-        // ✅ PointerCapture 적용 → 스크롤 영역 밖에서도 이벤트 감지
         this.CapturePointer(evt.pointerId);
     }
 
@@ -34,31 +44,8 @@ public partial class CustomScrollView : ScrollView
     {
         if (isDragging)
         {
-            Vector2 pointerPosition = new Vector2(evt.position.x, evt.position.y); // ✅ 변환 추가
+            Vector2 pointerPosition = new Vector2(evt.position.x, evt.position.y);
             Vector2 delta = pointerPosition - previousPointerPosition;
-
-            Vector2 newScroll = scrollOffset - delta;
-
-            float minScrollX = 0;
-            float minScrollY = 0;
-            float maxScrollX = Mathf.Max(0, contentContainer.resolvedStyle.width - resolvedStyle.width);
-            float maxScrollY = Mathf.Max(0, contentContainer.resolvedStyle.height - resolvedStyle.height);
-
-            Vector2 outOfBoundsDistance = Vector2.zero;
-
-            if (newScroll.x < minScrollX) outOfBoundsDistance.x = minScrollX - newScroll.x;
-            else if (newScroll.x > maxScrollX) outOfBoundsDistance.x = newScroll.x - maxScrollX;
-
-            if (newScroll.y < minScrollY) outOfBoundsDistance.y = minScrollY - newScroll.y;
-            else if (newScroll.y > maxScrollY) outOfBoundsDistance.y = newScroll.y - maxScrollY;
-
-            // 감속 비율 (범위를 넘을수록 더 느려짐)
-            Vector2 slowdownFactor = new Vector2(
-                1f / (1f + outOfBoundsDistance.x * 0.15f),
-                1f / (1f + outOfBoundsDistance.y * 0.15f)
-            );
-
-            delta *= slowdownFactor;
 
             // 최종 스크롤 업데이트 (수직, 수평 방향 적용)
             if (mode == ScrollViewMode.Vertical)
@@ -71,11 +58,6 @@ public partial class CustomScrollView : ScrollView
                 scrollOffset += new Vector2(-delta.x, 0);
                 velocity = new Vector2(-delta.x, 0);
             }
-            else // ScrollViewMode.Both
-            {
-                scrollOffset += -delta;
-                velocity = -delta;
-            }
 
             previousPointerPosition = evt.position;
         }
@@ -85,8 +67,6 @@ public partial class CustomScrollView : ScrollView
     {
         isDragging = false;
         ScheduleTick();
-
-        // ✅ PointerCapture 해제
         this.ReleasePointer(evt.pointerId);
     }
 
@@ -112,10 +92,14 @@ public partial class CustomScrollView : ScrollView
         {
             if (velocity.magnitude > 0.1f)
             {
-                velocity *= decelerationRate;
+                velocity *= scrollDecelerationRate;
                 scrollOffset += -velocity;
                 ApplyBounds();
                 ScheduleTick();
+            }
+            else
+            {
+                velocity = Vector2.zero;
             }
         });
     }
@@ -129,22 +113,28 @@ public partial class CustomScrollView : ScrollView
 
         if (scrollOffset.x < minScrollX)
         {
+            Debug.Log("왓");
+
             velocity.x = 0;
             ScheduleBounce(new Vector2(minScrollX, scrollOffset.y));
         }
         else if (scrollOffset.x > maxScrollX)
         {
+            Debug.Log("왓");
+
             velocity.x = 0;
             ScheduleBounce(new Vector2(maxScrollX, scrollOffset.y));
         }
 
         if (scrollOffset.y < minScrollY)
         {
+            Debug.Log("왓");
             velocity.y = 0;
             ScheduleBounce(new Vector2(scrollOffset.x, minScrollY));
         }
         else if (scrollOffset.y > maxScrollY)
         {
+            Debug.Log("왓");
             velocity.y = 0;
             ScheduleBounce(new Vector2(scrollOffset.x, maxScrollY));
         }
@@ -152,6 +142,7 @@ public partial class CustomScrollView : ScrollView
 
     private void ScheduleBounce(Vector2 targetPosition)
     {
+
         schedule.Execute(() =>
         {
             if ((scrollOffset - targetPosition).magnitude > 0.1f)
@@ -166,3 +157,4 @@ public partial class CustomScrollView : ScrollView
         });
     }
 }
+
