@@ -16,12 +16,12 @@
     padding-bottom: 0;
     padding-left: 0;
     -unity-font-definition: initial;
-    -unity-font: url("project://database/Assets/99.Asset/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
+    -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
 }
 
 .slider {
     height: 80px;
-    background-image: url("project://database/Assets/10.UIToolkit/HW/UIAcceptSlider/UIAcceptSlider/Sprites/circleSliced.png?fileID=21300000&guid=28fc02f4d8f9c194e90966deeb232252&type=3#circleSliced");
+    background-image: url('project://database/Assets/10.UIToolkit/HW/UIAcceptSlider/UIAcceptSlider/Sprites/circleSliced.png?fileID=21300000&guid=28fc02f4d8f9c194e90966deeb232252&type=3#circleSliced');
     -unity-background-image-tint-color: rgb(152, 154, 175);
     border-top-left-radius: 43px;
     border-top-right-radius: 43px;
@@ -109,7 +109,7 @@
     position: absolute;
     width: 50px;
     height: 50px;
-    background-image: url("project://database/Assets/10.UIToolkit/HW/UIAcceptSlider/UIAcceptSlider/Sprites/circleSliced.png?fileID=21300000&guid=28fc02f4d8f9c194e90966deeb232252&type=3#circleSliced");
+    background-image: url('project://database/Assets/10.UIToolkit/HW/UIAcceptSlider/UIAcceptSlider/Sprites/circleSliced.png?fileID=21300000&guid=28fc02f4d8f9c194e90966deeb232252&type=3#circleSliced');
     border-top-left-radius: 50px;
     border-top-right-radius: 50px;
     border-bottom-right-radius: 50px;

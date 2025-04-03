@@ -47,13 +47,13 @@ public class SettingUI : BaseUI
     private void InitElements()
     {
         // buttons
-        _exitBtn = root.Q<Button>("exit-btn");
-        _initBtn = root.Q<Button>("init-btn");
+        _exitBtn = _root.Q<Button>("exit-btn");
+        _initBtn = _root.Q<Button>("init-btn");
 
         // sliders
-        _master = root.Q<Slider>("master-slider");
-        _bgm    = root.Q<Slider>(   "bgm-slider");
-        _sfx    = root.Q<Slider>(   "sfx-slider");
+        _master = _root.Q<Slider>("master-slider");
+        _bgm    = _root.Q<Slider>(   "bgm-slider");
+        _sfx    = _root.Q<Slider>(   "sfx-slider");
 
     }
 
@@ -69,11 +69,11 @@ public class SettingUI : BaseUI
     private void RegisterBtnEvents()
     {
         AddButtonAction(_exitBtn, OnExitBtnClickEvent);
-        AddButtonAction(_initBtn, OnInitBtnClickEvent);
+        //AddButtonAction(_initBtn, OnInitBtnClickEvent);
 
         foreach ((Button, Action) item in _btnActions)
         {
-            //item.Item1.clicked += item.Item2;
+            item.Item1.clicked += item.Item2;
         }
     }
     private void RegisterSliderEvents()
@@ -112,7 +112,8 @@ public class SettingUI : BaseUI
 
     private void OnExitBtnClickEvent()
     {
-        Debug.Log("닫기 버튼이 눌렸습니다.");
+        Close();
+        UIManager.Instance.ShowUI<MainUI>();
     }
 
     private void OnInitBtnClickEvent()
@@ -123,7 +124,7 @@ public class SettingUI : BaseUI
 
     public override void Close()
     {
-
+        _settingRoot.Q("window").RemoveFromClassList("appear");
     }
 
     public override void Open()
@@ -141,7 +142,7 @@ public class SettingUI : BaseUI
 
         InitUI();
 
-        StartCoroutine(InitializeClass());
+        StartCoroutine(AddClass());
 
 
         //_root.style.display = DisplayStyle.None;
@@ -151,7 +152,7 @@ public class SettingUI : BaseUI
         //_settingUI.InitUI();
     }
 
-    private IEnumerator InitializeClass()
+    private IEnumerator AddClass()
     {
         yield return new WaitForSeconds(.1f);
         _settingRoot.Q("window").AddToClassList("appear");

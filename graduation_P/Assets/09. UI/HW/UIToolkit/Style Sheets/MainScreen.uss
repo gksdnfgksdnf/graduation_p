@@ -80,7 +80,7 @@
     width: 300px;
     height: 120px;
     margin-bottom: 50px;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
 }
 

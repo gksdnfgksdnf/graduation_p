@@ -48,7 +48,6 @@ public class MainUI : BaseUI
     {
         if (_root != null)
         {
-
             root.Q("container").Add(_root);
 
             // VisualElements를 가져오기
@@ -61,6 +60,9 @@ public class MainUI : BaseUI
             _start?.RegisterCallback<ClickEvent>(evt =>
             {
                 //Fade
+                Close();
+
+
             });
 
             _setting?.RegisterCallback<ClickEvent>(evt =>
@@ -79,21 +81,21 @@ public class MainUI : BaseUI
                 Debug.Log("Exit 버튼 클릭됨!");
             });
 
-            StartCoroutine(InitializeClass());
         }
         else
             Debug.LogError("Root VisualElement가 설정되지 않았습니다.");
 
+        StartCoroutine(AddClass());
 
     }
 
-    private IEnumerator InitializeClass()
+    private IEnumerator AddClass()
     {
         yield return new WaitForSeconds(.1f);
 
-        _title.AddToClassList("appear");
-        _start.AddToClassList("appear");
-        _setting.AddToClassList("appear");
-        _exit.AddToClassList("appear");
+        _title.RemoveFromClassList("disappear");
+        _start.RemoveFromClassList("disappear");
+        _setting.RemoveFromClassList("disappear");
+        _exit.RemoveFromClassList("disappear");
     }
 }
