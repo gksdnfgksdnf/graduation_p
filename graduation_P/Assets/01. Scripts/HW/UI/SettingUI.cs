@@ -11,6 +11,8 @@ public class SettingUI : BaseUI
 
     private VisualElement _settingRoot;
 
+    private VisualElement _fade;
+
     private List<(Button, Action)> _btnActions = new List<(Button, Action)>();
     private List<(Slider, Action<ChangeEvent<float>>)> _sliderActions = new List<(Slider, Action<ChangeEvent<float>>)>();
 
@@ -35,7 +37,7 @@ public class SettingUI : BaseUI
 
     public void InitUI()
     {
-        _settingRoot = _root.Q("setting-container");
+
 
         InitElements();
 
@@ -46,14 +48,18 @@ public class SettingUI : BaseUI
 
     private void InitElements()
     {
+        _settingRoot = _root.Q("setting-container");
+
+        _fade = _settingRoot.Q("fade-pannel");
+
         // buttons
-        _exitBtn = _root.Q<Button>("exit-btn");
-        _initBtn = _root.Q<Button>("init-btn");
+        _exitBtn = _settingRoot.Q<Button>("exit-btn");
+        _initBtn = _settingRoot.Q<Button>("init-btn");
 
         // sliders
-        _master = _root.Q<Slider>("master-slider");
-        _bgm    = _root.Q<Slider>(   "bgm-slider");
-        _sfx    = _root.Q<Slider>(   "sfx-slider");
+        _master = _settingRoot.Q<Slider>("master-slider");
+        _bgm    = _settingRoot.Q<Slider>(   "bgm-slider");
+        _sfx    = _settingRoot.Q<Slider>(   "sfx-slider");
 
     }
 
@@ -125,6 +131,7 @@ public class SettingUI : BaseUI
     public override void Close()
     {
         _settingRoot.Q("window").RemoveFromClassList("appear");
+        _fade.RemoveFromClassList("fade");
     }
 
     public override void Open()
@@ -143,19 +150,13 @@ public class SettingUI : BaseUI
         InitUI();
 
         StartCoroutine(AddClass());
-
-
-        //_root.style.display = DisplayStyle.None;
-        //_settingRoot = _settingAsset.CloneTree();
-        //_root.Q("container").Add(_settingRoot);
-        //_settingRoot.style.flexGrow = 1;
-        //_settingUI.InitUI();
     }
 
     private IEnumerator AddClass()
     {
         yield return new WaitForSeconds(.1f);
         _settingRoot.Q("window").AddToClassList("appear");
+        _fade.AddToClassList("fade");
     }
 
 }

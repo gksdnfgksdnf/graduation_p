@@ -67,13 +67,8 @@ public class MainUI : BaseUI
 
             _setting?.RegisterCallback<ClickEvent>(evt =>
             {
-                //_root.style.display = DisplayStyle.None;
-                //_settingRoot = _settingAsset.CloneTree();
-                //_root.Q("container").Add(_settingRoot);
-                //_settingRoot.style.flexGrow = 1;
-                //_settingUI.InitUI();
-                UIManager.Instance.ShowUI<SettingUI>();
                 Close();
+                UIManager.Instance.ShowUI<SettingUI>();
             });
 
             _exit?.RegisterCallback<ClickEvent>(evt =>

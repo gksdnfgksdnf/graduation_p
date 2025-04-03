@@ -5,9 +5,9 @@
     -unity-text-outline-width: 0;
     text-shadow: 10px 10px 1px rgba(74, 74, 74, 0.43);
     -unity-font-style: normal;
-    transition-duration: 0.2s, 0.4s;
+    transition-duration: 0.1s, 0.65s;
     transition-property: font-size, left;
-    transition-timing-function: ease, ease;
+    transition-timing-function: ease, ease-in-out-back;
     margin-top: 0;
     margin-right: 0;
     margin-bottom: 0;
@@ -37,12 +37,12 @@
     margin-right: 0;
     margin-left: 0;
     margin-bottom: 100px;
-    transition-duration: 0.2s, 0.4s;
-    transition-property: font-size, left;
-    transition-timing-function: ease, ease;
+    transition-duration: 0.65s;
+    transition-property: left;
+    transition-timing-function: ease-in-out-back;
     -unity-font-definition: initial;
     -unity-font: url("project://database/Assets/11.%20Fonts/HW/Font/SMUSnowflake-Bold.otf?fileID=12800000&guid=7a906f4ec373ce447b65c103e4692cd0&type=3#SMUSnowflake-Bold");
-    transition-delay: 0s, 0s;
+    transition-delay: 0s;
     left: 0;
 }
 
@@ -82,20 +82,4 @@
     margin-bottom: 50px;
     align-items: center;
     justify-content: center;
-}
-
-#fade {
-    transition-duration: 2s;
-    transition-property: background-color;
-}
-
-#fade.fade {
-    background-color: rgb(0, 0, 0);
-}
-
-.fade {
-}
-
-#setting-container.appear {
-    translate: -100% 0;
 }
