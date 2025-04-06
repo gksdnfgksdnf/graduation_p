@@ -24,12 +24,12 @@
                 </engine:VisualElement>
             </engine:VisualElement>
             <engine:VisualElement name="right-content" style="flex-grow: 1;">
-                <engine:VisualElement name="exit" style="flex-grow: 0; position: absolute; top: 0; right: 0; width: 100px; height: 100px;">
+                <engine:VisualElement name="exit" style="flex-grow: 0; position: absolute; top: 0; right: 0; width: 100px; height: 100px; justify-content: center;">
                     <engine:Button text="X" name="exit-btn" class="button" style="-unity-text-outline-width: 2px; -unity-text-outline-color: rgb(255, 255, 255); color: rgb(255, 0, 0); -unity-font-style: bold;" />
                 </engine:VisualElement>
-                <engine:VisualElement name="scroll-visual" style="width: 90%; height: 70%; overflow: hidden; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0);">
-                    <CustomScrollView mode="Horizontal" name="customScrollView" touch-scroll-type="Elastic" scroll-deceleration-rate="0.5" style="height: 400px; width: 100%;">
-                        <engine:VisualElement style="flex-grow: 0; width: 1200px; height: 100%; flex-direction: row; flex-wrap: wrap;">
+                <engine:VisualElement name="scroll-visual" style="width: 90%; height: 70%; overflow: hidden; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center;">
+                    <CustomScrollView mode="Horizontal" name="customScrollView" touch-scroll-type="Elastic" scroll-deceleration-rate="0.5" style="height: 510px; width: 100%; overflow: visible;">
+                        <engine:VisualElement name="VisualElement" style="flex-grow: 0; width: 1450px; height: 510px; flex-direction: column; flex-wrap: wrap; overflow: visible; justify-content: center;">
                             <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
                             <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
                             <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
