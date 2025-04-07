@@ -27,10 +27,138 @@
                 <engine:VisualElement name="exit" style="flex-grow: 0; position: absolute; top: 0; right: 0; width: 100px; height: 100px; justify-content: center;">
                     <engine:Button text="X" name="exit-btn" class="button" style="-unity-text-outline-width: 2px; -unity-text-outline-color: rgb(255, 255, 255); color: rgb(255, 0, 0); -unity-font-style: bold;" />
                 </engine:VisualElement>
-                <engine:VisualElement name="scroll-visual" style="width: 90%; height: 70%; overflow: hidden; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center;">
-                    <CustomScrollView mode="Horizontal" name="customScrollView" touch-scroll-type="Elastic" scroll-deceleration-rate="0.5" style="height: 510px; width: 100%; overflow: visible;">
-                        <engine:VisualElement name="scroll-content" style="flex-direction: column; flex-wrap: wrap; overflow: visible; justify-content: center; width: 1450px;">
-                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item">
+                <engine:VisualElement name="scroll-visual" style="width: 90%; height: 70%; overflow: hidden; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;">
+                    <CustomScrollView mode="Horizontal" name="customScrollView" touch-scroll-type="Elastic" scroll-deceleration-rate="0.5" style="overflow: visible;">
+                        <engine:VisualElement name="scroll-content" style="flex-direction: column; flex-wrap: wrap; overflow: visible; justify-content: center;">
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item" style="margin-top: 40px; margin-right: 40px; margin-bottom: 40px; margin-left: 40px;">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/GinFizz.asset?fileID=11400000&amp;guid=3e37cb9e864e97147b56d9578a6712e3&amp;type=2#GinFizz" class="item">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item" style="margin-top: 40px; margin-right: 40px; margin-bottom: 40px; margin-left: 40px;">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/GinFizz.asset?fileID=11400000&amp;guid=3e37cb9e864e97147b56d9578a6712e3&amp;type=2#GinFizz" class="item">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item" style="margin-top: 40px; margin-right: 40px; margin-bottom: 40px; margin-left: 40px;">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/GinFizz.asset?fileID=11400000&amp;guid=3e37cb9e864e97147b56d9578a6712e3&amp;type=2#GinFizz" class="item">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item" style="margin-top: 40px; margin-right: 40px; margin-bottom: 40px; margin-left: 40px;">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/GinFizz.asset?fileID=11400000&amp;guid=3e37cb9e864e97147b56d9578a6712e3&amp;type=2#GinFizz" class="item">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item" style="margin-top: 40px; margin-right: 40px; margin-bottom: 40px; margin-left: 40px;">
                                 <engine:VisualElement name="name">
                                     <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
                                         <Bindings>

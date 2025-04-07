@@ -48,6 +48,7 @@ Label {
     align-items: center;
     justify-content: center;
     background-color: rgb(0, 0, 0);
+    height: 20%;
 }
 
 #item #item-content {
@@ -59,18 +60,17 @@ Label {
     border-bottom-color: rgb(0, 0, 0);
     border-top-width: 2px;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .item {
-    flex-basis: 200px;
-    width: 200px;
-    height: 200px;
+    width: 300px;
+    height: 300px;
     flex-shrink: 0;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-    margin-left: 20px;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
     border-top-width: 2px;
     border-right-width: 2px;
     border-bottom-width: 2px;
