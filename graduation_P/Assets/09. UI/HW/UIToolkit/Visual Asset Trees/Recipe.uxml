@@ -1,7 +1,7 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/Recipe.uss?fileID=7433441132597879392&amp;guid=459a82b4861c1b74c8ea7a89cc40683f&amp;type=3#Recipe" />
     <engine:VisualElement name="recpie-container" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
-        <engine:VisualElement name="recpie-window" style="flex-direction: row; width: 70%; height: 70%;">
+        <engine:VisualElement name="recpie-window" style="flex-direction: row; width: 100%; height: 100%;">
             <engine:VisualElement name="left-content" style="flex-grow: 0; width: 20%;">
                 <engine:VisualElement name="scroll-visual" style="flex-grow: 0; width: 51%; height: 70%;">
                     <CustomScrollView touch-scroll-type="Elastic" scroll-deceleration-rate="0.1" elasticity="0" name="customScrollView" style="position: relative; flex-direction: column;">
@@ -29,19 +29,39 @@
                 </engine:VisualElement>
                 <engine:VisualElement name="scroll-visual" style="width: 90%; height: 70%; overflow: hidden; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); justify-content: center;">
                     <CustomScrollView mode="Horizontal" name="customScrollView" touch-scroll-type="Elastic" scroll-deceleration-rate="0.5" style="height: 510px; width: 100%; overflow: visible;">
-                        <engine:VisualElement name="VisualElement" style="flex-grow: 0; width: 1450px; height: 510px; flex-direction: column; flex-wrap: wrap; overflow: visible; justify-content: center;">
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
-                            <engine:VisualElement name="item" class="item" style="border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-left-width: 2px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); flex-grow: 0; flex-shrink: 0; width: 200px; height: 200px; flex-basis: 200px;" />
+                        <engine:VisualElement name="scroll-content" style="flex-direction: column; flex-wrap: wrap; overflow: visible; justify-content: center; width: 1450px;">
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
+                            <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/GinFizz.asset?fileID=11400000&amp;guid=3e37cb9e864e97147b56d9578a6712e3&amp;type=2#GinFizz" class="item">
+                                <engine:VisualElement name="name">
+                                    <engine:Label text="Name" name="name-label" style="padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 35px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="text" data-source-path="itemName" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:Label>
+                                </engine:VisualElement>
+                                <engine:VisualElement name="item-content" style="flex-shrink: 0; justify-content: flex-end;">
+                                    <engine:VisualElement name="sprite" style="background-image: url(&quot;project://database/Assets/03.%20Assets/HW/22.png?fileID=-7371509505491802261&amp;guid=b50a2dfe3d82a884bb9f05b49dfcbb41&amp;type=3#22_0&quot;); background-position-x: center 0; height: 85px; width: 90px;">
+                                        <Bindings>
+                                            <engine:DataBinding property="style.backgroundImage" data-source-path="icon" binding-mode="ToTarget" />
+                                        </Bindings>
+                                    </engine:VisualElement>
+                                </engine:VisualElement>
+                            </RecpieItem>
                         </engine:VisualElement>
                     </CustomScrollView>
                 </engine:VisualElement>
