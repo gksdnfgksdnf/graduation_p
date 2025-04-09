@@ -12,6 +12,11 @@ public partial class CustomScrollView : ScrollView
     private Vector2 wheelVelocity = Vector2.zero;
     private float lastMoveTime;
 
+    private float minScrollY;
+    private float maxScrollY;
+    private float minScrollX;
+    private float maxScrollX;
+
     private IVisualElementScheduledItem bounceItem;
     private const float decelerationRate = 0.95f;
 
@@ -23,6 +28,8 @@ public partial class CustomScrollView : ScrollView
         if (mode == ScrollViewMode.Vertical)
         {
             //contentContainer.style.height = new Length(1000, LengthUnit.Pixel);
+            contentContainer.style.width = new Length(300, LengthUnit.Pixel);
+
         }
         else if (mode == ScrollViewMode.Horizontal)
         {
@@ -32,6 +39,11 @@ public partial class CustomScrollView : ScrollView
             contentContainer.style.flexWrap = Wrap.Wrap;
         }
 
+        minScrollX = 0;
+        minScrollY = 0;
+        maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
+        maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
+
         RegisterCallback<PointerDownEvent>(OnPointerDown);
         RegisterCallback<PointerMoveEvent>(OnPointerMove);
         RegisterCallback<PointerUpEvent>(OnPointerUp);
@@ -40,7 +52,7 @@ public partial class CustomScrollView : ScrollView
 
     private void OnPointerDown(PointerDownEvent evt)
     {
-        isDragging = true;
+        isDragging = true; 
         velocity = Vector2.zero;
         previousPointerPosition = evt.position;
         lastMoveTime = Time.realtimeSinceStartup;
@@ -50,13 +62,16 @@ public partial class CustomScrollView : ScrollView
             bounceItem.Pause();
             isBouncing = false;
         }
-
-        this.CapturePointer(evt.pointerId);
     }
 
     private void OnPointerMove(PointerMoveEvent evt)
     {
         if (!isDragging) return;
+
+        if (!this.HasPointerCapture(evt.pointerId))
+        {
+            this.CapturePointer(evt.pointerId);
+        }
 
         Vector2 pointerPosition = evt.position;
         Vector2 delta = pointerPosition - previousPointerPosition;
@@ -84,11 +99,6 @@ public partial class CustomScrollView : ScrollView
 
     private void ApplyDelta(Vector2 delta)
     {
-        float minScrollY = 0;
-        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
-        float minScrollX = 0;
-        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
-
         if (mode == ScrollViewMode.Vertical)
         {
             float nextOffsetY = scrollOffset.y - delta.y;
@@ -101,7 +111,6 @@ public partial class CustomScrollView : ScrollView
 
             scrollOffset += new Vector2(0, -delta.y);
             velocity = new Vector2(0, -delta.y);
-
         }
         else if (mode == ScrollViewMode.Horizontal)
         {
@@ -123,24 +132,23 @@ public partial class CustomScrollView : ScrollView
     {
         isDragging = false;
 
-        // 손 뗐을 때 속도 적용 - 방향에 따라 분리
-        if (mode == ScrollViewMode.Vertical)
-            velocity = new Vector2(0, -lastDelta.y * 0.35f);
-        else if (mode == ScrollViewMode.Horizontal)
-            velocity = new Vector2(-lastDelta.x * 0.35f, 0);
+        if (velocity.magnitude > 0)
+        {
+            // 손 뗐을 때 속도 적용 - 방향에 따라 분리
+            if (mode == ScrollViewMode.Vertical)
+                velocity = new Vector2(0, -lastDelta.y * 0.35f);
+            else if (mode == ScrollViewMode.Horizontal)
+                velocity = new Vector2(-lastDelta.x * 0.35f, 0);
 
-        ScheduleTick();
+            ScheduleTick();
+        }
+
         this.ReleasePointer(evt.pointerId);
     }
 
 
     private void OnMouseWheel(WheelEvent evt)
     {
-        float minScrollX = 0;
-        float minScrollY = 0;
-        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
-        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
-
         if (mode == ScrollViewMode.Vertical)
         {
             float newY = scrollOffset.y + evt.delta.y * 10f;
@@ -191,11 +199,6 @@ public partial class CustomScrollView : ScrollView
     private void ApplyBounds()
     {
         if (isBouncing) return;
-
-        float minScrollX = 0;
-        float minScrollY = 0;
-        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
-        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
 
         bool outOfBounds = false;
         Vector2 target = scrollOffset;
@@ -258,14 +261,7 @@ public partial class CustomScrollView : ScrollView
         });
     }
 
-    private bool IsScrollOutOfBounds()
-    {
-        float minScrollX = 0;
-        float minScrollY = 0;
-        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
-        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
-
-        return scrollOffset.x < minScrollX || scrollOffset.x > maxScrollX
-            || scrollOffset.y < minScrollY || scrollOffset.y > maxScrollY;
-    }
+    private bool IsScrollOutOfBounds() =>
+        scrollOffset.x < minScrollX || scrollOffset.x > maxScrollX ||
+        scrollOffset.y < minScrollY || scrollOffset.y > maxScrollY;
 }

@@ -1,0 +1,144 @@
+#recpie-window {
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    overflow: hidden;
+}
+
+#left-content {
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-right-width: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.78);
+}
+
+#right-content {
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(145, 145, 145, 0.39);
+}
+
+.rounded-rect {
+}
+
+#item #name {
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(0, 0, 0);
+    height: 20%;
+}
+
+#item #item-content {
+    height: 80%;
+    background-color: rgb(255, 255, 255);
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-width: 2px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.item {
+    width: 300px;
+    height: 300px;
+    flex-shrink: 0;
+    margin-top: 30px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+    border-left-width: 2px;
+    border-left-color: rgb(0, 0, 0);
+    border-right-color: rgb(0, 0, 0);
+    border-top-color: rgb(0, 0, 0);
+    border-bottom-color: rgb(0, 0, 0);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    overflow: hidden;
+    -unity-font-style: bold;
+    font-size: 40px;
+    color: rgb(255, 255, 255);
+    -unity-text-align: middle-center;
+}
+
+#item #item-content #sprite {
+    margin-bottom: 15px;
+}
+
+.item-label {
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 0;
+    margin-left: 0;
+    font-size: 35px;
+}
+
+.button {
+    margin-top: 15px;
+    margin-right: 0;
+    margin-bottom: 15px;
+    margin-left: 0;
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    -unity-font-style: bold;
+    -unity-text-align: middle-center;
+    background-color: rgb(255, 255, 255);
+    border-top-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 5px;
+    border-left-width: 5px;
+    border-left-color: rgb(150, 150, 150);
+    border-right-color: rgb(150, 150, 150);
+    border-top-color: rgb(150, 150, 150);
+    border-bottom-color: rgb(150, 150, 150);
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    border-bottom-right-radius: 60px;
+    border-bottom-left-radius: 60px;
+    padding-top: 0;
+    padding-right: 0;
+    padding-bottom: 0;
+    padding-left: 0;
+    width: 300px;
+    height: 120px;
+    -unity-text-outline-width: 2px;
+    -unity-text-outline-color: rgb(0, 0, 0);
+    text-shadow: 3px 5px 0 rgba(0, 0, 0, 0.59);
+    transition-duration: 0.25s;
+}
+
+.button:hover {
+    background-color: rgb(215, 215, 215);
+    border-left-color: rgb(110, 110, 110);
+    border-right-color: rgb(110, 110, 110);
+    border-top-color: rgb(110, 110, 110);
+    border-bottom-color: rgb(110, 110, 110);
+}
+
+.clicked {
+}
+
+.button.clicked {
+    width: 280px;
+    height: 112px;
+    font-size: 34px;
+}

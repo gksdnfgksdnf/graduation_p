@@ -1,0 +1,53 @@
+{ "skeleton": { "images": "C:/Users/윤서진/Desktop/그림/졸작/손/흔들기/images/" },
+"PhotoshopToSpine": { "scale": 1, "padding": 1, "trim": true },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "팔L", "bone": "root", "attachment": "팔L" },
+	{ "name": "손L", "bone": "root", "attachment": "손L" },
+	{ "name": "검지 복사", "bone": "root", "attachment": "검지 복사" },
+	{ "name": "검지", "bone": "root", "attachment": "검지" },
+	{ "name": "레이어 1", "bone": "root", "attachment": "레이어 1" },
+	{ "name": "손R 복사 3", "bone": "root", "attachment": "손R 복사 3" },
+	{ "name": "손R 복사 2", "bone": "root", "attachment": "손R 복사 2" },
+	{ "name": "손R 복사", "bone": "root", "attachment": "손R 복사" },
+	{ "name": "손R", "bone": "root", "attachment": "손R" },
+	{ "name": "팔R", "bone": "root", "attachment": "팔R" }
+],
+"skins": {
+	"default": {
+		"팔L": {
+			"팔L": { "x": 2016.5, "y": -2730, "width": 1601, "height": 1818 }
+		},
+		"손L": {
+			"손L": { "x": 1442.5, "y": -3649, "width": 1647, "height": 3682 }
+		},
+		"검지 복사": {
+			"검지 복사": { "x": 2723.5, "y": -2620.5, "width": 249, "height": 303 }
+		},
+		"검지": {
+			"검지": { "x": 2861.5, "y": -2521, "width": 285, "height": 270 }
+		},
+		"레이어 1": {
+			"레이어 1": { "x": 2352.5, "y": -2896, "width": 2571, "height": 2004 }
+		},
+		"손R 복사 3": {
+			"손R 복사 3": { "x": 3525.5, "y": -3018, "width": 181, "height": 244 }
+		},
+		"손R 복사 2": {
+			"손R 복사 2": { "x": 3611, "y": -2978, "width": 210, "height": 166 }
+		},
+		"손R 복사": {
+			"손R 복사": { "x": 3649, "y": -3133, "width": 246, "height": 414 }
+		},
+		"손R": {
+			"손R": { "x": 2915, "y": -3256, "width": 1660, "height": 1740 }
+		},
+		"팔R": {
+			"팔R": { "x": 3498.5, "y": -4736.5, "width": 1529, "height": 1667 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}

@@ -5,21 +5,7 @@
             <engine:VisualElement name="left-content" style="flex-grow: 0; width: 20%;">
                 <engine:VisualElement name="scroll-visual" style="flex-grow: 0; width: 51%; height: 70%;">
                     <CustomScrollView touch-scroll-type="Elastic" scroll-deceleration-rate="0.1" elasticity="0" name="customScrollView" style="position: relative; flex-direction: column;">
-                        <engine:Label text="asdf" />
-                        <engine:Label text="aaaa" />
-                        <engine:Label text="bbbb" />
-                        <engine:Label text="cccc" />
-                        <engine:Label text="dddd" />
-                        <engine:Label text="eeee" />
-                        <engine:Label text="ffff" />
-                        <engine:Label text="gggg" />
-                        <engine:Label text="hhhh" />
-                        <engine:Label text="iiii" />
-                        <engine:Label text="jjjj" />
-                        <engine:Label text="kkkk" />
-                        <engine:Label text="hhhh" />
-                        <engine:Label text="hhhh" />
-                        <engine:Label text="hhhh" />
+                        <engine:Label text="레시피" />
                     </CustomScrollView>
                 </engine:VisualElement>
             </engine:VisualElement>
