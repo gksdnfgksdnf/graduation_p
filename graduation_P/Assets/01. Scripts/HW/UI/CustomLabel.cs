@@ -27,7 +27,6 @@ public partial class CustomLabel : Label
 
     private void OnPointerUp(PointerUpEvent evt)
     {
-        Debug.Log("지웠냐");
         this.RemoveFromClassList("clicked");
     }
 }

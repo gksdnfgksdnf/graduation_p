@@ -1,10 +1,10 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
-    <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/Shop.uss?fileID=7433441132597879392&amp;guid=dda2795a037770a439a77ba8add4c89f&amp;type=3#Shop" />
+    <Style src="project://database/Assets/09.%20UI/HW/UIToolkit/Style%20Sheets/Scrollview.uss?fileID=7433441132597879392&amp;guid=dda2795a037770a439a77ba8add4c89f&amp;type=3#Scrollview" />
     <engine:VisualElement name="shop-container" style="flex-grow: 1; flex-direction: row; align-items: center; justify-content: center;">
         <engine:VisualElement name="recpie-window" style="flex-direction: row; width: 100%; height: 100%;">
             <engine:VisualElement name="left-content" style="flex-grow: 0; width: 20%; background-color: rgba(0, 0, 0, 0.59);">
                 <engine:VisualElement name="scroll-visual" style="flex-grow: 0; width: 100%; height: 60%; align-items: center;">
-                    <CustomScrollView touch-scroll-type="Elastic" scroll-deceleration-rate="0.1" elasticity="0" name="customScrollView" enabled="true" style="position: relative; flex-direction: column; height: 100%; width: 100%; align-items: center;">
+                    <CustomScrollView name="vertical-scroll-view" touch-scroll-type="Elastic" scroll-deceleration-rate="0.1" style="width: 100%; height: 100%; flex-grow: 1;">
                         <engine:VisualElement name="scroll-content" style="flex-direction: column; flex-wrap: wrap; overflow: visible; justify-content: center; align-items: center;">
                             <CustomLabel name="label" text="재료" class="button" />
                             <CustomLabel name="label" text="업그레이드" class="button" />
@@ -20,7 +20,7 @@
                     <engine:Button text="X" name="exit-btn" style="-unity-text-outline-width: 2px; -unity-text-outline-color: rgb(255, 255, 255); color: rgb(255, 0, 0); -unity-font-style: bold; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;" />
                 </engine:VisualElement>
                 <engine:VisualElement name="scroll-visual" style="width: 100%; height: 70%; overflow: hidden; border-top-width: 5px; border-right-width: 0; border-bottom-width: 5px; border-left-width: 5px; border-left-color: rgb(255, 255, 255); border-right-color: rgb(255, 255, 255); border-top-color: rgb(255, 255, 255); border-bottom-color: rgb(255, 255, 255); justify-content: center; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; border-top-left-radius: 15px; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 15px; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; background-color: rgba(255, 255, 255, 0.2);">
-                    <CustomScrollView mode="Horizontal" name="customScrollView" touch-scroll-type="Elastic" scroll-deceleration-rate="0.5" style="overflow: visible;">
+                    <CustomScrollView touch-scroll-type="Elastic" scroll-deceleration-rate="0.1" name="horizontal-scroll-view" mode="Horizontal">
                         <engine:VisualElement name="scroll-content" style="flex-direction: column; flex-wrap: wrap; overflow: visible; justify-content: center;">
                             <RecpieItem name="item" data-source="project://database/Assets/05.%20SO/HW/Cocktail/Cocktails/BloodyMary.asset?fileID=11400000&amp;guid=8692b505384109e46bdeec13733c85ee&amp;type=2#BloodyMary" class="item">
                                 <engine:VisualElement name="name">
@@ -185,6 +185,7 @@
                         </engine:VisualElement>
                     </CustomScrollView>
                 </engine:VisualElement>
+                <engine:VisualElement name="explain-content" style="flex-grow: 1; position: absolute; width: 50%; height: 100%; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); border-top-width: 5px; border-right-width: 5px; border-bottom-width: 5px; border-left-width: 5px; border-top-left-radius: 30px; border-top-right-radius: 0; border-bottom-right-radius: 0; border-bottom-left-radius: 30px; background-color: rgb(255, 255, 255);" />
             </engine:VisualElement>
         </engine:VisualElement>
     </engine:VisualElement>

@@ -12,11 +12,6 @@ public partial class CustomScrollView : ScrollView
     private Vector2 wheelVelocity = Vector2.zero;
     private float lastMoveTime;
 
-    private float minScrollY;
-    private float maxScrollY;
-    private float minScrollX;
-    private float maxScrollX;
-
     private IVisualElementScheduledItem bounceItem;
     private const float decelerationRate = 0.95f;
 
@@ -25,24 +20,14 @@ public partial class CustomScrollView : ScrollView
         this.verticalScrollerVisibility = ScrollerVisibility.Hidden;
         this.horizontalScrollerVisibility = ScrollerVisibility.Hidden;
 
-        if (mode == ScrollViewMode.Vertical)
+        if (this.name == "vertical-scroll-view")
         {
-            //contentContainer.style.height = new Length(1000, LengthUnit.Pixel);
-            contentContainer.style.width = new Length(300, LengthUnit.Pixel);
-
+            mode = ScrollViewMode.Vertical;
         }
-        else if (mode == ScrollViewMode.Horizontal)
+        else if (this.name == "horizontal-scroll-view")
         {
-            contentContainer.style.flexGrow = 0;
-            contentContainer.style.height = StyleKeyword.Auto;
-            contentContainer.style.flexDirection = FlexDirection.Column;
-            contentContainer.style.flexWrap = Wrap.Wrap;
+            mode = ScrollViewMode.Horizontal;
         }
-
-        minScrollX = 0;
-        minScrollY = 0;
-        maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
-        maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
 
         RegisterCallback<PointerDownEvent>(OnPointerDown);
         RegisterCallback<PointerMoveEvent>(OnPointerMove);
@@ -52,7 +37,7 @@ public partial class CustomScrollView : ScrollView
 
     private void OnPointerDown(PointerDownEvent evt)
     {
-        isDragging = true; 
+        isDragging = true;
         velocity = Vector2.zero;
         previousPointerPosition = evt.position;
         lastMoveTime = Time.realtimeSinceStartup;
@@ -99,6 +84,11 @@ public partial class CustomScrollView : ScrollView
 
     private void ApplyDelta(Vector2 delta)
     {
+        float minScrollX = 0;
+        float minScrollY = 0;
+        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
+        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
+
         if (mode == ScrollViewMode.Vertical)
         {
             float nextOffsetY = scrollOffset.y - delta.y;
@@ -149,6 +139,11 @@ public partial class CustomScrollView : ScrollView
 
     private void OnMouseWheel(WheelEvent evt)
     {
+        float minScrollX = 0;
+        float minScrollY = 0;
+        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
+        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
+
         if (mode == ScrollViewMode.Vertical)
         {
             float newY = scrollOffset.y + evt.delta.y * 10f;
@@ -199,6 +194,11 @@ public partial class CustomScrollView : ScrollView
     private void ApplyBounds()
     {
         if (isBouncing) return;
+
+        float minScrollX = 0;
+        float minScrollY = 0;
+        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
+        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
 
         bool outOfBounds = false;
         Vector2 target = scrollOffset;
@@ -261,7 +261,14 @@ public partial class CustomScrollView : ScrollView
         });
     }
 
-    private bool IsScrollOutOfBounds() =>
-        scrollOffset.x < minScrollX || scrollOffset.x > maxScrollX ||
+    private bool IsScrollOutOfBounds()
+    {
+        float minScrollX = 0;
+        float minScrollY = 0;
+        float maxScrollX = contentContainer.resolvedStyle.width - resolvedStyle.width;
+        float maxScrollY = contentContainer.resolvedStyle.height - resolvedStyle.height;
+
+        return scrollOffset.x < minScrollX || scrollOffset.x > maxScrollX ||
         scrollOffset.y < minScrollY || scrollOffset.y > maxScrollY;
+    }
 }
